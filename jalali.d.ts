@@ -1,1 +1,2 @@
-export * from "./dist/cjs/jalali.d.ts";
+/** @deprecated Import from `react-day-picker/persian` instead. */
+export * from "./persian.js";
