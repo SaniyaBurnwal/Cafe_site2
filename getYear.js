@@ -1,4 +1,4 @@
-import { toHijriDate } from "../utils/conversion.js";
+import { toHebrewDate } from "../utils/dateConversion.js";
 export function getYear(date) {
-    return toHijriDate(date).year;
+    return toHebrewDate(date).year;
 }

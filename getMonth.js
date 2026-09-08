@@ -1,4 +1,4 @@
-import { toHijriDate } from "../utils/conversion.js";
+import { toHebrewDate } from "../utils/dateConversion.js";
 export function getMonth(date) {
-    return toHijriDate(date).monthIndex;
+    return toHebrewDate(date).monthIndex;
 }

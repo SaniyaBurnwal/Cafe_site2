@@ -1,9 +1,5 @@
-import { toGregorianDate, toHijriDate } from "../utils/conversion.js";
+import { toGregorianDate, toHebrewDate } from "../utils/dateConversion.js";
 export function startOfMonth(date) {
-    const hijri = toHijriDate(date);
-    return toGregorianDate({
-        year: hijri.year,
-        monthIndex: hijri.monthIndex,
-        day: 1,
-    });
+    const hebrew = toHebrewDate(date);
+    return toGregorianDate({ ...hebrew, day: 1 });
 }

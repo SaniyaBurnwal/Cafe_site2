@@ -1,1 +1,1 @@
-export declare function setMonth(date: Date, monthIndex: number): Date;
+export declare function setMonth(date: Date, month: number): Date;

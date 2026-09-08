@@ -1,7 +1,6 @@
-import { toHijriDate } from "../utils/conversion.js";
+import { toHebrewDate } from "../utils/dateConversion.js";
 export function isSameMonth(dateLeft, dateRight) {
-    const hijriLeft = toHijriDate(dateLeft);
-    const hijriRight = toHijriDate(dateRight);
-    return (hijriLeft.year === hijriRight.year &&
-        hijriLeft.monthIndex === hijriRight.monthIndex);
+    const left = toHebrewDate(dateLeft);
+    const right = toHebrewDate(dateRight);
+    return left.year === right.year && left.monthIndex === right.monthIndex;
 }

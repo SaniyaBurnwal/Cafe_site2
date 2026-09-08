@@ -1,6 +1,4 @@
-import { toHijriDate } from "../utils/conversion.js";
+import { toHebrewDate } from "../utils/dateConversion.js";
 export function isSameYear(dateLeft, dateRight) {
-    const hijriLeft = toHijriDate(dateLeft);
-    const hijriRight = toHijriDate(dateRight);
-    return hijriLeft.year === hijriRight.year;
+    return toHebrewDate(dateLeft).year === toHebrewDate(dateRight).year;
 }

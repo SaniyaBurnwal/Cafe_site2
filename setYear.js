@@ -1,12 +1,28 @@
-import { toGregorianDate, toHijriDate } from "../utils/conversion.js";
-import { getDaysInMonth } from "../utils/daysInMonth.js";
+import { getMonthCode, isHebrewLeapYear, monthsInHebrewYear, } from "../utils/calendarMath.js";
+import { toGregorianDate, toHebrewDate } from "../utils/dateConversion.js";
+import { clampHebrewDay } from "../utils/serial.js";
+import { findMonthIndexByCode } from "./findMonthIndexByCode.js";
 export function setYear(date, year) {
-    const hijri = toHijriDate(date);
-    const daysInTargetMonth = getDaysInMonth(year, hijri.monthIndex);
-    const day = Math.min(hijri.day, daysInTargetMonth);
+    const hebrew = toHebrewDate(date);
+    const targetYear = year;
+    const originalCode = getMonthCode(hebrew.year, hebrew.monthIndex);
+    let targetMonthIndex = findMonthIndexByCode(targetYear, originalCode);
+    if (targetMonthIndex === -1) {
+        if (originalCode === "adarI") {
+            targetMonthIndex = findMonthIndexByCode(targetYear, "adar");
+        }
+        else if (originalCode === "adar" && !isHebrewLeapYear(targetYear)) {
+            targetMonthIndex = findMonthIndexByCode(targetYear, "adar");
+        }
+        else {
+            const monthsCount = monthsInHebrewYear(targetYear);
+            targetMonthIndex = Math.min(hebrew.monthIndex, monthsCount - 1);
+        }
+    }
+    const day = clampHebrewDay(targetYear, targetMonthIndex, hebrew.day);
     return toGregorianDate({
-        year,
-        monthIndex: hijri.monthIndex,
+        year: targetYear,
+        monthIndex: targetMonthIndex,
         day,
     });
 }

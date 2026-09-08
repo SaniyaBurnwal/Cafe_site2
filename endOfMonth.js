@@ -1,11 +1,7 @@
-import { toGregorianDate, toHijriDate } from "../utils/conversion.js";
-import { getDaysInMonth } from "../utils/daysInMonth.js";
+import { daysInHebrewMonth } from "../utils/calendarMath.js";
+import { toGregorianDate, toHebrewDate } from "../utils/dateConversion.js";
 export function endOfMonth(date) {
-    const hijri = toHijriDate(date);
-    const day = getDaysInMonth(hijri.year, hijri.monthIndex);
-    return toGregorianDate({
-        year: hijri.year,
-        monthIndex: hijri.monthIndex,
-        day,
-    });
+    const hebrew = toHebrewDate(date);
+    const day = daysInHebrewMonth(hebrew.year, hebrew.monthIndex);
+    return toGregorianDate({ ...hebrew, day });
 }

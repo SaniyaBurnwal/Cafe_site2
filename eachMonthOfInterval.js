@@ -1,26 +1,20 @@
 import { toDate } from "date-fns";
-import { toGregorianDate, toHijriDate } from "../utils/conversion.js";
+import { toGregorianDate, toHebrewDate } from "../utils/dateConversion.js";
+import { monthIndexToHebrewDate, monthsSinceEpoch } from "../utils/serial.js";
 export function eachMonthOfInterval(interval) {
-    const start = toDate(interval.start);
-    const end = toDate(interval.end);
-    if (end.getTime() < start.getTime()) {
-        throw new RangeError("Invalid interval");
+    const startDate = toDate(interval.start);
+    const endDate = toDate(interval.end);
+    if (endDate.getTime() < startDate.getTime()) {
+        return [];
     }
-    const startDate = toHijriDate(start);
-    const endDate = toHijriDate(end);
+    const startHebrew = toHebrewDate(startDate);
+    const endHebrew = toHebrewDate(endDate);
+    const startIndex = monthsSinceEpoch(startHebrew);
+    const endIndex = monthsSinceEpoch(endHebrew);
     const months = [];
-    let currentYear = startDate.year;
-    let currentMonth = startDate.monthIndex;
-    const endYear = endDate.year;
-    const endMonth = endDate.monthIndex;
-    while (currentYear < endYear ||
-        (currentYear === endYear && currentMonth <= endMonth)) {
-        months.push(toGregorianDate({ year: currentYear, monthIndex: currentMonth, day: 1 }));
-        currentMonth += 1;
-        if (currentMonth > 11) {
-            currentMonth = 0;
-            currentYear += 1;
-        }
+    for (let index = startIndex; index <= endIndex; index += 1) {
+        const hebrew = monthIndexToHebrewDate(index, 1);
+        months.push(toGregorianDate(hebrew));
     }
     return months;
 }
