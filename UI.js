@@ -1,10 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Animation = exports.SelectionState = exports.DayFlag = exports.UI = void 0;
 /**
  * Enum representing the UI elements composing DayPicker. These elements are
  * mapped to {@link CustomComponents}, {@link ClassNames}, and {@link Styles}.
  *
  * Some elements are extended by flags and modifiers.
  */
-export var UI;
+var UI;
 (function (UI) {
     /** The root component displaying the months and the navigation bar. */
     UI["Root"] = "root";
@@ -65,9 +68,9 @@ export var UI;
     UI["WeekNumberHeader"] = "week_number_header";
     /** The dropdown with the years. */
     UI["YearsDropdown"] = "years_dropdown";
-})(UI || (UI = {}));
+})(UI || (exports.UI = UI = {}));
 /** Enum representing flags for the {@link UI | UI.Day} element. */
-export var DayFlag;
+var DayFlag;
 (function (DayFlag) {
     /** The day is disabled. */
     DayFlag["disabled"] = "disabled";
@@ -79,12 +82,12 @@ export var DayFlag;
     DayFlag["focused"] = "focused";
     /** The day is today. */
     DayFlag["today"] = "today";
-})(DayFlag || (DayFlag = {}));
+})(DayFlag || (exports.DayFlag = DayFlag = {}));
 /**
  * Enum representing selection states that can be applied to the
  * {@link UI | UI.Day} element in selection mode.
  */
-export var SelectionState;
+var SelectionState;
 (function (SelectionState) {
     /** The day is at the end of a selected range. */
     SelectionState["range_end"] = "range_end";
@@ -94,12 +97,12 @@ export var SelectionState;
     SelectionState["range_start"] = "range_start";
     /** The day is selected. */
     SelectionState["selected"] = "selected";
-})(SelectionState || (SelectionState = {}));
+})(SelectionState || (exports.SelectionState = SelectionState = {}));
 /**
  * Enum representing different animation states for transitioning between
  * months.
  */
-export var Animation;
+var Animation;
 (function (Animation) {
     /** The entering weeks when they appear before the exiting month. */
     Animation["weeks_before_enter"] = "weeks_before_enter";
@@ -117,4 +120,4 @@ export var Animation;
     Animation["caption_before_enter"] = "caption_before_enter";
     /** The exiting caption when it disappears before the entering month. */
     Animation["caption_before_exit"] = "caption_before_exit";
-})(Animation || (Animation = {}));
+})(Animation || (exports.Animation = Animation = {}));

@@ -1,13 +1,53 @@
-import * as dateFnsJalali from "date-fns-jalali";
-import React from "react";
-import { DateLib, DayPicker as DayPickerComponent, } from "./index.js";
-import { enUSJalali } from "./locale/en-US-jalali.js";
-import { faIRJalali } from "./locale/fa-IR-jalali.js";
-import { createJalaliNoonOverrides } from "./noonJalaliDateLib.js";
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getDateLib = exports.enUS = exports.faIR = void 0;
+exports.DayPicker = DayPicker;
+const dateFnsJalali = __importStar(require("date-fns-jalali"));
+const react_1 = __importDefault(require("react"));
+const index_js_1 = require("./index.js");
+const en_US_jalali_js_1 = require("./locale/en-US-jalali.js");
+const fa_IR_jalali_js_1 = require("./locale/fa-IR-jalali.js");
+const noonJalaliDateLib_js_1 = require("./noonJalaliDateLib.js");
 /** Persian (Iran) Jalali locale with DayPicker labels. */
-export const faIR = faIRJalali;
+exports.faIR = fa_IR_jalali_js_1.faIRJalali;
 /** English (US) Jalali locale with DayPicker labels. */
-export const enUS = enUSJalali;
+exports.enUS = en_US_jalali_js_1.enUSJalali;
 /**
  * Renders the Persian calendar using the DayPicker component.
  *
@@ -21,9 +61,9 @@ export const enUS = enUSJalali;
  * @returns The Persian calendar component.
  * @see https://daypicker.dev/docs/localization#persian-calendar
  */
-export function DayPicker(props) {
+function DayPicker(props) {
     const { locale: localeProp, dir, dateLib: dateLibProp, numerals, noonSafe, ...restProps } = props;
-    const dateLib = getDateLib({
+    const dateLib = (0, exports.getDateLib)({
         locale: localeProp,
         weekStartsOn: props.broadcastCalendar ? 1 : props.weekStartsOn,
         firstWeekContainsDate: props.firstWeekContainsDate,
@@ -34,8 +74,8 @@ export function DayPicker(props) {
         noonSafe,
         overrides: dateLibProp,
     });
-    const locale = localeProp ?? faIR;
-    return (React.createElement(DayPickerComponent, { ...restProps, locale: locale, numerals: numerals ?? "arabext", dir: dir ?? "rtl", dateLib: dateLib, formatters: {
+    const locale = localeProp ?? exports.faIR;
+    return (react_1.default.createElement(index_js_1.DayPicker, { ...restProps, locale: locale, numerals: numerals ?? "arabext", dir: dir ?? "rtl", dateLib: dateLib, formatters: {
             formatWeekdayName: (date, _options, lib) => {
                 const activeLib = lib ?? dateLib;
                 const isPersian = activeLib.options.locale?.code?.startsWith("fa");
@@ -50,16 +90,17 @@ export function DayPicker(props) {
  * @param options - Optional configuration for the date library.
  * @returns The date library instance.
  */
-export const getDateLib = (options) => {
+const getDateLib = (options) => {
     const { noonSafe, overrides, ...dateLibOptions } = options ?? {};
     const baseOverrides = noonSafe && dateLibOptions.timeZone
         ? {
             ...dateFnsJalali,
-            ...createJalaliNoonOverrides(dateLibOptions.timeZone, {
+            ...(0, noonJalaliDateLib_js_1.createJalaliNoonOverrides)(dateLibOptions.timeZone, {
                 weekStartsOn: dateLibOptions.weekStartsOn,
                 locale: dateLibOptions.locale,
             }),
         }
         : dateFnsJalali;
-    return new DateLib(dateLibOptions, { ...baseOverrides, ...overrides });
+    return new index_js_1.DateLib(dateLibOptions, { ...baseOverrides, ...overrides });
 };
+exports.getDateLib = getDateLib;

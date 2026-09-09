@@ -1,5 +1,8 @@
-import { useLayoutEffect, useRef } from "react";
-import { Animation } from "./UI.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useAnimation = useAnimation;
+const react_1 = require("react");
+const UI_js_1 = require("./UI.js");
 const asHtmlElement = (element) => {
     if (element instanceof HTMLElement)
         return element;
@@ -24,11 +27,11 @@ const queryWeekdaysEl = (element) => asHtmlElement(element.querySelector("[data-
  * @param options - Configuration options for the animation, including class
  *   names, months, focused day, and the date utility library.
  */
-export function useAnimation(rootElRef, enabled, { classNames, months, focused, dateLib, }) {
-    const previousRootElSnapshotRef = useRef(null);
-    const previousMonthsRef = useRef(months);
-    const animatingRef = useRef(false);
-    useLayoutEffect(() => {
+function useAnimation(rootElRef, enabled, { classNames, months, focused, dateLib, }) {
+    const previousRootElSnapshotRef = (0, react_1.useRef)(null);
+    const previousMonthsRef = (0, react_1.useRef)(months);
+    const animatingRef = (0, react_1.useRef)(false);
+    (0, react_1.useLayoutEffect)(() => {
         // get previous months before updating the previous months ref
         const previousMonths = previousMonthsRef.current;
         // update previous months ref for next effect trigger
@@ -46,11 +49,11 @@ export function useAnimation(rootElRef, enabled, { classNames, months, focused, 
         const isSameMonth = dateLib.isSameMonth(months[0].date, previousMonths[0].date);
         const isAfterPreviousMonth = dateLib.isAfter(months[0].date, previousMonths[0].date);
         const captionAnimationClass = isAfterPreviousMonth
-            ? classNames[Animation.caption_after_enter]
-            : classNames[Animation.caption_before_enter];
+            ? classNames[UI_js_1.Animation.caption_after_enter]
+            : classNames[UI_js_1.Animation.caption_before_enter];
         const weeksAnimationClass = isAfterPreviousMonth
-            ? classNames[Animation.weeks_after_enter]
-            : classNames[Animation.weeks_before_enter];
+            ? classNames[UI_js_1.Animation.weeks_after_enter]
+            : classNames[UI_js_1.Animation.weeks_before_enter];
         // get previous root element snapshot before updating the snapshot ref
         const previousRootElSnapshot = previousRootElSnapshotRef.current;
         // update snapshot for next effect trigger
@@ -156,15 +159,15 @@ export function useAnimation(rootElRef, enabled, { classNames, months, focused, 
                 const previousCaptionEl = queryCaptionEl(previousMonthEl);
                 if (previousCaptionEl) {
                     previousCaptionEl.classList.add(isAfterPreviousMonth
-                        ? classNames[Animation.caption_before_exit]
-                        : classNames[Animation.caption_after_exit]);
+                        ? classNames[UI_js_1.Animation.caption_before_exit]
+                        : classNames[UI_js_1.Animation.caption_after_exit]);
                     previousCaptionEl.addEventListener("animationend", cleanUp);
                 }
                 const previousWeeksEl = queryWeeksEl(previousMonthEl);
                 if (previousWeeksEl) {
                     previousWeeksEl.classList.add(isAfterPreviousMonth
-                        ? classNames[Animation.weeks_before_exit]
-                        : classNames[Animation.weeks_after_exit]);
+                        ? classNames[UI_js_1.Animation.weeks_before_exit]
+                        : classNames[UI_js_1.Animation.weeks_after_exit]);
                 }
                 currentMonthEl.insertBefore(previousMonthEl, currentMonthEl.firstChild);
             });

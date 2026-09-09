@@ -1,14 +1,17 @@
-import { useEffect, useMemo } from "react";
-import { getDates } from "./helpers/getDates.js";
-import { getDays } from "./helpers/getDays.js";
-import { getDisplayMonths } from "./helpers/getDisplayMonths.js";
-import { getInitialMonth } from "./helpers/getInitialMonth.js";
-import { getMonths } from "./helpers/getMonths.js";
-import { getNavMonths } from "./helpers/getNavMonth.js";
-import { getNextMonth } from "./helpers/getNextMonth.js";
-import { getPreviousMonth } from "./helpers/getPreviousMonth.js";
-import { getWeeks } from "./helpers/getWeeks.js";
-import { useControlledValue } from "./helpers/useControlledValue.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useCalendar = useCalendar;
+const react_1 = require("react");
+const getDates_js_1 = require("./helpers/getDates.js");
+const getDays_js_1 = require("./helpers/getDays.js");
+const getDisplayMonths_js_1 = require("./helpers/getDisplayMonths.js");
+const getInitialMonth_js_1 = require("./helpers/getInitialMonth.js");
+const getMonths_js_1 = require("./helpers/getMonths.js");
+const getNavMonth_js_1 = require("./helpers/getNavMonth.js");
+const getNextMonth_js_1 = require("./helpers/getNextMonth.js");
+const getPreviousMonth_js_1 = require("./helpers/getPreviousMonth.js");
+const getWeeks_js_1 = require("./helpers/getWeeks.js");
+const useControlledValue_js_1 = require("./helpers/useControlledValue.js");
 /**
  * Provides the calendar object to work with the calendar in custom components.
  *
@@ -18,37 +21,37 @@ import { useControlledValue } from "./helpers/useControlledValue.js";
  * @returns The calendar object containing displayed days, weeks, months, and
  *   navigation methods.
  */
-export function useCalendar(props, dateLib) {
-    const [navStart, navEnd] = getNavMonths(props, dateLib);
+function useCalendar(props, dateLib) {
+    const [navStart, navEnd] = (0, getNavMonth_js_1.getNavMonths)(props, dateLib);
     const { startOfMonth, endOfMonth } = dateLib;
-    const initialMonth = getInitialMonth(props, navStart, navEnd, dateLib);
-    const [firstMonth, setFirstMonth] = useControlledValue(initialMonth, 
+    const initialMonth = (0, getInitialMonth_js_1.getInitialMonth)(props, navStart, navEnd, dateLib);
+    const [firstMonth, setFirstMonth] = (0, useControlledValue_js_1.useControlledValue)(initialMonth, 
     // initialMonth is always computed from props.month if provided
     props.month ? initialMonth : undefined);
     // biome-ignore lint/correctness/useExhaustiveDependencies: change the initial month when the time zone changes.
-    useEffect(() => {
-        const newInitialMonth = getInitialMonth(props, navStart, navEnd, dateLib);
+    (0, react_1.useEffect)(() => {
+        const newInitialMonth = (0, getInitialMonth_js_1.getInitialMonth)(props, navStart, navEnd, dateLib);
         setFirstMonth(newInitialMonth);
     }, [props.timeZone]);
     /** The months displayed in the calendar. */
     // biome-ignore lint/correctness/useExhaustiveDependencies: We want to recompute only when specific props change.
-    const { months, weeks, days, previousMonth, nextMonth } = useMemo(() => {
-        const displayMonths = getDisplayMonths(firstMonth, navEnd, { numberOfMonths: props.numberOfMonths }, dateLib);
-        const dates = getDates(displayMonths, props.endMonth ? endOfMonth(props.endMonth) : undefined, {
+    const { months, weeks, days, previousMonth, nextMonth } = (0, react_1.useMemo)(() => {
+        const displayMonths = (0, getDisplayMonths_js_1.getDisplayMonths)(firstMonth, navEnd, { numberOfMonths: props.numberOfMonths }, dateLib);
+        const dates = (0, getDates_js_1.getDates)(displayMonths, props.endMonth ? endOfMonth(props.endMonth) : undefined, {
             ISOWeek: props.ISOWeek,
             fixedWeeks: props.fixedWeeks,
             broadcastCalendar: props.broadcastCalendar,
         }, dateLib);
-        const months = getMonths(displayMonths, dates, {
+        const months = (0, getMonths_js_1.getMonths)(displayMonths, dates, {
             broadcastCalendar: props.broadcastCalendar,
             fixedWeeks: props.fixedWeeks,
             ISOWeek: props.ISOWeek,
             reverseMonths: props.reverseMonths,
         }, dateLib);
-        const weeks = getWeeks(months);
-        const days = getDays(months);
-        const previousMonth = getPreviousMonth(firstMonth, navStart, props, dateLib);
-        const nextMonth = getNextMonth(firstMonth, navEnd, props, dateLib);
+        const weeks = (0, getWeeks_js_1.getWeeks)(months);
+        const days = (0, getDays_js_1.getDays)(months);
+        const previousMonth = (0, getPreviousMonth_js_1.getPreviousMonth)(firstMonth, navStart, props, dateLib);
+        const nextMonth = (0, getNextMonth_js_1.getNextMonth)(firstMonth, navEnd, props, dateLib);
         return {
             months,
             weeks,

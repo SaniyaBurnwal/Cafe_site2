@@ -1,11 +1,14 @@
-import { TZDate } from "@date-fns/tz";
-import { differenceInCalendarDays as differenceInCalendarDaysFn, differenceInCalendarMonths as differenceInCalendarMonthsFn, getISOWeek as getISOWeekFn, getWeek as getWeekFn, } from "date-fns";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createNoonOverrides = createNoonOverrides;
+const tz_1 = require("@date-fns/tz");
+const date_fns_1 = require("date-fns");
 /**
  * Creates `dateLib` overrides that keep all calendar math at noon in the target
  * time zone. This avoids second-level offset changes (e.g., historical zones
  * with +03:41:12) from pushing dates backward across midnight.
  */
-export function createNoonOverrides(timeZone, options = {}) {
+function createNoonOverrides(timeZone, options = {}) {
     const { weekStartsOn, locale } = options;
     const fallbackWeekStartsOn = (weekStartsOn ??
         locale?.options?.weekStartsOn ??
@@ -16,7 +19,7 @@ export function createNoonOverrides(timeZone, options = {}) {
         const normalizedDate = typeof date === "number" || typeof date === "string"
             ? new Date(date)
             : date;
-        return new TZDate(normalizedDate.getFullYear(), normalizedDate.getMonth(), normalizedDate.getDate(), 12, 0, 0, timeZone);
+        return new tz_1.TZDate(normalizedDate.getFullYear(), normalizedDate.getMonth(), normalizedDate.getDate(), 12, 0, 0, timeZone);
     };
     // Convert a value into a host `Date` that represents the same calendar day
     // as the target-zone noon. This is useful for helpers (e.g., date-fns week
@@ -27,10 +30,10 @@ export function createNoonOverrides(timeZone, options = {}) {
     };
     return {
         today: () => {
-            return toNoonTZDate(TZDate.tz(timeZone));
+            return toNoonTZDate(tz_1.TZDate.tz(timeZone));
         },
         newDate: (year, monthIndex, date) => {
-            return new TZDate(year, monthIndex, date, 12, 0, 0, timeZone);
+            return new tz_1.TZDate(year, monthIndex, date, 12, 0, 0, timeZone);
         },
         startOfDay: (date) => {
             return toNoonTZDate(date);
@@ -88,10 +91,10 @@ export function createNoonOverrides(timeZone, options = {}) {
             const start = toNoonTZDate(interval.start);
             const end = toNoonTZDate(interval.end);
             const result = [];
-            const cursor = new TZDate(start.getFullYear(), start.getMonth(), 1, 12, 0, 0, timeZone);
+            const cursor = new tz_1.TZDate(start.getFullYear(), start.getMonth(), 1, 12, 0, 0, timeZone);
             const endKey = end.getFullYear() * 12 + end.getMonth();
             while (cursor.getFullYear() * 12 + cursor.getMonth() <= endKey) {
-                result.push(new TZDate(cursor, timeZone));
+                result.push(new tz_1.TZDate(cursor, timeZone));
                 cursor.setMonth(cursor.getMonth() + 1, 1);
             }
             return result;
@@ -122,16 +125,16 @@ export function createNoonOverrides(timeZone, options = {}) {
             const start = toNoonTZDate(interval.start);
             const end = toNoonTZDate(interval.end);
             const years = [];
-            const cursor = new TZDate(start.getFullYear(), 0, 1, 12, 0, 0, timeZone);
+            const cursor = new tz_1.TZDate(start.getFullYear(), 0, 1, 12, 0, 0, timeZone);
             while (cursor.getFullYear() <= end.getFullYear()) {
-                years.push(new TZDate(cursor, timeZone));
+                years.push(new tz_1.TZDate(cursor, timeZone));
                 cursor.setFullYear(cursor.getFullYear() + 1, 0, 1);
             }
             return years;
         },
         getWeek: (date, options) => {
             const base = toCalendarDate(date);
-            return getWeekFn(base, {
+            return (0, date_fns_1.getWeek)(base, {
                 weekStartsOn: options?.weekStartsOn ?? fallbackWeekStartsOn,
                 firstWeekContainsDate: options?.firstWeekContainsDate ??
                     locale?.options?.firstWeekContainsDate ??
@@ -140,17 +143,17 @@ export function createNoonOverrides(timeZone, options = {}) {
         },
         getISOWeek: (date) => {
             const base = toCalendarDate(date);
-            return getISOWeekFn(base);
+            return (0, date_fns_1.getISOWeek)(base);
         },
         differenceInCalendarDays: (dateLeft, dateRight) => {
             const left = toCalendarDate(dateLeft);
             const right = toCalendarDate(dateRight);
-            return differenceInCalendarDaysFn(left, right);
+            return (0, date_fns_1.differenceInCalendarDays)(left, right);
         },
         differenceInCalendarMonths: (dateLeft, dateRight) => {
             const left = toCalendarDate(dateLeft);
             const right = toCalendarDate(dateRight);
-            return differenceInCalendarMonthsFn(left, right);
+            return (0, date_fns_1.differenceInCalendarMonths)(left, right);
         },
     };
 }

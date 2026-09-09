@@ -1,6 +1,9 @@
-import { useMulti } from "./selection/useMulti.js";
-import { useRange } from "./selection/useRange.js";
-import { useSingle } from "./selection/useSingle.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useSelection = useSelection;
+const useMulti_js_1 = require("./selection/useMulti.js");
+const useRange_js_1 = require("./selection/useRange.js");
+const useSingle_js_1 = require("./selection/useSingle.js");
 /**
  * Determines the appropriate selection hook to use based on the selection mode
  * and returns the corresponding selection object.
@@ -11,10 +14,10 @@ import { useSingle } from "./selection/useSingle.js";
  * @returns The selection object for the specified mode, or `undefined` if no
  *   mode is set.
  */
-export function useSelection(props, dateLib) {
-    const single = useSingle(props, dateLib);
-    const multi = useMulti(props, dateLib);
-    const range = useRange(props, dateLib);
+function useSelection(props, dateLib) {
+    const single = (0, useSingle_js_1.useSingle)(props, dateLib);
+    const multi = (0, useMulti_js_1.useMulti)(props, dateLib);
+    const range = (0, useRange_js_1.useRange)(props, dateLib);
     switch (props.mode) {
         case "single":
             return single;
