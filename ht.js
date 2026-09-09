@@ -1,11 +1,14 @@
-import { ht as dateFnsHt } from "date-fns/locale";
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ht = void 0;
+const locale_1 = require("date-fns/locale");
+const DateLib_js_1 = require("../classes/DateLib.js");
 /** Haitian Creole locale extended with DayPicker-specific translations. */
-export const ht = {
-    ...dateFnsHt,
+exports.ht = {
+    ...locale_1.ht,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `Jodi a, ${label}`;
@@ -18,9 +21,9 @@ export const ht = {
         labelPrevious: "Ale nan mwa anvan",
         labelWeekNumber: (weekNumber) => `Semèn ${weekNumber}`,
         labelYearDropdown: "Chwazi ane a",
-        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib(options)).formatMonthYear(date),
+        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).formatMonthYear(date),
         labelGridcell: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `Jodi a, ${label}`;
@@ -29,6 +32,6 @@ export const ht = {
         },
         labelNav: "Ba navigasyon",
         labelWeekNumberHeader: "Nimewo semèn",
-        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib(options)).format(date, "cccc"),
+        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc"),
     },
 };

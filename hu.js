@@ -1,11 +1,14 @@
-import { hu as dateFnsHu } from "date-fns/locale";
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.hu = void 0;
+const locale_1 = require("date-fns/locale");
+const DateLib_js_1 = require("../classes/DateLib.js");
 /** Hungarian locale extended with DayPicker-specific translations. */
-export const hu = {
-    ...dateFnsHu,
+exports.hu = {
+    ...locale_1.hu,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `Ma, ${label}`;
@@ -18,9 +21,9 @@ export const hu = {
         labelPrevious: "Ugrás az előző hónapra",
         labelWeekNumber: (weekNumber) => `Hét ${weekNumber}`,
         labelYearDropdown: "Válassza ki az évet",
-        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib(options)).formatMonthYear(date),
+        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).formatMonthYear(date),
         labelGridcell: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `Ma, ${label}`;
@@ -29,6 +32,6 @@ export const hu = {
         },
         labelNav: "Navigációs sáv",
         labelWeekNumberHeader: "Hét száma",
-        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib(options)).format(date, "cccc"),
+        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc"),
     },
 };

@@ -1,11 +1,14 @@
-import { kn as dateFnsKn } from "date-fns/locale";
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.kn = void 0;
+const locale_1 = require("date-fns/locale");
+const DateLib_js_1 = require("../classes/DateLib.js");
 /** Kannada locale extended with DayPicker-specific translations. */
-export const kn = {
-    ...dateFnsKn,
+exports.kn = {
+    ...locale_1.kn,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `ಇಂದು, ${label}`;
@@ -18,9 +21,9 @@ export const kn = {
         labelPrevious: "ಹಿಂದಿನ ತಿಂಗಳಿಗೆ ಹೋಗಿ",
         labelWeekNumber: (weekNumber) => `ವಾರ ${weekNumber}`,
         labelYearDropdown: "ವರ್ಷ ಆಯ್ಕೆಮಾಡಿ",
-        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib(options)).formatMonthYear(date),
+        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).formatMonthYear(date),
         labelGridcell: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `ಇಂದು, ${label}`;
@@ -29,6 +32,6 @@ export const kn = {
         },
         labelNav: "ನವಿಗೇಶನ್ ಪಟ್ಟೆ",
         labelWeekNumberHeader: "ವಾರ ಸಂಖ್ಯೆ",
-        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib(options)).format(date, "cccc"),
+        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc"),
     },
 };

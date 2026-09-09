@@ -1,11 +1,14 @@
-import { eu as dateFnsEu } from "date-fns/locale";
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.eu = void 0;
+const locale_1 = require("date-fns/locale");
+const DateLib_js_1 = require("../classes/DateLib.js");
 /** Basque locale extended with DayPicker-specific translations. */
-export const eu = {
-    ...dateFnsEu,
+exports.eu = {
+    ...locale_1.eu,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `Gaur, ${label}`;
@@ -18,9 +21,9 @@ export const eu = {
         labelPrevious: "Joan aurreko hilabetera",
         labelWeekNumber: (weekNumber) => `Astea ${weekNumber}`,
         labelYearDropdown: "Hautatu urtea",
-        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib(options)).formatMonthYear(date),
+        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).formatMonthYear(date),
         labelGridcell: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `Gaur, ${label}`;
@@ -29,6 +32,6 @@ export const eu = {
         },
         labelNav: "Nabigazio barra",
         labelWeekNumberHeader: "Aste zenbakia",
-        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib(options)).format(date, "cccc"),
+        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc"),
     },
 };

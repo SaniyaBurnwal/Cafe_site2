@@ -1,8 +1,11 @@
-import { format } from "date-fns";
-import { enUS as dateFnsEnUS } from "date-fns/locale";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.enUS = void 0;
+const date_fns_1 = require("date-fns");
+const locale_1 = require("date-fns/locale");
 /** English (United States) locale extended with DayPicker-specific translations. */
-export const enUS = {
-    ...dateFnsEnUS,
+exports.enUS = {
+    ...locale_1.enUS,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
             let formatDate;
@@ -10,7 +13,7 @@ export const enUS = {
                 formatDate = dateLib.format.bind(dateLib);
             }
             else {
-                formatDate = (d, pattern) => format(d, pattern, { locale: dateFnsEnUS, ...options });
+                formatDate = (d, pattern) => (0, date_fns_1.format)(d, pattern, { locale: locale_1.enUS, ...options });
             }
             let label = formatDate(date, "PPPP");
             if (modifiers.today)
@@ -30,7 +33,7 @@ export const enUS = {
                 formatDate = dateLib.format.bind(dateLib);
             }
             else {
-                formatDate = (d, pattern) => format(d, pattern, { locale: dateFnsEnUS, ...options });
+                formatDate = (d, pattern) => (0, date_fns_1.format)(d, pattern, { locale: locale_1.enUS, ...options });
             }
             return formatDate(date, "LLLL yyyy");
         },
@@ -40,7 +43,7 @@ export const enUS = {
                 formatDate = dateLib.format.bind(dateLib);
             }
             else {
-                formatDate = (d, pattern) => format(d, pattern, { locale: dateFnsEnUS, ...options });
+                formatDate = (d, pattern) => (0, date_fns_1.format)(d, pattern, { locale: locale_1.enUS, ...options });
             }
             let label = formatDate(date, "PPPP");
             if (modifiers?.today) {
@@ -56,7 +59,7 @@ export const enUS = {
                 formatDate = dateLib.format.bind(dateLib);
             }
             else {
-                formatDate = (d, pattern) => format(d, pattern, { locale: dateFnsEnUS, ...options });
+                formatDate = (d, pattern) => (0, date_fns_1.format)(d, pattern, { locale: locale_1.enUS, ...options });
             }
             return formatDate(date, "cccc");
         },

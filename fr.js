@@ -1,11 +1,14 @@
-import { fr as dateFnsFr } from "date-fns/locale";
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.fr = void 0;
+const locale_1 = require("date-fns/locale");
+const DateLib_js_1 = require("../classes/DateLib.js");
 /** French locale extended with DayPicker-specific translations. */
-export const fr = {
-    ...dateFnsFr,
+exports.fr = {
+    ...locale_1.fr,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `Aujourd'hui, ${label}`;
@@ -18,9 +21,9 @@ export const fr = {
         labelPrevious: "Aller au mois précédent",
         labelWeekNumber: (weekNumber) => `Semaine ${weekNumber}`,
         labelYearDropdown: "Choisir l'année",
-        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib(options)).formatMonthYear(date),
+        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).formatMonthYear(date),
         labelGridcell: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `Aujourd'hui, ${label}`;
@@ -29,6 +32,6 @@ export const fr = {
         },
         labelNav: "Barre de navigation",
         labelWeekNumberHeader: "Numéro de semaine",
-        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib(options)).format(date, "cccc"),
+        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc"),
     },
 };

@@ -1,11 +1,14 @@
-import { ko as dateFnsKo } from "date-fns/locale";
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ko = void 0;
+const locale_1 = require("date-fns/locale");
+const DateLib_js_1 = require("../classes/DateLib.js");
 /** Korean locale extended with DayPicker-specific translations. */
-export const ko = {
-    ...dateFnsKo,
+exports.ko = {
+    ...locale_1.ko,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `오늘, ${label}`;
@@ -18,9 +21,9 @@ export const ko = {
         labelPrevious: "이전 달로 이동",
         labelWeekNumber: (weekNumber) => `주 ${weekNumber}`,
         labelYearDropdown: "연도 선택",
-        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib(options)).formatMonthYear(date),
+        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).formatMonthYear(date),
         labelGridcell: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `오늘, ${label}`;
@@ -29,6 +32,6 @@ export const ko = {
         },
         labelNav: "탐색 모음",
         labelWeekNumberHeader: "주 번호",
-        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib(options)).format(date, "cccc"),
+        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc"),
     },
 };

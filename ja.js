@@ -1,11 +1,14 @@
-import { ja as dateFnsJa } from "date-fns/locale";
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ja = void 0;
+const locale_1 = require("date-fns/locale");
+const DateLib_js_1 = require("../classes/DateLib.js");
 /** Japanese locale extended with DayPicker-specific translations. */
-export const ja = {
-    ...dateFnsJa,
+exports.ja = {
+    ...locale_1.ja,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `今日、${label}`;
@@ -18,9 +21,9 @@ export const ja = {
         labelPrevious: "前の月へ",
         labelWeekNumber: (weekNumber) => `第${weekNumber}週`,
         labelYearDropdown: "年を選択",
-        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib(options)).formatMonthYear(date),
+        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).formatMonthYear(date),
         labelGridcell: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `今日、${label}`;
@@ -29,6 +32,6 @@ export const ja = {
         },
         labelNav: "ナビゲーションバー",
         labelWeekNumberHeader: "週番号",
-        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib(options)).format(date, "cccc"),
+        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc"),
     },
 };

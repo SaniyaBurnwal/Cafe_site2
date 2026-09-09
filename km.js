@@ -1,11 +1,14 @@
-import { km as dateFnsKm } from "date-fns/locale";
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.km = void 0;
+const locale_1 = require("date-fns/locale");
+const DateLib_js_1 = require("../classes/DateLib.js");
 /** Khmer locale extended with DayPicker-specific translations. */
-export const km = {
-    ...dateFnsKm,
+exports.km = {
+    ...locale_1.km,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `ថ្ងៃ​នេះ, ${label}`;
@@ -18,9 +21,9 @@ export const km = {
         labelPrevious: "ទៅខែមុន",
         labelWeekNumber: (weekNumber) => `សប្ដាហ៍ ${weekNumber}`,
         labelYearDropdown: "ជ្រើសឆ្នាំ",
-        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib(options)).formatMonthYear(date),
+        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).formatMonthYear(date),
         labelGridcell: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `ថ្ងៃ​នេះ, ${label}`;
@@ -29,6 +32,6 @@ export const km = {
         },
         labelNav: "របាររុករក",
         labelWeekNumberHeader: "លេខសប្ដាហ៍",
-        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib(options)).format(date, "cccc"),
+        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc"),
     },
 };
