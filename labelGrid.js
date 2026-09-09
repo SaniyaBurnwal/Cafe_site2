@@ -1,4 +1,8 @@
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.labelCaption = void 0;
+exports.labelGrid = labelGrid;
+const DateLib_js_1 = require("../classes/DateLib.js");
 /**
  * Generates the ARIA label for the month grid, which is announced when entering
  * the grid.
@@ -11,12 +15,12 @@ import { DateLib } from "../classes/DateLib.js";
  * @group Labels
  * @see https://daypicker.dev/docs/translation#aria-labels
  */
-export function labelGrid(date, options, dateLib) {
-    const lib = dateLib ?? new DateLib(options);
+function labelGrid(date, options, dateLib) {
+    const lib = dateLib ?? new DateLib_js_1.DateLib(options);
     return lib.formatMonthYear(date);
 }
 /**
  * @ignore
  * @deprecated Use {@link labelGrid} instead.
  */
-export const labelCaption = labelGrid;
+exports.labelCaption = labelGrid;

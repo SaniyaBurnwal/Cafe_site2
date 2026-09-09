@@ -1,4 +1,7 @@
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.labelWeekday = labelWeekday;
+const DateLib_js_1 = require("../classes/DateLib.js");
 /**
  * Generates the ARIA label for a weekday column header.
  *
@@ -10,6 +13,6 @@ import { DateLib } from "../classes/DateLib.js";
  * @group Labels
  * @see https://daypicker.dev/docs/translation#aria-labels
  */
-export function labelWeekday(date, options, dateLib) {
-    return (dateLib ?? new DateLib(options)).format(date, "cccc");
+function labelWeekday(date, options, dateLib) {
+    return (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc");
 }

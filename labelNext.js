@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.labelNext = labelNext;
 const defaultLabel = "Go to the Next Month";
 /**
  * Generates the ARIA label for the "next month" button.
@@ -9,6 +12,6 @@ const defaultLabel = "Go to the Next Month";
  * @group Labels
  * @see https://daypicker.dev/docs/translation#aria-labels
  */
-export function labelNext(_month, _options) {
+function labelNext(_month, _options) {
     return defaultLabel;
 }

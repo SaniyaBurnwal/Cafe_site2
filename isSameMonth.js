@@ -1,13 +1,10 @@
-import { toEthiopicDate } from "../utils/index.js";
-/**
- * Is same month
- *
- * @param {Date} dateLeft - The first date
- * @param {Date} dateRight - The second date
- * @returns {boolean} True if the two dates are in the same month
- */
-export function isSameMonth(dateLeft, dateRight) {
-    const left = toEthiopicDate(dateLeft);
-    const right = toEthiopicDate(dateRight);
-    return left.year === right.year && left.month === right.month;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isSameMonth = isSameMonth;
+const conversion_js_1 = require("../utils/conversion.js");
+function isSameMonth(dateLeft, dateRight) {
+    const hijriLeft = (0, conversion_js_1.toHijriDate)(dateLeft);
+    const hijriRight = (0, conversion_js_1.toHijriDate)(dateRight);
+    return (hijriLeft.year === hijriRight.year &&
+        hijriLeft.monthIndex === hijriRight.monthIndex);
 }

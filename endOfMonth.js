@@ -1,14 +1,14 @@
-import { daysInMonth } from "../utils/daysInMonth.js";
-import { toEthiopicDate, toGregorianDate } from "../utils/index.js";
-/**
- * Returns the last day of the Ethiopian month for the given date.
- *
- * @param date - The gregorian date to get the end of month for
- * @returns A new gregorian date representing the last day of the Ethiopian
- *   month
- */
-export function endOfMonth(date) {
-    const { year, month } = toEthiopicDate(date);
-    const day = daysInMonth(month, year);
-    return toGregorianDate({ year, month, day: day });
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.endOfMonth = endOfMonth;
+const conversion_js_1 = require("../utils/conversion.js");
+const daysInMonth_js_1 = require("../utils/daysInMonth.js");
+function endOfMonth(date) {
+    const hijri = (0, conversion_js_1.toHijriDate)(date);
+    const day = (0, daysInMonth_js_1.getDaysInMonth)(hijri.year, hijri.monthIndex);
+    return (0, conversion_js_1.toGregorianDate)({
+        year: hijri.year,
+        monthIndex: hijri.monthIndex,
+        day,
+    });
 }

@@ -1,4 +1,8 @@
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.labelDay = void 0;
+exports.labelDayButton = labelDayButton;
+const DateLib_js_1 = require("../classes/DateLib.js");
 /**
  * Generates the ARIA label for a day button.
  *
@@ -14,8 +18,8 @@ import { DateLib } from "../classes/DateLib.js";
  * @group Labels
  * @see https://daypicker.dev/docs/translation#aria-labels
  */
-export function labelDayButton(date, modifiers, options, dateLib) {
-    let label = (dateLib ?? new DateLib(options)).format(date, "PPPP");
+function labelDayButton(date, modifiers, options, dateLib) {
+    let label = (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "PPPP");
     if (modifiers.today)
         label = `Today, ${label}`;
     if (modifiers.selected)
@@ -26,4 +30,4 @@ export function labelDayButton(date, modifiers, options, dateLib) {
  * @ignore
  * @deprecated Use `labelDayButton` instead.
  */
-export const labelDay = labelDayButton;
+exports.labelDay = labelDayButton;

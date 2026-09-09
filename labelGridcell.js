@@ -1,4 +1,7 @@
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.labelGridcell = labelGridcell;
+const DateLib_js_1 = require("../classes/DateLib.js");
 /**
  * Generates the label for a day grid cell when the calendar is not interactive.
  *
@@ -10,8 +13,8 @@ import { DateLib } from "../classes/DateLib.js";
  * @group Labels
  * @see https://daypicker.dev/docs/translation#aria-labels
  */
-export function labelGridcell(date, modifiers, options, dateLib) {
-    let label = (dateLib ?? new DateLib(options)).format(date, "PPPP");
+function labelGridcell(date, modifiers, options, dateLib) {
+    let label = (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "PPPP");
     if (modifiers?.today) {
         label = `Today, ${label}`;
     }

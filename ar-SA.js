@@ -1,11 +1,14 @@
-import { arSA as dateFnsArSA } from "date-fns/locale";
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.arSA = void 0;
+const locale_1 = require("date-fns/locale");
+const DateLib_js_1 = require("../classes/DateLib.js");
 /** Arabic (Saudi Arabia) locale extended with DayPicker-specific translations. */
-export const arSA = {
-    ...dateFnsArSA,
+exports.arSA = {
+    ...locale_1.arSA,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `اليوم، ${label}`;
@@ -18,9 +21,9 @@ export const arSA = {
         labelPrevious: "اذهب إلى الشهر السابق",
         labelWeekNumber: (weekNumber) => `الأسبوع ${weekNumber}`,
         labelYearDropdown: "اختر السنة",
-        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib(options)).formatMonthYear(date),
+        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).formatMonthYear(date),
         labelGridcell: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `اليوم، ${label}`;
@@ -29,6 +32,6 @@ export const arSA = {
         },
         labelNav: "شريط التنقل",
         labelWeekNumberHeader: "رقم الأسبوع",
-        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib(options)).format(date, "cccc"),
+        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc"),
     },
 };

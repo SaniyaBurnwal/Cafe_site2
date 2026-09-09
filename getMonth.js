@@ -1,11 +1,7 @@
-import { toEthiopicDate } from "../utils/index.js";
-/**
- * Get month
- *
- * @param {Date} date - The original date
- * @returns {number} The zero-based month index
- */
-export function getMonth(date) {
-    const { month } = toEthiopicDate(date);
-    return month - 1; // Return zero-based month index
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getMonth = getMonth;
+const conversion_js_1 = require("../utils/conversion.js");
+function getMonth(date) {
+    return (0, conversion_js_1.toHijriDate)(date).monthIndex;
 }

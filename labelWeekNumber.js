@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.labelWeekNumber = labelWeekNumber;
 /**
  * Generates the ARIA label for the week number cell (the first cell in a row).
  *
@@ -8,6 +11,6 @@
  * @group Labels
  * @see https://daypicker.dev/docs/translation#aria-labels
  */
-export function labelWeekNumber(weekNumber, _options) {
+function labelWeekNumber(weekNumber, _options) {
     return `Week ${weekNumber}`;
 }

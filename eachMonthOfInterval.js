@@ -1,27 +1,29 @@
-import { toEthiopicDate, toGregorianDate } from "../utils/index.js";
-/**
- * Each month of an interval
- *
- * @param {Object} interval - The interval object
- * @param {Date} interval.start - The start date of the interval
- * @param {Date} interval.end - The end date of the interval
- * @returns {Date[]} An array of dates representing the start of each month in
- *   the interval
- */
-export function eachMonthOfInterval(interval) {
-    const start = toEthiopicDate(new Date(interval.start));
-    const end = toEthiopicDate(new Date(interval.end));
-    const dates = [];
-    let currentYear = start.year;
-    let currentMonth = start.month;
-    while (currentYear < end.year ||
-        (currentYear === end.year && currentMonth <= end.month)) {
-        dates.push(toGregorianDate({ year: currentYear, month: currentMonth, day: 1 }));
-        currentMonth++;
-        if (currentMonth > 13) {
-            currentMonth = 1;
-            currentYear++;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.eachMonthOfInterval = eachMonthOfInterval;
+const date_fns_1 = require("date-fns");
+const conversion_js_1 = require("../utils/conversion.js");
+function eachMonthOfInterval(interval) {
+    const start = (0, date_fns_1.toDate)(interval.start);
+    const end = (0, date_fns_1.toDate)(interval.end);
+    if (end.getTime() < start.getTime()) {
+        throw new RangeError("Invalid interval");
+    }
+    const startDate = (0, conversion_js_1.toHijriDate)(start);
+    const endDate = (0, conversion_js_1.toHijriDate)(end);
+    const months = [];
+    let currentYear = startDate.year;
+    let currentMonth = startDate.monthIndex;
+    const endYear = endDate.year;
+    const endMonth = endDate.monthIndex;
+    while (currentYear < endYear ||
+        (currentYear === endYear && currentMonth <= endMonth)) {
+        months.push((0, conversion_js_1.toGregorianDate)({ year: currentYear, monthIndex: currentMonth, day: 1 }));
+        currentMonth += 1;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear += 1;
         }
     }
-    return dates;
+    return months;
 }

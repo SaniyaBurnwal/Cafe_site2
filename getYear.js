@@ -1,11 +1,7 @@
-import { toEthiopicDate } from "../utils/index.js";
-/**
- * Get year
- *
- * @param {Date} date - The original date
- * @returns {number} The year
- */
-export function getYear(date) {
-    const { year } = toEthiopicDate(date);
-    return year;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getYear = getYear;
+const conversion_js_1 = require("../utils/conversion.js");
+function getYear(date) {
+    return (0, conversion_js_1.toHijriDate)(date).year;
 }

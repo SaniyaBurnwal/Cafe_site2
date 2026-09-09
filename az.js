@@ -1,11 +1,14 @@
-import { az as dateFnsAz } from "date-fns/locale";
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.az = void 0;
+const locale_1 = require("date-fns/locale");
+const DateLib_js_1 = require("../classes/DateLib.js");
 /** Azerbaijani locale extended with DayPicker-specific translations. */
-export const az = {
-    ...dateFnsAz,
+exports.az = {
+    ...locale_1.az,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `Bu gün, ${label}`;
@@ -18,9 +21,9 @@ export const az = {
         labelPrevious: "Əvvəlki aya keç",
         labelWeekNumber: (weekNumber) => `Həftə ${weekNumber}`,
         labelYearDropdown: "İli seçin",
-        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib(options)).formatMonthYear(date),
+        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).formatMonthYear(date),
         labelGridcell: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `Bu gün, ${label}`;
@@ -29,6 +32,6 @@ export const az = {
         },
         labelNav: "Naviqasiya paneli",
         labelWeekNumberHeader: "Həftə nömrəsi",
-        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib(options)).format(date, "cccc"),
+        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc"),
     },
 };

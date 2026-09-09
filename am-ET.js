@@ -1,5 +1,8 @@
-import { DateLib } from "../classes/DateLib.js";
-import { enUS } from "./en-US.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.amET = void 0;
+const DateLib_js_1 = require("../classes/DateLib.js");
+const en_US_js_1 = require("./en-US.js");
 /**
  * Minimal Amharic (Ethiopia) locale for date-fns v4.
  *
@@ -61,10 +64,10 @@ function getDayPeriod(value, width) {
             return parts.value;
     }
     // Fallback: delegate to en-US for anything else
-    return enUS.localize.dayPeriod(value, { width: width });
+    return en_US_js_1.enUS.localize.dayPeriod(value, { width: width });
 }
 const localize = {
-    ...enUS.localize,
+    ...en_US_js_1.enUS.localize,
     // Ordinals in Amharic are commonly written as cardinals; keep simple numeric output
     ordinalNumber: (n) => String(n),
     month: (value, options) => {
@@ -87,18 +90,18 @@ const options = {
  * Amharic (Ethiopia) locale backed by Intl for core names plus DayPicker
  * labels.
  */
-export const amET = {
+exports.amET = {
     code: "am-ET",
     // Reuse en-US for distance/relative formatting and formatLong skeletons
-    formatDistance: enUS.formatDistance,
-    formatRelative: enUS.formatRelative,
-    formatLong: enUS.formatLong,
+    formatDistance: en_US_js_1.enUS.formatDistance,
+    formatRelative: en_US_js_1.enUS.formatRelative,
+    formatLong: en_US_js_1.enUS.formatLong,
     localize,
-    match: enUS.match,
+    match: en_US_js_1.enUS.match,
     options,
     labels: {
         labelDayButton: (date, modifiers, opts, dateLib) => {
-            const lib = dateLib ?? new DateLib(opts);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(opts);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `ዛሬ፣ ${label}`;
@@ -111,9 +114,9 @@ export const amET = {
         labelPrevious: "ወደ ቀዳሚ ወር ይሂዱ",
         labelWeekNumber: (weekNumber) => `ሳምንት ${weekNumber}`,
         labelYearDropdown: "ዓመቱን ይምረጡ",
-        labelGrid: (date, opts, dateLib) => (dateLib ?? new DateLib(opts)).formatMonthYear(date),
+        labelGrid: (date, opts, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(opts)).formatMonthYear(date),
         labelGridcell: (date, modifiers, opts, dateLib) => {
-            const lib = dateLib ?? new DateLib(opts);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(opts);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `ዛሬ፣ ${label}`;
@@ -122,7 +125,7 @@ export const amET = {
         },
         labelNav: "መምሪያ አሞሌ",
         labelWeekNumberHeader: "የሳምንት ቁጥር",
-        labelWeekday: (date, opts, dateLib) => (dateLib ?? new DateLib(opts)).format(date, "cccc"),
+        labelWeekday: (date, opts, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(opts)).format(date, "cccc"),
     },
 };
-export default amET;
+exports.default = exports.amET;

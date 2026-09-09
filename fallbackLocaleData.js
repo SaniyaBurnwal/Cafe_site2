@@ -1,4 +1,7 @@
-import { toHijriDate } from "../utils/conversion.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getFallbackWeekdayName = exports.getFallbackMonthName = exports.getFallbackLocaleCode = void 0;
+const conversion_js_1 = require("../utils/conversion.js");
 const fallbackMonthNames = {
     en: {
         long: [
@@ -91,15 +94,18 @@ const fallbackWeekdayNames = {
         narrow: ["ح", "ن", "ث", "ر", "خ", "ج", "س"],
     },
 };
-export const getFallbackLocaleCode = (localeCode) => {
+const getFallbackLocaleCode = (localeCode) => {
     return localeCode.toLowerCase().startsWith("ar") ? "ar" : "en";
 };
-export const getFallbackMonthName = (date, localeCode, width) => {
-    const hijri = toHijriDate(date);
-    const locale = getFallbackLocaleCode(localeCode);
+exports.getFallbackLocaleCode = getFallbackLocaleCode;
+const getFallbackMonthName = (date, localeCode, width) => {
+    const hijri = (0, conversion_js_1.toHijriDate)(date);
+    const locale = (0, exports.getFallbackLocaleCode)(localeCode);
     return fallbackMonthNames[locale][width][hijri.monthIndex];
 };
-export const getFallbackWeekdayName = (date, localeCode, width) => {
-    const locale = getFallbackLocaleCode(localeCode);
+exports.getFallbackMonthName = getFallbackMonthName;
+const getFallbackWeekdayName = (date, localeCode, width) => {
+    const locale = (0, exports.getFallbackLocaleCode)(localeCode);
     return fallbackWeekdayNames[locale][width][date.getDay()];
 };
+exports.getFallbackWeekdayName = getFallbackWeekdayName;

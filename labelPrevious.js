@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.labelPrevious = labelPrevious;
 /**
  * Generates the ARIA label for the "previous month" button.
  *
@@ -8,6 +11,6 @@
  * @group Labels
  * @see https://daypicker.dev/docs/translation#aria-labels
  */
-export function labelPrevious(_month) {
+function labelPrevious(_month) {
     return "Go to the Previous Month";
 }

@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.labelYearDropdown = labelYearDropdown;
 /**
  * Generates the ARIA label for the years dropdown.
  *
@@ -7,6 +10,6 @@
  * @group Labels
  * @see https://daypicker.dev/docs/translation#aria-labels
  */
-export function labelYearDropdown(_options) {
+function labelYearDropdown(_options) {
     return "Choose the Year";
 }

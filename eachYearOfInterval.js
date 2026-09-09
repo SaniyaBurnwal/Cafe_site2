@@ -1,18 +1,19 @@
-import { toEthiopicDate, toGregorianDate } from "../utils/index.js";
-/**
- * Returns the start of each Ethiopic year included in the given interval.
- *
- * @param interval The interval whose years should be returned.
- */
-export function eachYearOfInterval(interval) {
-    const start = toEthiopicDate(new Date(interval.start));
-    const end = toEthiopicDate(new Date(interval.end));
-    if (end.year < start.year) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.eachYearOfInterval = eachYearOfInterval;
+const date_fns_1 = require("date-fns");
+const conversion_js_1 = require("../utils/conversion.js");
+function eachYearOfInterval(interval) {
+    const start = (0, date_fns_1.toDate)(interval.start);
+    const end = (0, date_fns_1.toDate)(interval.end);
+    if (end.getTime() < start.getTime()) {
         return [];
     }
+    const startYear = (0, conversion_js_1.toHijriDate)(start).year;
+    const endYear = (0, conversion_js_1.toHijriDate)(end).year;
     const years = [];
-    for (let year = start.year; year <= end.year; year += 1) {
-        years.push(toGregorianDate({ year, month: 1, day: 1 }));
+    for (let year = startYear; year <= endYear; year += 1) {
+        years.push((0, conversion_js_1.toGregorianDate)({ year, monthIndex: 0, day: 1 }));
     }
     return years;
 }

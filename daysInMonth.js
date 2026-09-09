@@ -1,19 +1,24 @@
-import { isEthiopicLeapYear } from "./isEthiopicLeapYear.js";
-/**
- * Returns the number of days in the specified month of the Ethiopic calendar.
- *
- * In the Ethiopic calendar:
- *
- * - Months 1-12 have 30 days each
- * - Month 13 (Pagume) has 5 days in regular years, 6 days in leap years
- *
- * @param month - The month number (1-13)
- * @param year - The Ethiopic year
- * @returns The number of days in the specified month
- */
-export function daysInMonth(month, year) {
-    if (month === 13) {
-        return isEthiopicLeapYear(year) ? 6 : 5;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getDaysInMonth = getDaysInMonth;
+const conversion_js_1 = require("./conversion.js");
+const range_js_1 = require("./range.js");
+const MAX_DAY_IN_HIJRI_MONTH = 30;
+const MIN_DAY_IN_HIJRI_MONTH = 29;
+function getDaysInMonth(year, monthIndex) {
+    const clamped = (0, range_js_1.clampHijriDate)({ year, monthIndex, day: 1 });
+    for (let day = MAX_DAY_IN_HIJRI_MONTH; day >= MIN_DAY_IN_HIJRI_MONTH; day -= 1) {
+        const candidateDate = (0, conversion_js_1.toGregorianDate)({
+            year: clamped.year,
+            monthIndex: clamped.monthIndex,
+            day,
+        });
+        const roundTrip = (0, conversion_js_1.toHijriDate)(candidateDate);
+        if (roundTrip.year === clamped.year &&
+            roundTrip.monthIndex === clamped.monthIndex &&
+            roundTrip.day === day) {
+            return day;
+        }
     }
-    return 30;
+    return MIN_DAY_IN_HIJRI_MONTH;
 }
