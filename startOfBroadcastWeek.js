@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.startOfBroadcastWeek = startOfBroadcastWeek;
 /**
  * Returns the start date of the week in the broadcast calendar.
  *
@@ -10,7 +13,7 @@
  * @param dateLib The date library to use for date manipulation.
  * @returns The start date of the broadcast week.
  */
-export function startOfBroadcastWeek(date, dateLib) {
+function startOfBroadcastWeek(date, dateLib) {
     const firstOfMonth = dateLib.startOfMonth(date);
     const dayOfWeek = firstOfMonth.getDay();
     if (dayOfWeek === 1) {

@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getDisplayMonths = getDisplayMonths;
 /**
  * Returns the months to display in the calendar.
  *
@@ -8,7 +11,7 @@
  * @param dateLib The date library to use for date manipulation.
  * @returns An array of dates representing the months to display.
  */
-export function getDisplayMonths(firstDisplayedMonth, calendarEndMonth, props, dateLib) {
+function getDisplayMonths(firstDisplayedMonth, calendarEndMonth, props, dateLib) {
     const { numberOfMonths = 1 } = props;
     const months = [];
     for (let i = 0; i < numberOfMonths; i++) {

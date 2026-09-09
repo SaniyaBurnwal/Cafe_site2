@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getNavMonths = getNavMonths;
 /**
  * Returns the start and end months for calendar navigation.
  *
@@ -5,7 +8,7 @@
  * @param dateLib The date library to use for date manipulation.
  * @returns A tuple containing the start and end months for navigation.
  */
-export function getNavMonths(props, dateLib) {
+function getNavMonths(props, dateLib) {
     let { startMonth, endMonth } = props;
     const { startOfYear, startOfDay, startOfMonth, endOfMonth, addYears, endOfYear, newDate, today, } = dateLib;
     // Handle deprecated code

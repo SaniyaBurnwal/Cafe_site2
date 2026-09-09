@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getPreviousMonth = getPreviousMonth;
 /**
  * Returns the previous month the user can navigate to, based on the given
  * options.
@@ -16,7 +19,7 @@
  * @param dateLib The date library to use for date manipulation.
  * @returns The previous month, or `undefined` if navigation is not possible.
  */
-export function getPreviousMonth(firstDisplayedMonth, calendarStartMonth, options, dateLib) {
+function getPreviousMonth(firstDisplayedMonth, calendarStartMonth, options, dateLib) {
     if (options.disableNavigation) {
         return undefined;
     }

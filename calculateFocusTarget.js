@@ -1,4 +1,7 @@
-import { DayFlag } from "../UI.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.calculateFocusTarget = calculateFocusTarget;
+const UI_js_1 = require("../UI.js");
 var FocusTargetPriority;
 (function (FocusTargetPriority) {
     FocusTargetPriority[FocusTargetPriority["Today"] = 0] = "Today";
@@ -16,9 +19,9 @@ var FocusTargetPriority;
  * @returns `true` if the day is focusable, otherwise `false`.
  */
 function isFocusableDay(modifiers) {
-    return (!modifiers[DayFlag.disabled] &&
-        !modifiers[DayFlag.hidden] &&
-        !modifiers[DayFlag.outside]);
+    return (!modifiers[UI_js_1.DayFlag.disabled] &&
+        !modifiers[UI_js_1.DayFlag.hidden] &&
+        !modifiers[UI_js_1.DayFlag.outside]);
 }
 /**
  * Calculates the focus target day based on priority.
@@ -34,13 +37,13 @@ function isFocusableDay(modifiers) {
  * @returns The `CalendarDay` that should receive focus, or `undefined` if no
  *   focusable day is found.
  */
-export function calculateFocusTarget(days, getModifiers, isSelected, lastFocused) {
+function calculateFocusTarget(days, getModifiers, isSelected, lastFocused) {
     let focusTarget;
     let foundFocusTargetPriority = -1;
     for (const day of days) {
         const modifiers = getModifiers(day);
         if (isFocusableDay(modifiers)) {
-            if (modifiers[DayFlag.focused] &&
+            if (modifiers[UI_js_1.DayFlag.focused] &&
                 foundFocusTargetPriority < FocusTargetPriority.FocusedModifier) {
                 focusTarget = day;
                 foundFocusTargetPriority = FocusTargetPriority.FocusedModifier;
@@ -55,7 +58,7 @@ export function calculateFocusTarget(days, getModifiers, isSelected, lastFocused
                 focusTarget = day;
                 foundFocusTargetPriority = FocusTargetPriority.Selected;
             }
-            else if (modifiers[DayFlag.today] &&
+            else if (modifiers[UI_js_1.DayFlag.today] &&
                 foundFocusTargetPriority < FocusTargetPriority.Today) {
                 focusTarget = day;
                 foundFocusTargetPriority = FocusTargetPriority.Today;

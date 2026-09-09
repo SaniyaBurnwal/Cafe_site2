@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getNextMonth = getNextMonth;
 /**
  * Returns the next month the user can navigate to, based on the given options.
  *
@@ -15,7 +18,7 @@
  * @param dateLib The date library to use for date manipulation.
  * @returns The next month, or `undefined` if navigation is not possible.
  */
-export function getNextMonth(firstDisplayedMonth, calendarEndMonth, options, dateLib) {
+function getNextMonth(firstDisplayedMonth, calendarEndMonth, options, dateLib) {
     if (options.disableNavigation) {
         return undefined;
     }

@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getDataAttributes = getDataAttributes;
 /**
  * Extracts `data-` attributes from the DayPicker props.
  *
@@ -7,7 +10,7 @@
  * @param props The DayPicker props.
  * @returns An object containing the `data-` attributes.
  */
-export function getDataAttributes(props) {
+function getDataAttributes(props) {
     const dataAttributes = {
         "data-mode": props.mode ?? undefined,
         "data-required": "required" in props ? props.required : undefined,

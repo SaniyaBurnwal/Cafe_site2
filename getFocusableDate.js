@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getFocusableDate = getFocusableDate;
 /**
  * Calculates the next date that should be focused in the calendar.
  *
@@ -14,7 +17,7 @@
  * @param dateLib The date library to use for date manipulation.
  * @returns The next focusable date.
  */
-export function getFocusableDate(moveBy, moveDir, refDate, navStart, navEnd, props, dateLib) {
+function getFocusableDate(moveBy, moveDir, refDate, navStart, navEnd, props, dateLib) {
     const { ISOWeek, broadcastCalendar } = props;
     const { addDays, addMonths, addWeeks, addYears, endOfBroadcastWeek, endOfISOWeek, endOfWeek, max, min, startOfBroadcastWeek, startOfISOWeek, startOfWeek, } = dateLib;
     const moveFns = {

@@ -1,4 +1,7 @@
-import { UI } from "../UI.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getStyleForModifiers = getStyleForModifiers;
+const UI_js_1 = require("../UI.js");
 /**
  * Returns the computed style for a day based on its modifiers.
  *
@@ -10,8 +13,8 @@ import { UI } from "../UI.js";
  * @param modifiersStyles The styles associated with specific modifiers.
  * @returns The computed style for the day.
  */
-export function getStyleForModifiers(dayModifiers, styles = {}, modifiersStyles = {}) {
-    let style = { ...styles?.[UI.Day] };
+function getStyleForModifiers(dayModifiers, styles = {}, modifiersStyles = {}) {
+    let style = { ...styles?.[UI_js_1.UI.Day] };
     Object.entries(dayModifiers)
         .filter(([, active]) => active === true)
         .forEach(([modifier]) => {

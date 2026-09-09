@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getBroadcastWeeksInMonth = getBroadcastWeeksInMonth;
 const FIVE_WEEKS = 5;
 const FOUR_WEEKS = 4;
 /**
@@ -12,7 +15,7 @@ const FOUR_WEEKS = 4;
  * @param dateLib The date library to use for date manipulation.
  * @returns The number of weeks in the broadcast calendar (4 or 5).
  */
-export function getBroadcastWeeksInMonth(month, dateLib) {
+function getBroadcastWeeksInMonth(month, dateLib) {
     // Get the first day of the month
     const firstDayOfMonth = dateLib.startOfMonth(month);
     // Get the day of the week for the first day of the month (1-7, where 1 is Monday)

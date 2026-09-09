@@ -1,6 +1,9 @@
-import { CalendarDay } from "../classes/index.js";
-import { dateMatchModifiers } from "../utils/dateMatchModifiers.js";
-import { getFocusableDate } from "./getFocusableDate.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getNextFocus = getNextFocus;
+const index_js_1 = require("../classes/index.js");
+const dateMatchModifiers_js_1 = require("../utils/dateMatchModifiers.js");
+const getFocusableDate_js_1 = require("./getFocusableDate.js");
 /**
  * Determines the next focusable day in the calendar.
  *
@@ -18,17 +21,17 @@ import { getFocusableDate } from "./getFocusableDate.js";
  * @param attempt The current recursion attempt (used to limit recursion depth).
  * @returns The next focusable day, or `undefined` if no focusable day is found.
  */
-export function getNextFocus(moveBy, moveDir, refDay, calendarStartMonth, calendarEndMonth, props, dateLib, attempt = 0) {
+function getNextFocus(moveBy, moveDir, refDay, calendarStartMonth, calendarEndMonth, props, dateLib, attempt = 0) {
     if (attempt > 365) {
         // Limit the recursion to 365 attempts
         return undefined;
     }
-    const focusableDate = getFocusableDate(moveBy, moveDir, refDay.date, calendarStartMonth, calendarEndMonth, props, dateLib);
+    const focusableDate = (0, getFocusableDate_js_1.getFocusableDate)(moveBy, moveDir, refDay.date, calendarStartMonth, calendarEndMonth, props, dateLib);
     const isDisabled = Boolean(props.disabled &&
-        dateMatchModifiers(focusableDate, props.disabled, dateLib));
-    const isHidden = Boolean(props.hidden && dateMatchModifiers(focusableDate, props.hidden, dateLib));
+        (0, dateMatchModifiers_js_1.dateMatchModifiers)(focusableDate, props.disabled, dateLib));
+    const isHidden = Boolean(props.hidden && (0, dateMatchModifiers_js_1.dateMatchModifiers)(focusableDate, props.hidden, dateLib));
     const targetMonth = focusableDate;
-    const focusDay = new CalendarDay(focusableDate, targetMonth, dateLib);
+    const focusDay = new index_js_1.CalendarDay(focusableDate, targetMonth, dateLib);
     if (!isDisabled && !isHidden) {
         return focusDay;
     }

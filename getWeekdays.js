@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getWeekdays = getWeekdays;
 /**
  * Generates a series of 7 days, starting from the beginning of the week, to use
  * for formatting weekday names (e.g., Monday, Tuesday, etc.).
@@ -8,7 +11,7 @@
  *   on Monday, but may include adjustments for broadcast-specific rules).
  * @returns An array of 7 dates representing the weekdays.
  */
-export function getWeekdays(dateLib, ISOWeek, broadcastCalendar, today) {
+function getWeekdays(dateLib, ISOWeek, broadcastCalendar, today) {
     const referenceToday = today ?? dateLib.today();
     const start = broadcastCalendar
         ? dateLib.startOfBroadcastWeek(referenceToday, dateLib)

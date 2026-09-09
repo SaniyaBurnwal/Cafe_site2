@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getInitialMonth = getInitialMonth;
 /**
  * Determines the initial month to display in the calendar based on the provided
  * props.
@@ -9,7 +12,7 @@
  * @param dateLib The date library to use for date manipulation.
  * @returns The initial month to display.
  */
-export function getInitialMonth(props, navStart, navEnd, dateLib) {
+function getInitialMonth(props, navStart, navEnd, dateLib) {
     const { month, defaultMonth, today = dateLib.today(), numberOfMonths = 1, } = props;
     let initialMonth = month || defaultMonth || today;
     const { differenceInCalendarMonths, addMonths, startOfMonth } = dateLib;

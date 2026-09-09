@@ -1,5 +1,8 @@
-import { DayFlag } from "../UI.js";
-import { dateMatchModifiers } from "../utils/dateMatchModifiers.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createGetModifiers = createGetModifiers;
+const UI_js_1 = require("../UI.js");
+const dateMatchModifiers_js_1 = require("../utils/dateMatchModifiers.js");
 /**
  * Creates a function to retrieve the modifiers for a given day.
  *
@@ -13,17 +16,17 @@ import { dateMatchModifiers } from "../utils/dateMatchModifiers.js";
  * @param dateLib The date library to use for date manipulation.
  * @returns A function that retrieves the modifiers for a given `CalendarDay`.
  */
-export function createGetModifiers(days, props, navStart, navEnd, dateLib) {
+function createGetModifiers(days, props, navStart, navEnd, dateLib) {
     const { disabled, hidden, modifiers, showOutsideDays, broadcastCalendar, today = dateLib.today(), } = props;
     const { isSameDay, isSameMonth, startOfMonth, isBefore, endOfMonth, isAfter, } = dateLib;
     const computedNavStart = navStart && startOfMonth(navStart);
     const computedNavEnd = navEnd && endOfMonth(navEnd);
     const internalModifiersMap = {
-        [DayFlag.focused]: [],
-        [DayFlag.outside]: [],
-        [DayFlag.disabled]: [],
-        [DayFlag.hidden]: [],
-        [DayFlag.today]: [],
+        [UI_js_1.DayFlag.focused]: [],
+        [UI_js_1.DayFlag.outside]: [],
+        [UI_js_1.DayFlag.disabled]: [],
+        [UI_js_1.DayFlag.hidden]: [],
+        [UI_js_1.DayFlag.today]: [],
     };
     const customModifiersMap = {};
     for (const day of days) {
@@ -31,8 +34,8 @@ export function createGetModifiers(days, props, navStart, navEnd, dateLib) {
         const isOutside = Boolean(displayMonth && !isSameMonth(date, displayMonth));
         const isBeforeNavStart = Boolean(computedNavStart && isBefore(date, computedNavStart));
         const isAfterNavEnd = Boolean(computedNavEnd && isAfter(date, computedNavEnd));
-        const isDisabled = Boolean(disabled && dateMatchModifiers(date, disabled, dateLib));
-        const isHidden = Boolean(hidden && dateMatchModifiers(date, hidden, dateLib)) ||
+        const isDisabled = Boolean(disabled && (0, dateMatchModifiers_js_1.dateMatchModifiers)(date, disabled, dateLib));
+        const isHidden = Boolean(hidden && (0, dateMatchModifiers_js_1.dateMatchModifiers)(date, hidden, dateLib)) ||
             isBeforeNavStart ||
             isAfterNavEnd ||
             // Broadcast calendar will show outside days as default
@@ -52,7 +55,7 @@ export function createGetModifiers(days, props, navStart, navEnd, dateLib) {
             Object.keys(modifiers).forEach((name) => {
                 const modifierValue = modifiers?.[name];
                 const isMatch = modifierValue
-                    ? dateMatchModifiers(date, modifierValue, dateLib)
+                    ? (0, dateMatchModifiers_js_1.dateMatchModifiers)(date, modifierValue, dateLib)
                     : false;
                 if (!isMatch)
                     return;
@@ -68,11 +71,11 @@ export function createGetModifiers(days, props, navStart, navEnd, dateLib) {
     return (day) => {
         // Initialize all the modifiers to false
         const dayFlags = {
-            [DayFlag.focused]: false,
-            [DayFlag.disabled]: false,
-            [DayFlag.hidden]: false,
-            [DayFlag.outside]: false,
-            [DayFlag.today]: false,
+            [UI_js_1.DayFlag.focused]: false,
+            [UI_js_1.DayFlag.disabled]: false,
+            [UI_js_1.DayFlag.hidden]: false,
+            [UI_js_1.DayFlag.outside]: false,
+            [UI_js_1.DayFlag.today]: false,
         };
         const customModifiers = {};
         // Find the modifiers for the given day

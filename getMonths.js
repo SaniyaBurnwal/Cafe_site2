@@ -1,4 +1,7 @@
-import { CalendarDay, CalendarMonth, CalendarWeek } from "../classes/index.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getMonths = getMonths;
+const index_js_1 = require("../classes/index.js");
 /**
  * Returns the months to display in the calendar.
  *
@@ -13,7 +16,7 @@ import { CalendarDay, CalendarMonth, CalendarWeek } from "../classes/index.js";
  * @returns An array of `CalendarMonth` objects representing the months to
  *   display.
  */
-export function getMonths(displayMonths, dates, props, dateLib) {
+function getMonths(displayMonths, dates, props, dateLib) {
     const { addDays, endOfBroadcastWeek, endOfISOWeek, endOfMonth, endOfWeek, getISOWeek, getWeek, startOfBroadcastWeek, startOfISOWeek, startOfWeek, } = dateLib;
     const dayPickerMonths = displayMonths.reduce((months, month) => {
         const firstDateOfFirstWeek = props.broadcastCalendar
@@ -42,16 +45,16 @@ export function getMonths(displayMonths, dates, props, dateLib) {
         const weeks = monthDates.reduce((weeks, date) => {
             const weekNumber = props.ISOWeek ? getISOWeek(date) : getWeek(date);
             const week = weeks.find((week) => week.weekNumber === weekNumber);
-            const day = new CalendarDay(date, month, dateLib);
+            const day = new index_js_1.CalendarDay(date, month, dateLib);
             if (!week) {
-                weeks.push(new CalendarWeek(weekNumber, [day]));
+                weeks.push(new index_js_1.CalendarWeek(weekNumber, [day]));
             }
             else {
                 week.days.push(day);
             }
             return weeks;
         }, []);
-        const dayPickerMonth = new CalendarMonth(month, weeks);
+        const dayPickerMonth = new index_js_1.CalendarMonth(month, weeks);
         months.push(dayPickerMonth);
         return months;
     }, []);

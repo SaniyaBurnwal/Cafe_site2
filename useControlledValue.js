@@ -1,4 +1,7 @@
-import { useState } from "react";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useControlledValue = useControlledValue;
+const react_1 = require("react");
 /**
  * A custom hook for managing both controlled and uncontrolled component states.
  *
@@ -21,8 +24,8 @@ import { useState } from "react";
  *   controlled or uncontrolled) and the second element is a setter function to
  *   update the value.
  */
-export function useControlledValue(defaultValue, controlledValue) {
-    const [uncontrolledValue, setValue] = useState(defaultValue);
+function useControlledValue(defaultValue, controlledValue) {
+    const [uncontrolledValue, setValue] = (0, react_1.useState)(defaultValue);
     const value = controlledValue === undefined ? uncontrolledValue : controlledValue;
     return [value, setValue];
 }

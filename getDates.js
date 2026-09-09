@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getDates = getDates;
 /**
  * Returns all the dates to display in the calendar.
  *
@@ -10,7 +13,7 @@
  * @param dateLib The date library to use for date manipulation.
  * @returns An array of dates to display in the calendar.
  */
-export function getDates(displayMonths, maxDate, props, dateLib) {
+function getDates(displayMonths, maxDate, props, dateLib) {
     const firstMonth = displayMonths[0];
     const lastMonth = displayMonths[displayMonths.length - 1];
     const { ISOWeek, fixedWeeks, broadcastCalendar } = props ?? {};

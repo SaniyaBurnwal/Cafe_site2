@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getYearOptions = getYearOptions;
 /**
  * Returns the years to display in the dropdown.
  *
@@ -12,7 +15,7 @@
  * @returns An array of dropdown options representing the years, or `undefined`
  *   if `navStart` or `navEnd` is not provided.
  */
-export function getYearOptions(navStart, navEnd, formatters, dateLib, reverse = false) {
+function getYearOptions(navStart, navEnd, formatters, dateLib, reverse = false) {
     if (!navStart)
         return undefined;
     if (!navEnd)

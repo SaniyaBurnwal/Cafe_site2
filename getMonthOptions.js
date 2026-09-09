@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getMonthOptions = getMonthOptions;
 /**
  * Returns the months to show in the dropdown.
  *
@@ -13,7 +16,7 @@
  * @returns An array of dropdown options representing the months, or `undefined`
  *   if no months are available.
  */
-export function getMonthOptions(displayMonth, navStart, navEnd, formatters, dateLib) {
+function getMonthOptions(displayMonth, navStart, navEnd, formatters, dateLib) {
     const { startOfMonth, startOfYear, endOfYear, eachMonthOfInterval, getMonth, } = dateLib;
     const months = eachMonthOfInterval({
         start: startOfYear(displayMonth),
