@@ -1,4 +1,8 @@
-import { defaultDateLib } from "../classes/index.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isDateInRange = void 0;
+exports.rangeIncludesDate = rangeIncludesDate;
+const index_js_1 = require("../classes/index.js");
 /**
  * Checks if a given date is within a specified date range.
  *
@@ -10,7 +14,7 @@ import { defaultDateLib } from "../classes/index.js";
  * @returns `true` if the date is within the range, otherwise `false`.
  * @group Utilities
  */
-export function rangeIncludesDate(range, date, excludeEnds = false, dateLib = defaultDateLib) {
+function rangeIncludesDate(range, date, excludeEnds = false, dateLib = index_js_1.defaultDateLib) {
     let { from, to } = range;
     const { differenceInCalendarDays, isSameDay } = dateLib;
     if (from && to) {
@@ -34,4 +38,5 @@ export function rangeIncludesDate(range, date, excludeEnds = false, dateLib = de
  * @private
  * @deprecated Use {@link rangeIncludesDate} instead.
  */
-export const isDateInRange = (range, date) => rangeIncludesDate(range, date, false, defaultDateLib);
+const isDateInRange = (range, date) => rangeIncludesDate(range, date, false, index_js_1.defaultDateLib);
+exports.isDateInRange = isDateInRange;

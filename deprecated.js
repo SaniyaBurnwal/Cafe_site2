@@ -1,23 +1,26 @@
-import { MonthCaption, } from "../components/MonthCaption.js";
-import { Week } from "../components/Week.js";
-import { useDayPicker } from "../useDayPicker.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useNavigation = exports.Row = exports.Caption = void 0;
+const MonthCaption_js_1 = require("../components/MonthCaption.js");
+const Week_js_1 = require("../components/Week.js");
+const useDayPicker_js_1 = require("../useDayPicker.js");
 /**
  * @ignore
  * @deprecated This component has been renamed. Use `MonthCaption` instead.
  * @group Components
  * @see https://daypicker.dev/guides/custom-components
  */
-export const Caption = MonthCaption;
+exports.Caption = MonthCaption_js_1.MonthCaption;
 /**
  * @ignore
  * @deprecated This component has been renamed. Use `Week` instead.
  * @group Components
  * @see https://daypicker.dev/guides/custom-components
  */
-export const Row = Week;
+exports.Row = Week_js_1.Week;
 /**
  * @ignore
  * @deprecated This type has been moved to `useDayPicker`.
  * @group Hooks
  */
-export const useNavigation = useDayPicker;
+exports.useNavigation = useDayPicker_js_1.useDayPicker;

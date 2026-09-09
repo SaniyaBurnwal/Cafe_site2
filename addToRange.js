@@ -1,4 +1,7 @@
-import { defaultDateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addToRange = addToRange;
+const DateLib_js_1 = require("../classes/DateLib.js");
 /**
  * Adds a date to an existing range, considering constraints like minimum and
  * maximum range size.
@@ -12,7 +15,7 @@ import { defaultDateLib } from "../classes/DateLib.js";
  * @returns The updated date range, or `undefined` if the range is cleared.
  * @group Utilities
  */
-export function addToRange(date, initialRange, min = 0, max = 0, required = false, dateLib = defaultDateLib) {
+function addToRange(date, initialRange, min = 0, max = 0, required = false, dateLib = DateLib_js_1.defaultDateLib) {
     const { from, to } = initialRange || {};
     const { isSameDay, isAfter, isBefore } = dateLib;
     let range;

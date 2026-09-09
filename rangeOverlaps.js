@@ -1,5 +1,8 @@
-import { defaultDateLib } from "../classes/index.js";
-import { rangeIncludesDate } from "./rangeIncludesDate.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rangeOverlaps = rangeOverlaps;
+const index_js_1 = require("../classes/index.js");
+const rangeIncludesDate_js_1 = require("./rangeIncludesDate.js");
 /**
  * Determines if two date ranges overlap.
  *
@@ -10,9 +13,9 @@ import { rangeIncludesDate } from "./rangeIncludesDate.js";
  * @returns `true` if the ranges overlap, otherwise `false`.
  * @group Utilities
  */
-export function rangeOverlaps(rangeLeft, rangeRight, dateLib = defaultDateLib) {
-    return (rangeIncludesDate(rangeLeft, rangeRight.from, false, dateLib) ||
-        rangeIncludesDate(rangeLeft, rangeRight.to, false, dateLib) ||
-        rangeIncludesDate(rangeRight, rangeLeft.from, false, dateLib) ||
-        rangeIncludesDate(rangeRight, rangeLeft.to, false, dateLib));
+function rangeOverlaps(rangeLeft, rangeRight, dateLib = index_js_1.defaultDateLib) {
+    return ((0, rangeIncludesDate_js_1.rangeIncludesDate)(rangeLeft, rangeRight.from, false, dateLib) ||
+        (0, rangeIncludesDate_js_1.rangeIncludesDate)(rangeLeft, rangeRight.to, false, dateLib) ||
+        (0, rangeIncludesDate_js_1.rangeIncludesDate)(rangeRight, rangeLeft.from, false, dateLib) ||
+        (0, rangeIncludesDate_js_1.rangeIncludesDate)(rangeRight, rangeLeft.to, false, dateLib));
 }

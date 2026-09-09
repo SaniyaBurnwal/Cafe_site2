@@ -1,11 +1,14 @@
-import { TZDate } from "@date-fns/tz";
-import { toTimeZone } from "./toTimeZone.js";
-import { isDateAfterType, isDateBeforeType, isDateInterval, isDateRange, } from "./typeguards.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.convertMatchersToTimeZone = convertMatchersToTimeZone;
+const tz_1 = require("@date-fns/tz");
+const toTimeZone_js_1 = require("./toTimeZone.js");
+const typeguards_js_1 = require("./typeguards.js");
 function toZoneNoon(date, timeZone, noonSafe) {
     if (!noonSafe)
-        return toTimeZone(date, timeZone);
-    const zoned = toTimeZone(date, timeZone);
-    const noonZoned = new TZDate(zoned.getFullYear(), zoned.getMonth(), zoned.getDate(), 12, 0, 0, timeZone);
+        return (0, toTimeZone_js_1.toTimeZone)(date, timeZone);
+    const zoned = (0, toTimeZone_js_1.toTimeZone)(date, timeZone);
+    const noonZoned = new tz_1.TZDate(zoned.getFullYear(), zoned.getMonth(), zoned.getDate(), 12, 0, 0, timeZone);
     return new Date(noonZoned.getTime());
 }
 function convertMatcher(matcher, timeZone, noonSafe) {
@@ -18,25 +21,25 @@ function convertMatcher(matcher, timeZone, noonSafe) {
     if (Array.isArray(matcher)) {
         return matcher.map((value) => value instanceof Date ? toZoneNoon(value, timeZone, noonSafe) : value);
     }
-    if (isDateRange(matcher)) {
+    if ((0, typeguards_js_1.isDateRange)(matcher)) {
         return {
             ...matcher,
-            from: matcher.from ? toTimeZone(matcher.from, timeZone) : matcher.from,
-            to: matcher.to ? toTimeZone(matcher.to, timeZone) : matcher.to,
+            from: matcher.from ? (0, toTimeZone_js_1.toTimeZone)(matcher.from, timeZone) : matcher.from,
+            to: matcher.to ? (0, toTimeZone_js_1.toTimeZone)(matcher.to, timeZone) : matcher.to,
         };
     }
-    if (isDateInterval(matcher)) {
+    if ((0, typeguards_js_1.isDateInterval)(matcher)) {
         return {
             before: toZoneNoon(matcher.before, timeZone, noonSafe),
             after: toZoneNoon(matcher.after, timeZone, noonSafe),
         };
     }
-    if (isDateAfterType(matcher)) {
+    if ((0, typeguards_js_1.isDateAfterType)(matcher)) {
         return {
             after: toZoneNoon(matcher.after, timeZone, noonSafe),
         };
     }
-    if (isDateBeforeType(matcher)) {
+    if ((0, typeguards_js_1.isDateBeforeType)(matcher)) {
         return {
             before: toZoneNoon(matcher.before, timeZone, noonSafe),
         };
@@ -51,7 +54,7 @@ function convertMatcher(matcher, timeZone, noonSafe) {
  * @returns The converted matcher(s).
  * @group Utilities
  */
-export function convertMatchersToTimeZone(matchers, timeZone, noonSafe) {
+function convertMatchersToTimeZone(matchers, timeZone, noonSafe) {
     if (!matchers) {
         return matchers;
     }

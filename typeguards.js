@@ -1,3 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isDateInterval = isDateInterval;
+exports.isDateRange = isDateRange;
+exports.isDateAfterType = isDateAfterType;
+exports.isDateBeforeType = isDateBeforeType;
+exports.isDayOfWeekType = isDayOfWeekType;
+exports.isDatesArray = isDatesArray;
 /**
  * Checks if the given value is of type {@link DateInterval}.
  *
@@ -5,7 +13,7 @@
  * @returns `true` if the value is a {@link DateInterval}, otherwise `false`.
  * @group Utilities
  */
-export function isDateInterval(matcher) {
+function isDateInterval(matcher) {
     return Boolean(matcher &&
         typeof matcher === "object" &&
         "before" in matcher &&
@@ -18,7 +26,7 @@ export function isDateInterval(matcher) {
  * @returns `true` if the value is a {@link DateRange}, otherwise `false`.
  * @group Utilities
  */
-export function isDateRange(value) {
+function isDateRange(value) {
     return Boolean(value && typeof value === "object" && "from" in value);
 }
 /**
@@ -28,7 +36,7 @@ export function isDateRange(value) {
  * @returns `true` if the value is a {@link DateAfter}, otherwise `false`.
  * @group Utilities
  */
-export function isDateAfterType(value) {
+function isDateAfterType(value) {
     return Boolean(value && typeof value === "object" && "after" in value);
 }
 /**
@@ -38,7 +46,7 @@ export function isDateAfterType(value) {
  * @returns `true` if the value is a {@link DateBefore}, otherwise `false`.
  * @group Utilities
  */
-export function isDateBeforeType(value) {
+function isDateBeforeType(value) {
     return Boolean(value && typeof value === "object" && "before" in value);
 }
 /**
@@ -48,7 +56,7 @@ export function isDateBeforeType(value) {
  * @returns `true` if the value is a {@link DayOfWeek}, otherwise `false`.
  * @group Utilities
  */
-export function isDayOfWeekType(value) {
+function isDayOfWeekType(value) {
     return Boolean(value && typeof value === "object" && "dayOfWeek" in value);
 }
 /**
@@ -59,6 +67,6 @@ export function isDayOfWeekType(value) {
  * @param dateLib - The date utility library instance.
  * @returns `true` if the value is an array of valid dates, otherwise `false`.
  */
-export function isDatesArray(value, dateLib) {
+function isDatesArray(value, dateLib) {
     return Array.isArray(value) && value.every(dateLib.isDate);
 }

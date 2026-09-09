@@ -1,4 +1,7 @@
-import { useControlledValue } from "../helpers/useControlledValue.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useMulti = useMulti;
+const useControlledValue_js_1 = require("../helpers/useControlledValue.js");
 /**
  * Hook to manage multiple-date selection in the DayPicker component.
  *
@@ -8,9 +11,9 @@ import { useControlledValue } from "../helpers/useControlledValue.js";
  * @returns An object containing the selected dates, a function to select dates,
  *   and a function to check if a date is selected.
  */
-export function useMulti(props, dateLib) {
+function useMulti(props, dateLib) {
     const { selected: initiallySelected, required, onSelect, } = props;
-    const [internallySelected, setSelected] = useControlledValue(initiallySelected, onSelect ? initiallySelected : undefined);
+    const [internallySelected, setSelected] = (0, useControlledValue_js_1.useControlledValue)(initiallySelected, onSelect ? initiallySelected : undefined);
     const selected = !onSelect ? internallySelected : initiallySelected;
     const { isSameDay } = dateLib;
     const isSelected = (date) => {

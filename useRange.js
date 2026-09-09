@@ -1,6 +1,9 @@
-import { useControlledValue } from "../helpers/useControlledValue.js";
-import { addToRange, rangeContainsModifiers } from "../utils/index.js";
-import { rangeIncludesDate } from "../utils/rangeIncludesDate.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useRange = useRange;
+const useControlledValue_js_1 = require("../helpers/useControlledValue.js");
+const index_js_1 = require("../utils/index.js");
+const rangeIncludesDate_js_1 = require("../utils/rangeIncludesDate.js");
 /**
  * Hook to manage range selection in the DayPicker component.
  *
@@ -10,11 +13,11 @@ import { rangeIncludesDate } from "../utils/rangeIncludesDate.js";
  * @returns An object containing the selected range, a function to select a
  *   range, and a function to check if a date is within the range.
  */
-export function useRange(props, dateLib) {
+function useRange(props, dateLib) {
     const { disabled, excludeDisabled, resetOnSelect, selected: initiallySelected, required, onSelect, } = props;
-    const [internallySelected, setSelected] = useControlledValue(initiallySelected, onSelect ? initiallySelected : undefined);
+    const [internallySelected, setSelected] = (0, useControlledValue_js_1.useControlledValue)(initiallySelected, onSelect ? initiallySelected : undefined);
     const selected = !onSelect ? internallySelected : initiallySelected;
-    const isSelected = (date) => selected && rangeIncludesDate(selected, date, false, dateLib);
+    const isSelected = (date) => selected && (0, rangeIncludesDate_js_1.rangeIncludesDate)(selected, date, false, dateLib);
     const select = (triggerDate, modifiers, e) => {
         const { min, max } = props;
         let newRange;
@@ -35,11 +38,11 @@ export function useRange(props, dateLib) {
                 }
             }
             else {
-                newRange = addToRange(triggerDate, selected, min, max, required, dateLib);
+                newRange = (0, index_js_1.addToRange)(triggerDate, selected, min, max, required, dateLib);
             }
         }
         if (excludeDisabled && disabled && newRange?.from && newRange.to) {
-            if (rangeContainsModifiers({ from: newRange.from, to: newRange.to }, disabled, dateLib)) {
+            if ((0, index_js_1.rangeContainsModifiers)({ from: newRange.from, to: newRange.to }, disabled, dateLib)) {
                 // if a disabled days is found, the range is reset
                 newRange.from = triggerDate;
                 newRange.to = undefined;

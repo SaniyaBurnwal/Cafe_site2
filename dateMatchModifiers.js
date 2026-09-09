@@ -1,6 +1,10 @@
-import { defaultDateLib } from "../classes/DateLib.js";
-import { rangeIncludesDate } from "./rangeIncludesDate.js";
-import { isDateAfterType, isDateBeforeType, isDateInterval, isDateRange, isDatesArray, isDayOfWeekType, } from "./typeguards.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isMatch = void 0;
+exports.dateMatchModifiers = dateMatchModifiers;
+const DateLib_js_1 = require("../classes/DateLib.js");
+const rangeIncludesDate_js_1 = require("./rangeIncludesDate.js");
+const typeguards_js_1 = require("./typeguards.js");
 /**
  * Checks if a given date matches at least one of the specified {@link Matcher}.
  *
@@ -10,7 +14,7 @@ import { isDateAfterType, isDateBeforeType, isDateInterval, isDateRange, isDates
  * @returns `true` if the date matches any of the matchers, otherwise `false`.
  * @group Utilities
  */
-export function dateMatchModifiers(date, matchers, dateLib = defaultDateLib) {
+function dateMatchModifiers(date, matchers, dateLib = DateLib_js_1.defaultDateLib) {
     const matchersArr = !Array.isArray(matchers) ? [matchers] : matchers;
     const { isSameDay, differenceInCalendarDays, isAfter } = dateLib;
     return matchersArr.some((matcher) => {
@@ -20,19 +24,19 @@ export function dateMatchModifiers(date, matchers, dateLib = defaultDateLib) {
         if (dateLib.isDate(matcher)) {
             return isSameDay(date, matcher);
         }
-        if (isDatesArray(matcher, dateLib)) {
+        if ((0, typeguards_js_1.isDatesArray)(matcher, dateLib)) {
             return matcher.some((matcherDate) => isSameDay(date, matcherDate));
         }
-        if (isDateRange(matcher)) {
-            return rangeIncludesDate(matcher, date, false, dateLib);
+        if ((0, typeguards_js_1.isDateRange)(matcher)) {
+            return (0, rangeIncludesDate_js_1.rangeIncludesDate)(matcher, date, false, dateLib);
         }
-        if (isDayOfWeekType(matcher)) {
+        if ((0, typeguards_js_1.isDayOfWeekType)(matcher)) {
             if (!Array.isArray(matcher.dayOfWeek)) {
                 return matcher.dayOfWeek === date.getDay();
             }
             return matcher.dayOfWeek.includes(date.getDay());
         }
-        if (isDateInterval(matcher)) {
+        if ((0, typeguards_js_1.isDateInterval)(matcher)) {
             const diffBefore = differenceInCalendarDays(matcher.before, date);
             const diffAfter = differenceInCalendarDays(matcher.after, date);
             const isDayBefore = diffBefore > 0;
@@ -45,10 +49,10 @@ export function dateMatchModifiers(date, matchers, dateLib = defaultDateLib) {
                 return isDayBefore || isDayAfter;
             }
         }
-        if (isDateAfterType(matcher)) {
+        if ((0, typeguards_js_1.isDateAfterType)(matcher)) {
             return differenceInCalendarDays(date, matcher.after) > 0;
         }
-        if (isDateBeforeType(matcher)) {
+        if ((0, typeguards_js_1.isDateBeforeType)(matcher)) {
             return differenceInCalendarDays(matcher.before, date) > 0;
         }
         if (typeof matcher === "function") {
@@ -61,4 +65,4 @@ export function dateMatchModifiers(date, matchers, dateLib = defaultDateLib) {
  * @private
  * @deprecated Use {@link dateMatchModifiers} instead.
  */
-export const isMatch = dateMatchModifiers;
+exports.isMatch = dateMatchModifiers;

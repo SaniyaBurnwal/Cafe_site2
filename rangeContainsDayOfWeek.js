@@ -1,4 +1,7 @@
-import { defaultDateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rangeContainsDayOfWeek = rangeContainsDayOfWeek;
+const DateLib_js_1 = require("../classes/DateLib.js");
 /**
  * Checks if a date range contains one or more specified days of the week.
  *
@@ -11,7 +14,7 @@ import { defaultDateLib } from "../classes/DateLib.js";
  *   otherwise `false`.
  * @group Utilities
  */
-export function rangeContainsDayOfWeek(range, dayOfWeek, dateLib = defaultDateLib) {
+function rangeContainsDayOfWeek(range, dayOfWeek, dateLib = DateLib_js_1.defaultDateLib) {
     const dayOfWeekArr = !Array.isArray(dayOfWeek) ? [dayOfWeek] : dayOfWeek;
     let date = range.from;
     const totalDays = dateLib.differenceInCalendarDays(range.to, range.from);
