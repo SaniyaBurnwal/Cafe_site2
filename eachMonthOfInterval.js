@@ -1,20 +1,27 @@
-import { toDate } from "date-fns";
-import { toGregorianDate, toHebrewDate } from "../utils/dateConversion.js";
-import { monthIndexToHebrewDate, monthsSinceEpoch } from "../utils/serial.js";
+import { toEthiopicDate, toGregorianDate } from "../utils/index.js";
+/**
+ * Each month of an interval
+ *
+ * @param {Object} interval - The interval object
+ * @param {Date} interval.start - The start date of the interval
+ * @param {Date} interval.end - The end date of the interval
+ * @returns {Date[]} An array of dates representing the start of each month in
+ *   the interval
+ */
 export function eachMonthOfInterval(interval) {
-    const startDate = toDate(interval.start);
-    const endDate = toDate(interval.end);
-    if (endDate.getTime() < startDate.getTime()) {
-        return [];
+    const start = toEthiopicDate(new Date(interval.start));
+    const end = toEthiopicDate(new Date(interval.end));
+    const dates = [];
+    let currentYear = start.year;
+    let currentMonth = start.month;
+    while (currentYear < end.year ||
+        (currentYear === end.year && currentMonth <= end.month)) {
+        dates.push(toGregorianDate({ year: currentYear, month: currentMonth, day: 1 }));
+        currentMonth++;
+        if (currentMonth > 13) {
+            currentMonth = 1;
+            currentYear++;
+        }
     }
-    const startHebrew = toHebrewDate(startDate);
-    const endHebrew = toHebrewDate(endDate);
-    const startIndex = monthsSinceEpoch(startHebrew);
-    const endIndex = monthsSinceEpoch(endHebrew);
-    const months = [];
-    for (let index = startIndex; index <= endIndex; index += 1) {
-        const hebrew = monthIndexToHebrewDate(index, 1);
-        months.push(toGregorianDate(hebrew));
-    }
-    return months;
+    return dates;
 }

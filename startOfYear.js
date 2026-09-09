@@ -1,5 +1,11 @@
-import { toGregorianDate, toHebrewDate } from "../utils/dateConversion.js";
+import { toEthiopicDate, toGregorianDate } from "../utils/index.js";
+/**
+ * Start of year
+ *
+ * @param {Date} date - The original date
+ * @returns {Date} The start of the year
+ */
 export function startOfYear(date) {
-    const hebrew = toHebrewDate(date);
-    return toGregorianDate({ year: hebrew.year, monthIndex: 0, day: 1 });
+    const { year } = toEthiopicDate(date);
+    return toGregorianDate({ year, month: 1, day: 1 });
 }

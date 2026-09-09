@@ -1,4 +1,13 @@
-import { toHebrewDate } from "../utils/dateConversion.js";
+import { toEthiopicDate } from "../utils/index.js";
+/**
+ * Checks if two dates fall in the same Ethiopian year.
+ *
+ * @param dateLeft - The first gregorian date to compare
+ * @param dateRight - The second gregorian date to compare
+ * @returns True if the dates are in the same Ethiopian year
+ */
 export function isSameYear(dateLeft, dateRight) {
-    return toHebrewDate(dateLeft).year === toHebrewDate(dateRight).year;
+    const left = toEthiopicDate(dateLeft);
+    const right = toEthiopicDate(dateRight);
+    return left.year === right.year;
 }

@@ -1,8 +1,12 @@
-import { daysInHebrewMonth, monthsInHebrewYear, } from "../utils/calendarMath.js";
-import { toGregorianDate, toHebrewDate } from "../utils/dateConversion.js";
+import { isEthiopicLeapYear, toEthiopicDate, toGregorianDate, } from "../utils/index.js";
+/**
+ * End of year
+ *
+ * @param {Date} date - The original date
+ * @returns {Date} The end of the year
+ */
 export function endOfYear(date) {
-    const hebrew = toHebrewDate(date);
-    const lastMonth = monthsInHebrewYear(hebrew.year) - 1;
-    const day = daysInHebrewMonth(hebrew.year, lastMonth);
-    return toGregorianDate({ year: hebrew.year, monthIndex: lastMonth, day });
+    const { year } = toEthiopicDate(date);
+    const day = isEthiopicLeapYear(year) ? 6 : 5;
+    return toGregorianDate({ year, month: 13, day });
 }

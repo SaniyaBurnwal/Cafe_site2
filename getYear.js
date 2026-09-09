@@ -1,4 +1,11 @@
-import { toHebrewDate } from "../utils/dateConversion.js";
+import { toEthiopicDate } from "../utils/index.js";
+/**
+ * Get year
+ *
+ * @param {Date} date - The original date
+ * @returns {number} The year
+ */
 export function getYear(date) {
-    return toHebrewDate(date).year;
+    const { year } = toEthiopicDate(date);
+    return year;
 }

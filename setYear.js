@@ -1,28 +1,16 @@
-import { getMonthCode, isHebrewLeapYear, monthsInHebrewYear, } from "../utils/calendarMath.js";
-import { toGregorianDate, toHebrewDate } from "../utils/dateConversion.js";
-import { clampHebrewDay } from "../utils/serial.js";
-import { findMonthIndexByCode } from "./findMonthIndexByCode.js";
+import { daysInMonth } from "../utils/daysInMonth.js";
+import { toEthiopicDate, toGregorianDate } from "../utils/index.js";
+/**
+ * Set year
+ *
+ * @param {Date} date - The original date
+ * @param {number} year - The year to set
+ * @returns {Date} The new date with the year set
+ */
 export function setYear(date, year) {
-    const hebrew = toHebrewDate(date);
-    const targetYear = year;
-    const originalCode = getMonthCode(hebrew.year, hebrew.monthIndex);
-    let targetMonthIndex = findMonthIndexByCode(targetYear, originalCode);
-    if (targetMonthIndex === -1) {
-        if (originalCode === "adarI") {
-            targetMonthIndex = findMonthIndexByCode(targetYear, "adar");
-        }
-        else if (originalCode === "adar" && !isHebrewLeapYear(targetYear)) {
-            targetMonthIndex = findMonthIndexByCode(targetYear, "adar");
-        }
-        else {
-            const monthsCount = monthsInHebrewYear(targetYear);
-            targetMonthIndex = Math.min(hebrew.monthIndex, monthsCount - 1);
-        }
-    }
-    const day = clampHebrewDay(targetYear, targetMonthIndex, hebrew.day);
-    return toGregorianDate({
-        year: targetYear,
-        monthIndex: targetMonthIndex,
-        day,
-    });
+    const { month, day } = toEthiopicDate(date);
+    // Check if the day is valid in the new year (handles leap year changes)
+    const maxDays = daysInMonth(month, year);
+    const newDay = Math.min(day, maxDays);
+    return toGregorianDate({ year, month, day: newDay });
 }

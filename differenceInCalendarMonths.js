@@ -1,7 +1,14 @@
-import { toHebrewDate } from "../utils/dateConversion.js";
-import { monthsSinceEpoch } from "../utils/serial.js";
+import { toEthiopicDate } from "../utils/index.js";
+/**
+ * Difference in calendar months
+ *
+ * @param {Date} dateLeft - The later date
+ * @param {Date} dateRight - The earlier date
+ * @returns {number} The number of calendar months between the two dates
+ */
 export function differenceInCalendarMonths(dateLeft, dateRight) {
-    const left = toHebrewDate(dateLeft);
-    const right = toHebrewDate(dateRight);
-    return monthsSinceEpoch(left) - monthsSinceEpoch(right);
+    const ethiopicLeft = toEthiopicDate(dateLeft);
+    const ethiopicRight = toEthiopicDate(dateRight);
+    return ((ethiopicLeft.year - ethiopicRight.year) * 13 +
+        (ethiopicLeft.month - ethiopicRight.month));
 }
