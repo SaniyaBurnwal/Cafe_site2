@@ -1,11 +1,12 @@
-import { toEthiopicDate, toGregorianDate } from "../utils/index.js";
-/**
- * Start of month
- *
- * @param {Date} date - The original date
- * @returns {Date} The start of the month
- */
-export function startOfMonth(date) {
-    const { year, month } = toEthiopicDate(date);
-    return toGregorianDate({ year, month, day: 1 });
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.startOfMonth = startOfMonth;
+const conversion_js_1 = require("../utils/conversion.js");
+function startOfMonth(date) {
+    const hijri = (0, conversion_js_1.toHijriDate)(date);
+    return (0, conversion_js_1.toGregorianDate)({
+        year: hijri.year,
+        monthIndex: hijri.monthIndex,
+        day: 1,
+    });
 }

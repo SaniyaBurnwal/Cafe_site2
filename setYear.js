@@ -1,16 +1,15 @@
-import { daysInMonth } from "../utils/daysInMonth.js";
-import { toEthiopicDate, toGregorianDate } from "../utils/index.js";
-/**
- * Set year
- *
- * @param {Date} date - The original date
- * @param {number} year - The year to set
- * @returns {Date} The new date with the year set
- */
-export function setYear(date, year) {
-    const { month, day } = toEthiopicDate(date);
-    // Check if the day is valid in the new year (handles leap year changes)
-    const maxDays = daysInMonth(month, year);
-    const newDay = Math.min(day, maxDays);
-    return toGregorianDate({ year, month, day: newDay });
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.setYear = setYear;
+const conversion_js_1 = require("../utils/conversion.js");
+const daysInMonth_js_1 = require("../utils/daysInMonth.js");
+function setYear(date, year) {
+    const hijri = (0, conversion_js_1.toHijriDate)(date);
+    const daysInTargetMonth = (0, daysInMonth_js_1.getDaysInMonth)(year, hijri.monthIndex);
+    const day = Math.min(hijri.day, daysInTargetMonth);
+    return (0, conversion_js_1.toGregorianDate)({
+        year,
+        monthIndex: hijri.monthIndex,
+        day,
+    });
 }
