@@ -1,11 +1,14 @@
-import { sv as dateFnsSv } from "date-fns/locale";
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.sv = void 0;
+const locale_1 = require("date-fns/locale");
+const DateLib_js_1 = require("../classes/DateLib.js");
 /** Swedish locale extended with DayPicker-specific translations. */
-export const sv = {
-    ...dateFnsSv,
+exports.sv = {
+    ...locale_1.sv,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `Idag, ${label}`;
@@ -18,9 +21,9 @@ export const sv = {
         labelPrevious: "Gå till föregående månad",
         labelWeekNumber: (weekNumber) => `Vecka ${weekNumber}`,
         labelYearDropdown: "Välj år",
-        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib(options)).formatMonthYear(date),
+        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).formatMonthYear(date),
         labelGridcell: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `Idag, ${label}`;
@@ -29,6 +32,6 @@ export const sv = {
         },
         labelNav: "Navigationsfält",
         labelWeekNumberHeader: "Veckonummer",
-        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib(options)).format(date, "cccc"),
+        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc"),
     },
 };

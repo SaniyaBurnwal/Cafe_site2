@@ -1,14 +1,17 @@
-import { zhHK as dateFnsZhHK } from "date-fns/locale";
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.zhHK = void 0;
+const locale_1 = require("date-fns/locale");
+const DateLib_js_1 = require("../classes/DateLib.js");
 /**
  * Chinese (Traditional, Hong Kong) locale extended with DayPicker-specific
  * translations.
  */
-export const zhHK = {
-    ...dateFnsZhHK,
+exports.zhHK = {
+    ...locale_1.zhHK,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `今日，${label}`;
@@ -21,9 +24,9 @@ export const zhHK = {
         labelPrevious: "前往上個月",
         labelWeekNumber: (weekNumber) => `第 ${weekNumber} 週`,
         labelYearDropdown: "選擇年份",
-        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib(options)).formatMonthYear(date),
+        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).formatMonthYear(date),
         labelGridcell: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `今日，${label}`;
@@ -32,6 +35,6 @@ export const zhHK = {
         },
         labelNav: "導覽列",
         labelWeekNumberHeader: "週數",
-        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib(options)).format(date, "cccc"),
+        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc"),
     },
 };

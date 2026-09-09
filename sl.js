@@ -1,11 +1,14 @@
-import { sl as dateFnsSl } from "date-fns/locale";
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.sl = void 0;
+const locale_1 = require("date-fns/locale");
+const DateLib_js_1 = require("../classes/DateLib.js");
 /** Slovene locale extended with DayPicker-specific translations. */
-export const sl = {
-    ...dateFnsSl,
+exports.sl = {
+    ...locale_1.sl,
     labels: {
         labelDayButton: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers.today)
                 label = `Danes, ${label}`;
@@ -18,9 +21,9 @@ export const sl = {
         labelPrevious: "Pojdi na prejšnji mesec",
         labelWeekNumber: (weekNumber) => `Teden ${weekNumber}`,
         labelYearDropdown: "Izberite leto",
-        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib(options)).formatMonthYear(date),
+        labelGrid: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).formatMonthYear(date),
         labelGridcell: (date, modifiers, options, dateLib) => {
-            const lib = dateLib ?? new DateLib(options);
+            const lib = dateLib ?? new DateLib_js_1.DateLib(options);
             let label = lib.format(date, "PPPP");
             if (modifiers?.today) {
                 label = `Danes, ${label}`;
@@ -29,6 +32,6 @@ export const sl = {
         },
         labelNav: "Navigacijska vrstica",
         labelWeekNumberHeader: "Številka tedna",
-        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib(options)).format(date, "cccc"),
+        labelWeekday: (date, options, dateLib) => (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "cccc"),
     },
 };
