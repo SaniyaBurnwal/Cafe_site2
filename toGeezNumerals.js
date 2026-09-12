@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.toGeezNumerals = toGeezNumerals;
 /**
  * Converts a number to Geez (Ethiopic) numerals.
  *
@@ -5,7 +8,7 @@
  * @returns The number in Geez numerals
  * @throws {Error} When input is 0 (Geez has no zero representation)
  */
-export function toGeezNumerals(num) {
+function toGeezNumerals(num) {
     const geezDigits = ["፩", "፪", "፫", "፬", "፭", "፮", "፯", "፰", "፱"];
     const geezTens = ["፲", "፳", "፴", "፵", "፶", "፷", "፸", "፹", "፺"];
     const geezHundreds = "፻";

@@ -1,4 +1,8 @@
-import { differenceInCalendarDays } from "date-fns";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getDayNoGregorian = getDayNoGregorian;
+exports.toEthiopicDate = toEthiopicDate;
+const date_fns_1 = require("date-fns");
 /**
  * Calculates the number of days between January 1, 0001 and the given date.
  *
@@ -6,7 +10,7 @@ import { differenceInCalendarDays } from "date-fns";
  * @returns The number of days since January 1, 0001. Returns 0 if the input is
  *   not a valid Date.
  */
-export function getDayNoGregorian(date) {
+function getDayNoGregorian(date) {
     if (!(date instanceof Date)) {
         return 0;
     }
@@ -15,7 +19,7 @@ export function getDayNoGregorian(date) {
     adStart.setFullYear(1, 0, 1);
     adStart.setHours(0, 0, 0, 0);
     // Calculate the number of days between the two dates, then add 1.
-    const dayNumber = differenceInCalendarDays(date, adStart) + 1;
+    const dayNumber = (0, date_fns_1.differenceInCalendarDays)(date, adStart) + 1;
     return dayNumber;
 }
 function createEthiopicDate(dn) {
@@ -45,6 +49,6 @@ function createEthiopicDate(dn) {
  *   date.
  * @returns An EthiopicDate object.
  */
-export function toEthiopicDate(gregorianDate) {
+function toEthiopicDate(gregorianDate) {
     return createEthiopicDate(getDayNoGregorian(gregorianDate) - 2431);
 }

@@ -1,31 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setYear = setYear;
-const calendarMath_js_1 = require("../utils/calendarMath.js");
-const dateConversion_js_1 = require("../utils/dateConversion.js");
-const serial_js_1 = require("../utils/serial.js");
-const findMonthIndexByCode_js_1 = require("./findMonthIndexByCode.js");
+const daysInMonth_js_1 = require("../utils/daysInMonth.js");
+const index_js_1 = require("../utils/index.js");
+/**
+ * Set year
+ *
+ * @param {Date} date - The original date
+ * @param {number} year - The year to set
+ * @returns {Date} The new date with the year set
+ */
 function setYear(date, year) {
-    const hebrew = (0, dateConversion_js_1.toHebrewDate)(date);
-    const targetYear = year;
-    const originalCode = (0, calendarMath_js_1.getMonthCode)(hebrew.year, hebrew.monthIndex);
-    let targetMonthIndex = (0, findMonthIndexByCode_js_1.findMonthIndexByCode)(targetYear, originalCode);
-    if (targetMonthIndex === -1) {
-        if (originalCode === "adarI") {
-            targetMonthIndex = (0, findMonthIndexByCode_js_1.findMonthIndexByCode)(targetYear, "adar");
-        }
-        else if (originalCode === "adar" && !(0, calendarMath_js_1.isHebrewLeapYear)(targetYear)) {
-            targetMonthIndex = (0, findMonthIndexByCode_js_1.findMonthIndexByCode)(targetYear, "adar");
-        }
-        else {
-            const monthsCount = (0, calendarMath_js_1.monthsInHebrewYear)(targetYear);
-            targetMonthIndex = Math.min(hebrew.monthIndex, monthsCount - 1);
-        }
-    }
-    const day = (0, serial_js_1.clampHebrewDay)(targetYear, targetMonthIndex, hebrew.day);
-    return (0, dateConversion_js_1.toGregorianDate)({
-        year: targetYear,
-        monthIndex: targetMonthIndex,
-        day,
-    });
+    const { month, day } = (0, index_js_1.toEthiopicDate)(date);
+    // Check if the day is valid in the new year (handles leap year changes)
+    const maxDays = (0, daysInMonth_js_1.daysInMonth)(month, year);
+    const newDay = Math.min(day, maxDays);
+    return (0, index_js_1.toGregorianDate)({ year, month, day: newDay });
 }

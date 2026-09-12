@@ -1,6 +1,9 @@
-import { differenceInDays, getWeek as getWeekFns, } from "date-fns";
-import { toEthiopicDate, toGregorianDate } from "../utils/index.js";
-import { startOfWeek } from "./startOfWeek.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getWeek = getWeek;
+const date_fns_1 = require("date-fns");
+const index_js_1 = require("../utils/index.js");
+const startOfWeek_js_1 = require("./startOfWeek.js");
 /**
  * Get week number for Ethiopian calendar
  *
@@ -8,34 +11,34 @@ import { startOfWeek } from "./startOfWeek.js";
  * @param {GetWeekOptions} [options] - The options object
  * @returns {number} The week number
  */
-export function getWeek(date, options) {
+function getWeek(date, options) {
     const weekStartsOn = options?.weekStartsOn ?? 1; // Default to Monday (1)
-    const etDate = toEthiopicDate(date);
-    const currentWeekStart = startOfWeek(date, { weekStartsOn });
+    const etDate = (0, index_js_1.toEthiopicDate)(date);
+    const currentWeekStart = (0, startOfWeek_js_1.startOfWeek)(date, { weekStartsOn });
     // Get the first day of the current year
-    const firstDayOfYear = toGregorianDate({
+    const firstDayOfYear = (0, index_js_1.toGregorianDate)({
         year: etDate.year,
         month: 1,
         day: 1,
     });
-    const firstWeekStart = startOfWeek(firstDayOfYear, { weekStartsOn });
+    const firstWeekStart = (0, startOfWeek_js_1.startOfWeek)(firstDayOfYear, { weekStartsOn });
     // If date is before the first week of its year
     if (date < firstWeekStart) {
-        return getWeekFns(date, { weekStartsOn, firstWeekContainsDate: 1 });
+        return (0, date_fns_1.getWeek)(date, { weekStartsOn, firstWeekContainsDate: 1 });
     }
     // If date falls into the first week of the NEXT Ethiopic year, return 1
-    const nextYearFirstDay = toGregorianDate({
+    const nextYearFirstDay = (0, index_js_1.toGregorianDate)({
         year: etDate.year + 1,
         month: 1,
         day: 1,
     });
-    const nextYearFirstWeekStart = startOfWeek(nextYearFirstDay, {
+    const nextYearFirstWeekStart = (0, startOfWeek_js_1.startOfWeek)(nextYearFirstDay, {
         weekStartsOn,
     });
     if (date >= nextYearFirstWeekStart) {
         return 1;
     }
     // Calculate week number based on days since first week
-    const daysSinceFirstWeek = differenceInDays(currentWeekStart, firstWeekStart);
+    const daysSinceFirstWeek = (0, date_fns_1.differenceInDays)(currentWeekStart, firstWeekStart);
     return Math.floor(daysSinceFirstWeek / 7) + 1;
 }

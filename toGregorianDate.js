@@ -1,6 +1,10 @@
-import { getDaysInMonth } from "date-fns";
-import { isEthiopicDateValid } from "./isEthiopicDateValid.js";
-export function getDayNoEthiopian(etDate) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getDayNoEthiopian = getDayNoEthiopian;
+exports.toGregorianDate = toGregorianDate;
+const date_fns_1 = require("date-fns");
+const isEthiopicDateValid_js_1 = require("./isEthiopicDateValid.js");
+function getDayNoEthiopian(etDate) {
     const num = Math.floor(etDate.year / 4);
     const num2 = etDate.year % 4;
     return num * 1461 + num2 * 365 + (etDate.month - 1) * 30 + etDate.day - 1;
@@ -30,7 +34,7 @@ function gregorianDateFromDayNo(dayNum) {
     year += 400 * num400 + 100 * num100 + 4 * num4 + num1;
     while (dayNum > 0) {
         const tempDate = new Date(year, month - 1);
-        const daysInMonth = getDaysInMonth(tempDate);
+        const daysInMonth = (0, date_fns_1.getDaysInMonth)(tempDate);
         if (dayNum <= daysInMonth) {
             day = dayNum;
             break;
@@ -47,8 +51,8 @@ function gregorianDateFromDayNo(dayNum) {
  * @param ethiopicDate - An EthiopicDate object.
  * @returns A JavaScript Date object representing the Gregorian date.
  */
-export function toGregorianDate(ethiopicDate) {
-    if (!isEthiopicDateValid(ethiopicDate)) {
+function toGregorianDate(ethiopicDate) {
+    if (!(0, isEthiopicDateValid_js_1.isEthiopicDateValid)(ethiopicDate)) {
         throw new Error("Invalid Ethiopic date");
     }
     return gregorianDateFromDayNo(getDayNoEthiopian(ethiopicDate) + 2431);

@@ -1,11 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.endOfYear = endOfYear;
-const calendarMath_js_1 = require("../utils/calendarMath.js");
-const dateConversion_js_1 = require("../utils/dateConversion.js");
+const index_js_1 = require("../utils/index.js");
+/**
+ * End of year
+ *
+ * @param {Date} date - The original date
+ * @returns {Date} The end of the year
+ */
 function endOfYear(date) {
-    const hebrew = (0, dateConversion_js_1.toHebrewDate)(date);
-    const lastMonth = (0, calendarMath_js_1.monthsInHebrewYear)(hebrew.year) - 1;
-    const day = (0, calendarMath_js_1.daysInHebrewMonth)(hebrew.year, lastMonth);
-    return (0, dateConversion_js_1.toGregorianDate)({ year: hebrew.year, monthIndex: lastMonth, day });
+    const { year } = (0, index_js_1.toEthiopicDate)(date);
+    const day = (0, index_js_1.isEthiopicLeapYear)(year) ? 6 : 5;
+    return (0, index_js_1.toGregorianDate)({ year, month: 13, day });
 }

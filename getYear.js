@@ -1,7 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getYear = getYear;
-const dateConversion_js_1 = require("../utils/dateConversion.js");
+const index_js_1 = require("../utils/index.js");
+/**
+ * Get year
+ *
+ * @param {Date} date - The original date
+ * @returns {number} The year
+ */
 function getYear(date) {
-    return (0, dateConversion_js_1.toHebrewDate)(date).year;
+    const { year } = (0, index_js_1.toEthiopicDate)(date);
+    return year;
 }

@@ -1,15 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addMonths = addMonths;
-const dateConversion_js_1 = require("../utils/dateConversion.js");
-const serial_js_1 = require("../utils/serial.js");
+const daysInMonth_js_1 = require("../utils/daysInMonth.js");
+const index_js_1 = require("../utils/index.js");
+/**
+ * Adds the specified number of months to the given Ethiopian date. Handles
+ * month overflow and year boundaries correctly.
+ *
+ * @param date - The starting gregorian date
+ * @param amount - The number of months to add (can be negative)
+ * @returns A new gregorian date with the months added
+ */
 function addMonths(date, amount) {
-    if (amount === 0) {
-        return new Date(date.getTime());
+    const { year, month, day } = (0, index_js_1.toEthiopicDate)(date);
+    let newMonth = month + amount;
+    const yearAdjustment = Math.floor((newMonth - 1) / 13);
+    newMonth = ((newMonth - 1) % 13) + 1;
+    if (newMonth < 1) {
+        newMonth += 13;
     }
-    const hebrew = (0, dateConversion_js_1.toHebrewDate)(date);
-    const targetIndex = (0, serial_js_1.monthsSinceEpoch)(hebrew) + amount;
-    const target = (0, serial_js_1.monthIndexToHebrewDate)(targetIndex, hebrew.day);
-    const day = (0, serial_js_1.clampHebrewDay)(target.year, target.monthIndex, target.day);
-    return (0, dateConversion_js_1.toGregorianDate)({ ...target, day });
+    const newYear = year + yearAdjustment;
+    // Adjust day if it exceeds the month length
+    const monthLength = (0, daysInMonth_js_1.daysInMonth)(newMonth, newYear);
+    const newDay = Math.min(day, monthLength);
+    return (0, index_js_1.toGregorianDate)({ year: newYear, month: newMonth, day: newDay });
 }

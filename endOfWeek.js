@@ -1,4 +1,7 @@
-import { endOfWeek as endOfWeekFns } from "date-fns";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.endOfWeek = endOfWeek;
+const date_fns_1 = require("date-fns");
 /**
  * End of week
  *
@@ -6,8 +9,8 @@ import { endOfWeek as endOfWeekFns } from "date-fns";
  * @param {EndOfWeekOptions} [options] - The options object
  * @returns {Date} The end of the week
  */
-export function endOfWeek(date, options) {
+function endOfWeek(date, options) {
     const weekStartsOn = options?.weekStartsOn ?? 0; // Default to Monday (1)
-    const endOfWeek = endOfWeekFns(date, { weekStartsOn });
+    const endOfWeek = (0, date_fns_1.endOfWeek)(date, { weekStartsOn });
     return endOfWeek;
 }

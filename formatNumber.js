@@ -1,4 +1,7 @@
-import { toGeezNumerals } from "../utils/toGeezNumerals.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.formatNumber = formatNumber;
+const toGeezNumerals_js_1 = require("../utils/toGeezNumerals.js");
 /**
  * Formats a number using either Latin or Ethiopic (Geez) numerals
  *
@@ -17,9 +20,9 @@ import { toGeezNumerals } from "../utils/toGeezNumerals.js";
  *
  * @returns The formatted number string
  */
-export function formatNumber(value, numerals = "latn") {
+function formatNumber(value, numerals = "latn") {
     if (numerals === "geez") {
-        return toGeezNumerals(value);
+        return (0, toGeezNumerals_js_1.toGeezNumerals)(value);
     }
     // Use Intl.NumberFormat for other numeral systems
     const formatter = new Intl.NumberFormat("en-US", {

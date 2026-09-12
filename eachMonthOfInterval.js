@@ -1,23 +1,30 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eachMonthOfInterval = eachMonthOfInterval;
-const date_fns_1 = require("date-fns");
-const dateConversion_js_1 = require("../utils/dateConversion.js");
-const serial_js_1 = require("../utils/serial.js");
+const index_js_1 = require("../utils/index.js");
+/**
+ * Each month of an interval
+ *
+ * @param {Object} interval - The interval object
+ * @param {Date} interval.start - The start date of the interval
+ * @param {Date} interval.end - The end date of the interval
+ * @returns {Date[]} An array of dates representing the start of each month in
+ *   the interval
+ */
 function eachMonthOfInterval(interval) {
-    const startDate = (0, date_fns_1.toDate)(interval.start);
-    const endDate = (0, date_fns_1.toDate)(interval.end);
-    if (endDate.getTime() < startDate.getTime()) {
-        return [];
+    const start = (0, index_js_1.toEthiopicDate)(new Date(interval.start));
+    const end = (0, index_js_1.toEthiopicDate)(new Date(interval.end));
+    const dates = [];
+    let currentYear = start.year;
+    let currentMonth = start.month;
+    while (currentYear < end.year ||
+        (currentYear === end.year && currentMonth <= end.month)) {
+        dates.push((0, index_js_1.toGregorianDate)({ year: currentYear, month: currentMonth, day: 1 }));
+        currentMonth++;
+        if (currentMonth > 13) {
+            currentMonth = 1;
+            currentYear++;
+        }
     }
-    const startHebrew = (0, dateConversion_js_1.toHebrewDate)(startDate);
-    const endHebrew = (0, dateConversion_js_1.toHebrewDate)(endDate);
-    const startIndex = (0, serial_js_1.monthsSinceEpoch)(startHebrew);
-    const endIndex = (0, serial_js_1.monthsSinceEpoch)(endHebrew);
-    const months = [];
-    for (let index = startIndex; index <= endIndex; index += 1) {
-        const hebrew = (0, serial_js_1.monthIndexToHebrewDate)(index, 1);
-        months.push((0, dateConversion_js_1.toGregorianDate)(hebrew));
-    }
-    return months;
+    return dates;
 }
