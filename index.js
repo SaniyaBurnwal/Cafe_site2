@@ -1,38 +1,48 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./addMonths.js"), exports);
-__exportStar(require("./addYears.js"), exports);
-__exportStar(require("./differenceInCalendarMonths.js"), exports);
-__exportStar(require("./eachMonthOfInterval.js"), exports);
-__exportStar(require("./eachYearOfInterval.js"), exports);
-__exportStar(require("./endOfMonth.js"), exports);
-__exportStar(require("./endOfWeek.js"), exports);
-__exportStar(require("./endOfYear.js"), exports);
-__exportStar(require("./format.js"), exports);
-__exportStar(require("./formatNumber.js"), exports);
-__exportStar(require("./getMonth.js"), exports);
-__exportStar(require("./getWeek.js"), exports);
-__exportStar(require("./getYear.js"), exports);
-__exportStar(require("./isSameMonth.js"), exports);
-__exportStar(require("./isSameYear.js"), exports);
-__exportStar(require("./newDate.js"), exports);
-__exportStar(require("./setMonth.js"), exports);
-__exportStar(require("./setYear.js"), exports);
-__exportStar(require("./startOfDay.js"), exports);
-__exportStar(require("./startOfMonth.js"), exports);
-__exportStar(require("./startOfWeek.js"), exports);
-__exportStar(require("./startOfYear.js"), exports);
+exports.getDateLib = exports.enUS = exports.th = void 0;
+exports.DayPicker = DayPicker;
+const react_1 = __importDefault(require("react"));
+const index_js_1 = require("../index.js");
+const en_US_js_1 = require("../locale/en-US.js");
+const th_js_1 = require("../locale/th.js");
+const format_js_1 = require("./lib/format.js");
+// Adapter to match DateLib's format signature without using `any`.
+const buddhistFormat = (date, formatStr, options) => {
+    return (0, format_js_1.format)(date, formatStr, options);
+};
+exports.th = th_js_1.th;
+exports.enUS = en_US_js_1.enUS;
+/**
+ * Render the Buddhist (Thai) calendar.
+ *
+ * Months/weeks are Gregorian; displayed year is Buddhist Era (BE = CE + 543).
+ * Thai digits are used by default.
+ *
+ * Defaults:
+ *
+ * - `locale`: `th`
+ * - `dir`: `ltr`
+ * - `numerals`: `thai`
+ */
+function DayPicker(props) {
+    const dateLib = (0, exports.getDateLib)({
+        locale: props.locale ?? exports.th,
+        weekStartsOn: props.broadcastCalendar ? 1 : props.weekStartsOn,
+        firstWeekContainsDate: props.firstWeekContainsDate,
+        useAdditionalWeekYearTokens: props.useAdditionalWeekYearTokens,
+        useAdditionalDayOfYearTokens: props.useAdditionalDayOfYearTokens,
+        timeZone: props.timeZone,
+    });
+    return (react_1.default.createElement(index_js_1.DayPicker, { ...props, locale: props.locale ?? exports.th, numerals: props.numerals ?? "thai", dir: props.dir ?? "ltr", dateLib: dateLib }));
+}
+/** Returns the date library used in the Buddhist calendar. */
+const getDateLib = (options) => {
+    return new index_js_1.DateLib(options, {
+        format: buddhistFormat,
+    });
+};
+exports.getDateLib = getDateLib;

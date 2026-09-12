@@ -1,8 +1,11 @@
-import { TZDate } from "@date-fns/tz";
-import { addDays, addMonths, addWeeks, addYears, differenceInCalendarDays, differenceInCalendarMonths, eachMonthOfInterval, eachYearOfInterval, endOfISOWeek, endOfMonth, endOfWeek, endOfYear, format, getISOWeek, getMonth, getWeek, getYear, isAfter, isBefore, isDate, isSameDay, isSameMonth, isSameYear, max, min, setMonth, setYear, startOfDay, startOfISOWeek, startOfMonth, startOfWeek, startOfYear, } from "date-fns";
-import { endOfBroadcastWeek } from "../helpers/endOfBroadcastWeek.js";
-import { startOfBroadcastWeek } from "../helpers/startOfBroadcastWeek.js";
-import { enUS } from "../locale/en-US.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.dateLib = exports.defaultDateLib = exports.defaultLocale = exports.DateLib = void 0;
+const tz_1 = require("@date-fns/tz");
+const date_fns_1 = require("date-fns");
+const endOfBroadcastWeek_js_1 = require("../helpers/endOfBroadcastWeek.js");
+const startOfBroadcastWeek_js_1 = require("../helpers/startOfBroadcastWeek.js");
+const en_US_js_1 = require("../locale/en-US.js");
 /**
  * A wrapper class around [date-fns](http://date-fns.org) that provides utility
  * methods for date manipulation and formatting.
@@ -12,7 +15,7 @@ import { enUS } from "../locale/en-US.js";
  *   const dateLib = new DateLib({ locale: es });
  *   const newDate = dateLib.addDays(new Date(), 5);
  */
-export class DateLib {
+class DateLib {
     /**
      * Creates an instance of `DateLib`.
      *
@@ -37,7 +40,7 @@ export class DateLib {
                 return this.overrides.today();
             }
             if (this.options.timeZone) {
-                return TZDate.tz(this.options.timeZone);
+                return tz_1.TZDate.tz(this.options.timeZone);
             }
             return new this.Date();
         };
@@ -55,7 +58,7 @@ export class DateLib {
                 return this.overrides.newDate(year, monthIndex, date);
             }
             if (this.options.timeZone) {
-                return new TZDate(year, monthIndex, date, this.options.timeZone);
+                return new tz_1.TZDate(year, monthIndex, date, this.options.timeZone);
             }
             return new Date(year, monthIndex, date);
         };
@@ -69,7 +72,7 @@ export class DateLib {
         this.addDays = (date, amount) => {
             return this.overrides?.addDays
                 ? this.overrides.addDays(date, amount)
-                : addDays(date, amount);
+                : (0, date_fns_1.addDays)(date, amount);
         };
         /**
          * Adds the specified number of months to the given date.
@@ -81,7 +84,7 @@ export class DateLib {
         this.addMonths = (date, amount) => {
             return this.overrides?.addMonths
                 ? this.overrides.addMonths(date, amount)
-                : addMonths(date, amount);
+                : (0, date_fns_1.addMonths)(date, amount);
         };
         /**
          * Adds the specified number of weeks to the given date.
@@ -93,7 +96,7 @@ export class DateLib {
         this.addWeeks = (date, amount) => {
             return this.overrides?.addWeeks
                 ? this.overrides.addWeeks(date, amount)
-                : addWeeks(date, amount);
+                : (0, date_fns_1.addWeeks)(date, amount);
         };
         /**
          * Adds the specified number of years to the given date.
@@ -105,7 +108,7 @@ export class DateLib {
         this.addYears = (date, amount) => {
             return this.overrides?.addYears
                 ? this.overrides.addYears(date, amount)
-                : addYears(date, amount);
+                : (0, date_fns_1.addYears)(date, amount);
         };
         /**
          * Returns the number of calendar days between the given dates.
@@ -117,7 +120,7 @@ export class DateLib {
         this.differenceInCalendarDays = (dateLeft, dateRight) => {
             return this.overrides?.differenceInCalendarDays
                 ? this.overrides.differenceInCalendarDays(dateLeft, dateRight)
-                : differenceInCalendarDays(dateLeft, dateRight);
+                : (0, date_fns_1.differenceInCalendarDays)(dateLeft, dateRight);
         };
         /**
          * Returns the number of calendar months between the given dates.
@@ -129,7 +132,7 @@ export class DateLib {
         this.differenceInCalendarMonths = (dateLeft, dateRight) => {
             return this.overrides?.differenceInCalendarMonths
                 ? this.overrides.differenceInCalendarMonths(dateLeft, dateRight)
-                : differenceInCalendarMonths(dateLeft, dateRight);
+                : (0, date_fns_1.differenceInCalendarMonths)(dateLeft, dateRight);
         };
         /**
          * Returns the months between the given dates.
@@ -139,7 +142,7 @@ export class DateLib {
         this.eachMonthOfInterval = (interval) => {
             return this.overrides?.eachMonthOfInterval
                 ? this.overrides.eachMonthOfInterval(interval)
-                : eachMonthOfInterval(interval);
+                : (0, date_fns_1.eachMonthOfInterval)(interval);
         };
         /**
          * Returns the years between the given dates.
@@ -151,7 +154,7 @@ export class DateLib {
         this.eachYearOfInterval = (interval) => {
             const years = this.overrides?.eachYearOfInterval
                 ? this.overrides.eachYearOfInterval(interval)
-                : eachYearOfInterval(interval);
+                : (0, date_fns_1.eachYearOfInterval)(interval);
             // Remove duplicates that may happen across DST transitions (e.g., "America/Sao_Paulo")
             // See https://github.com/date-fns/tz/issues/72
             const uniqueYears = new Set(years.map((d) => this.getYear(d)));
@@ -175,7 +178,7 @@ export class DateLib {
         this.endOfBroadcastWeek = (date) => {
             return this.overrides?.endOfBroadcastWeek
                 ? this.overrides.endOfBroadcastWeek(date)
-                : endOfBroadcastWeek(date, this);
+                : (0, endOfBroadcastWeek_js_1.endOfBroadcastWeek)(date, this);
         };
         /**
          * Returns the end of the ISO week for the given date.
@@ -186,7 +189,7 @@ export class DateLib {
         this.endOfISOWeek = (date) => {
             return this.overrides?.endOfISOWeek
                 ? this.overrides.endOfISOWeek(date)
-                : endOfISOWeek(date);
+                : (0, date_fns_1.endOfISOWeek)(date);
         };
         /**
          * Returns the end of the month for the given date.
@@ -197,7 +200,7 @@ export class DateLib {
         this.endOfMonth = (date) => {
             return this.overrides?.endOfMonth
                 ? this.overrides.endOfMonth(date)
-                : endOfMonth(date);
+                : (0, date_fns_1.endOfMonth)(date);
         };
         /**
          * Returns the end of the week for the given date.
@@ -208,7 +211,7 @@ export class DateLib {
         this.endOfWeek = (date, options) => {
             return this.overrides?.endOfWeek
                 ? this.overrides.endOfWeek(date, options)
-                : endOfWeek(date, this.options);
+                : (0, date_fns_1.endOfWeek)(date, this.options);
         };
         /**
          * Returns the end of the year for the given date.
@@ -219,7 +222,7 @@ export class DateLib {
         this.endOfYear = (date) => {
             return this.overrides?.endOfYear
                 ? this.overrides.endOfYear(date)
-                : endOfYear(date);
+                : (0, date_fns_1.endOfYear)(date);
         };
         /**
          * Formats the given date using the specified format string.
@@ -231,7 +234,7 @@ export class DateLib {
         this.format = (date, formatStr, _options) => {
             const formatted = this.overrides?.format
                 ? this.overrides.format(date, formatStr, this.options)
-                : format(date, formatStr, this.options);
+                : (0, date_fns_1.format)(date, formatStr, this.options);
             if (this.options.numerals && this.options.numerals !== "latn") {
                 return this.replaceDigits(formatted);
             }
@@ -246,7 +249,7 @@ export class DateLib {
         this.getISOWeek = (date) => {
             return this.overrides?.getISOWeek
                 ? this.overrides.getISOWeek(date)
-                : getISOWeek(date);
+                : (0, date_fns_1.getISOWeek)(date);
         };
         /**
          * Returns the month of the given date.
@@ -257,7 +260,7 @@ export class DateLib {
         this.getMonth = (date, _options) => {
             return this.overrides?.getMonth
                 ? this.overrides.getMonth(date, this.options)
-                : getMonth(date, this.options);
+                : (0, date_fns_1.getMonth)(date, this.options);
         };
         /**
          * Returns the year of the given date.
@@ -268,7 +271,7 @@ export class DateLib {
         this.getYear = (date, _options) => {
             return this.overrides?.getYear
                 ? this.overrides.getYear(date, this.options)
-                : getYear(date, this.options);
+                : (0, date_fns_1.getYear)(date, this.options);
         };
         /**
          * Returns the local week number for the given date.
@@ -279,7 +282,7 @@ export class DateLib {
         this.getWeek = (date, _options) => {
             return this.overrides?.getWeek
                 ? this.overrides.getWeek(date, this.options)
-                : getWeek(date, this.options);
+                : (0, date_fns_1.getWeek)(date, this.options);
         };
         /**
          * Checks if the first date is after the second date.
@@ -291,7 +294,7 @@ export class DateLib {
         this.isAfter = (date, dateToCompare) => {
             return this.overrides?.isAfter
                 ? this.overrides.isAfter(date, dateToCompare)
-                : isAfter(date, dateToCompare);
+                : (0, date_fns_1.isAfter)(date, dateToCompare);
         };
         /**
          * Checks if the first date is before the second date.
@@ -303,7 +306,7 @@ export class DateLib {
         this.isBefore = (date, dateToCompare) => {
             return this.overrides?.isBefore
                 ? this.overrides.isBefore(date, dateToCompare)
-                : isBefore(date, dateToCompare);
+                : (0, date_fns_1.isBefore)(date, dateToCompare);
         };
         /**
          * Checks if the given value is a Date object.
@@ -314,7 +317,7 @@ export class DateLib {
         this.isDate = (value) => {
             return this.overrides?.isDate
                 ? this.overrides.isDate(value)
-                : isDate(value);
+                : (0, date_fns_1.isDate)(value);
         };
         /**
          * Checks if the given dates are on the same day.
@@ -326,7 +329,7 @@ export class DateLib {
         this.isSameDay = (dateLeft, dateRight) => {
             return this.overrides?.isSameDay
                 ? this.overrides.isSameDay(dateLeft, dateRight)
-                : isSameDay(dateLeft, dateRight);
+                : (0, date_fns_1.isSameDay)(dateLeft, dateRight);
         };
         /**
          * Checks if the given dates are in the same month.
@@ -338,7 +341,7 @@ export class DateLib {
         this.isSameMonth = (dateLeft, dateRight) => {
             return this.overrides?.isSameMonth
                 ? this.overrides.isSameMonth(dateLeft, dateRight)
-                : isSameMonth(dateLeft, dateRight);
+                : (0, date_fns_1.isSameMonth)(dateLeft, dateRight);
         };
         /**
          * Checks if the given dates are in the same year.
@@ -350,7 +353,7 @@ export class DateLib {
         this.isSameYear = (dateLeft, dateRight) => {
             return this.overrides?.isSameYear
                 ? this.overrides.isSameYear(dateLeft, dateRight)
-                : isSameYear(dateLeft, dateRight);
+                : (0, date_fns_1.isSameYear)(dateLeft, dateRight);
         };
         /**
          * Returns the latest date in the given array of dates.
@@ -359,7 +362,7 @@ export class DateLib {
          * @returns The latest date.
          */
         this.max = (dates) => {
-            return this.overrides?.max ? this.overrides.max(dates) : max(dates);
+            return this.overrides?.max ? this.overrides.max(dates) : (0, date_fns_1.max)(dates);
         };
         /**
          * Returns the earliest date in the given array of dates.
@@ -368,7 +371,7 @@ export class DateLib {
          * @returns The earliest date.
          */
         this.min = (dates) => {
-            return this.overrides?.min ? this.overrides.min(dates) : min(dates);
+            return this.overrides?.min ? this.overrides.min(dates) : (0, date_fns_1.min)(dates);
         };
         /**
          * Sets the month of the given date.
@@ -380,7 +383,7 @@ export class DateLib {
         this.setMonth = (date, month) => {
             return this.overrides?.setMonth
                 ? this.overrides.setMonth(date, month)
-                : setMonth(date, month);
+                : (0, date_fns_1.setMonth)(date, month);
         };
         /**
          * Sets the year of the given date.
@@ -392,7 +395,7 @@ export class DateLib {
         this.setYear = (date, year) => {
             return this.overrides?.setYear
                 ? this.overrides.setYear(date, year)
-                : setYear(date, year);
+                : (0, date_fns_1.setYear)(date, year);
         };
         /**
          * Returns the start of the broadcast week for the given date.
@@ -403,7 +406,7 @@ export class DateLib {
         this.startOfBroadcastWeek = (date, _dateLib) => {
             return this.overrides?.startOfBroadcastWeek
                 ? this.overrides.startOfBroadcastWeek(date, this)
-                : startOfBroadcastWeek(date, this);
+                : (0, startOfBroadcastWeek_js_1.startOfBroadcastWeek)(date, this);
         };
         /**
          * Returns the start of the day for the given date.
@@ -414,7 +417,7 @@ export class DateLib {
         this.startOfDay = (date) => {
             return this.overrides?.startOfDay
                 ? this.overrides.startOfDay(date)
-                : startOfDay(date);
+                : (0, date_fns_1.startOfDay)(date);
         };
         /**
          * Returns the start of the ISO week for the given date.
@@ -425,7 +428,7 @@ export class DateLib {
         this.startOfISOWeek = (date) => {
             return this.overrides?.startOfISOWeek
                 ? this.overrides.startOfISOWeek(date)
-                : startOfISOWeek(date);
+                : (0, date_fns_1.startOfISOWeek)(date);
         };
         /**
          * Returns the start of the month for the given date.
@@ -436,7 +439,7 @@ export class DateLib {
         this.startOfMonth = (date) => {
             return this.overrides?.startOfMonth
                 ? this.overrides.startOfMonth(date)
-                : startOfMonth(date);
+                : (0, date_fns_1.startOfMonth)(date);
         };
         /**
          * Returns the start of the week for the given date.
@@ -447,7 +450,7 @@ export class DateLib {
         this.startOfWeek = (date, _options) => {
             return this.overrides?.startOfWeek
                 ? this.overrides.startOfWeek(date, this.options)
-                : startOfWeek(date, this.options);
+                : (0, date_fns_1.startOfWeek)(date, this.options);
         };
         /**
          * Returns the start of the year for the given date.
@@ -458,9 +461,9 @@ export class DateLib {
         this.startOfYear = (date) => {
             return this.overrides?.startOfYear
                 ? this.overrides.startOfYear(date)
-                : startOfYear(date);
+                : (0, date_fns_1.startOfYear)(date);
         };
-        this.options = { locale: enUS, ...options };
+        this.options = { locale: en_US_js_1.enUS, ...options };
         this.overrides = overrides;
     }
     /**
@@ -542,6 +545,7 @@ export class DateLib {
         return this.format(date, pattern);
     }
 }
+exports.DateLib = DateLib;
 DateLib.yearFirstLocales = new Set([
     "eu",
     "hu",
@@ -562,15 +566,16 @@ DateLib.yearFirstLocales = new Set([
     "zh-TW",
 ]);
 /** The default locale (English). */
-export { enUS as defaultLocale } from "../locale/en-US.js";
+var en_US_js_2 = require("../locale/en-US.js");
+Object.defineProperty(exports, "defaultLocale", { enumerable: true, get: function () { return en_US_js_2.enUS; } });
 /**
  * The default date library with English locale.
  *
  * @since 9.2.0
  */
-export const defaultDateLib = new DateLib();
+exports.defaultDateLib = new DateLib();
 /**
  * @ignore
  * @deprecated Use `defaultDateLib`.
  */
-export const dateLib = defaultDateLib;
+exports.dateLib = exports.defaultDateLib;

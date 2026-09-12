@@ -1,4 +1,7 @@
-import { defaultDateLib } from "./DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CalendarDay = void 0;
+const DateLib_js_1 = require("./DateLib.js");
 /**
  * Represents a day displayed in the calendar.
  *
@@ -6,8 +9,8 @@ import { defaultDateLib } from "./DateLib.js";
  * provides additional information about the day, such as whether it belongs to
  * the displayed month.
  */
-export class CalendarDay {
-    constructor(date, displayMonth, dateLib = defaultDateLib) {
+class CalendarDay {
+    constructor(date, displayMonth, dateLib = DateLib_js_1.defaultDateLib) {
         this.date = date;
         this.displayMonth = displayMonth;
         this.outside = Boolean(displayMonth && !dateLib.isSameMonth(date, displayMonth));
@@ -28,3 +31,4 @@ export class CalendarDay {
             this.dateLib.isSameMonth(day.displayMonth, this.displayMonth));
     }
 }
+exports.CalendarDay = CalendarDay;
