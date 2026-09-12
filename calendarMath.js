@@ -1,15 +1,24 @@
-import { HEBREW_EPOCH, MONTH_SEQUENCE_COMMON, MONTH_SEQUENCE_LEAP, } from "./constants.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.mod = mod;
+exports.isHebrewLeapYear = isHebrewLeapYear;
+exports.roshHashanah = roshHashanah;
+exports.daysInHebrewYear = daysInHebrewYear;
+exports.monthsInHebrewYear = monthsInHebrewYear;
+exports.daysInHebrewMonth = daysInHebrewMonth;
+exports.getMonthCode = getMonthCode;
+const constants_js_1 = require("./constants.js");
 const roshHashanahCache = new Map();
 const yearLengthCache = new Map();
 /**
  * Calculate the modulus that always returns a positive remainder. Useful when
  * applying 19-year leap cycles.
  */
-export function mod(value, divisor) {
+function mod(value, divisor) {
     return ((value % divisor) + divisor) % divisor;
 }
 /** Determine whether a Hebrew year includes the extra Adar I month. */
-export function isHebrewLeapYear(year) {
+function isHebrewLeapYear(year) {
     return mod(7 * year + 1, 19) < 7;
 }
 /** Count lunar months elapsed since the epoch up to the start of a year. */
@@ -38,17 +47,17 @@ function hebrewCalendarElapsedDays(year) {
     return roshHashanah;
 }
 /** Return the absolute day for Rosh Hashanah (cached for reuse). */
-export function roshHashanah(year) {
+function roshHashanah(year) {
     const cached = roshHashanahCache.get(year);
     if (cached !== undefined) {
         return cached;
     }
-    const value = HEBREW_EPOCH + hebrewCalendarElapsedDays(year);
+    const value = constants_js_1.HEBREW_EPOCH + hebrewCalendarElapsedDays(year);
     roshHashanahCache.set(year, value);
     return value;
 }
 /** Total days in a Hebrew year, accounting for leap and year type. */
-export function daysInHebrewYear(year) {
+function daysInHebrewYear(year) {
     const cached = yearLengthCache.get(year);
     if (cached !== undefined) {
         return cached;
@@ -76,7 +85,7 @@ function yearType(year) {
 }
 /** Get the sequence of month codes for a year, inserting Adar I as needed. */
 function monthSequence(year) {
-    return isHebrewLeapYear(year) ? MONTH_SEQUENCE_LEAP : MONTH_SEQUENCE_COMMON;
+    return isHebrewLeapYear(year) ? constants_js_1.MONTH_SEQUENCE_LEAP : constants_js_1.MONTH_SEQUENCE_COMMON;
 }
 /** Retrieve the canonical month code for a year and month index. */
 function monthCode(year, monthIndex) {
@@ -87,11 +96,11 @@ function monthCode(year, monthIndex) {
     return sequence[monthIndex];
 }
 /** Returns the number of months in the specified year (12 or 13). */
-export function monthsInHebrewYear(year) {
+function monthsInHebrewYear(year) {
     return monthSequence(year).length;
 }
 /** Number of days in a given Hebrew month (by index). */
-export function daysInHebrewMonth(year, monthIndex) {
+function daysInHebrewMonth(year, monthIndex) {
     const code = monthCode(year, monthIndex);
     const type = yearType(year);
     switch (code) {
@@ -125,6 +134,6 @@ export function daysInHebrewMonth(year, monthIndex) {
             return 0;
     }
 }
-export function getMonthCode(year, monthIndex) {
+function getMonthCode(year, monthIndex) {
     return monthCode(year, monthIndex);
 }

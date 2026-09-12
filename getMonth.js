@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getMonth = getMonth;
-const conversion_js_1 = require("../utils/conversion.js");
+const dateConversion_js_1 = require("../utils/dateConversion.js");
 function getMonth(date) {
-    return (0, conversion_js_1.toHijriDate)(date).monthIndex;
+    return (0, dateConversion_js_1.toHebrewDate)(date).monthIndex;
 }

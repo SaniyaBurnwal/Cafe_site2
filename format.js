@@ -1,149 +1,152 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.format = format;
-const conversion_js_1 = require("../utils/conversion.js");
-const range_js_1 = require("../utils/range.js");
-const fallbackLocaleData_js_1 = require("./fallbackLocaleData.js");
-const DEFAULT_LOCALE_CODE = "ar-SA";
-const BASE_NUMBERING_SYSTEM = "latn";
-const UMM_AL_QURA_CALENDAR = "islamic-umalqura";
-const getLocaleCode = (options) => {
-    return options?.locale?.code ?? DEFAULT_LOCALE_CODE;
+const calendarMath_js_1 = require("../utils/calendarMath.js");
+const dateConversion_js_1 = require("../utils/dateConversion.js");
+const serial_js_1 = require("../utils/serial.js");
+const fallbackMonthNames = {
+    tishrei: { en: "Tishrei", he: "תשרי" },
+    cheshvan: { en: "Cheshvan", he: "חשוון" },
+    kislev: { en: "Kislev", he: "כסלו" },
+    tevet: { en: "Tevet", he: "טבת" },
+    shevat: { en: "Shevat", he: "שבט" },
+    adarI: { en: "Adar I", he: "אדר א׳" },
+    adar: { en: "Adar", he: "אדר" },
+    nisan: { en: "Nisan", he: "ניסן" },
+    iyar: { en: "Iyar", he: "אייר" },
+    sivan: { en: "Sivan", he: "סיוון" },
+    tamuz: { en: "Tammuz", he: "תמוז" },
+    av: { en: "Av", he: "אב" },
+    elul: { en: "Elul", he: "אלול" },
 };
-const formatWithUmmAlQura = (date, localeCode, options) => {
+const fallbackWeekdayNames = {
+    long: {
+        en: [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+        ],
+        he: [
+            "יום ראשון",
+            "יום שני",
+            "יום שלישי",
+            "יום רביעי",
+            "יום חמישי",
+            "יום שישי",
+            "שבת",
+        ],
+    },
+    narrow: {
+        en: ["S", "M", "T", "W", "T", "F", "S"],
+        he: ["א", "ב", "ג", "ד", "ה", "ו", "ש"],
+    },
+};
+const getLocaleCode = (options) => {
+    return options?.locale?.code ?? "he";
+};
+const getMonthCodeForDate = (date) => {
+    const hebrew = (0, dateConversion_js_1.toHebrewDate)(date);
+    return (0, calendarMath_js_1.getMonthCode)(hebrew.year, hebrew.monthIndex);
+};
+const formatMonthName = (date, localeCode) => {
     try {
         return new Intl.DateTimeFormat(localeCode, {
-            ...options,
-            calendar: UMM_AL_QURA_CALENDAR,
-            numberingSystem: BASE_NUMBERING_SYSTEM,
+            month: "long",
+            calendar: "hebrew",
         }).format(date);
     }
     catch {
-        return undefined;
+        const code = getMonthCodeForDate(date);
+        const isHebrew = localeCode.startsWith("he");
+        return isHebrew ? fallbackMonthNames[code].he : fallbackMonthNames[code].en;
+    }
+};
+const formatWeekdayName = (date, localeCode, width) => {
+    try {
+        return new Intl.DateTimeFormat(localeCode, {
+            weekday: width,
+            calendar: "hebrew",
+        }).format(date);
+    }
+    catch {
+        const index = date.getDay();
+        const isHebrew = localeCode.startsWith("he");
+        return isHebrew
+            ? fallbackWeekdayNames[width].he[index]
+            : fallbackWeekdayNames[width].en[index];
+    }
+};
+const formatDateStyle = (date, localeCode, style) => {
+    try {
+        return new Intl.DateTimeFormat(localeCode, {
+            dateStyle: style,
+            calendar: "hebrew",
+        }).format(date);
+    }
+    catch {
+        const hebrew = (0, dateConversion_js_1.toHebrewDate)(date);
+        const month = formatMonthName(date, localeCode);
+        if (style === "full") {
+            const weekday = formatWeekdayName(date, localeCode, "long");
+            return `${weekday}, ${month} ${hebrew.day}, ${hebrew.year}`;
+        }
+        return `${month} ${hebrew.day}, ${hebrew.year}`;
     }
 };
 const formatNumber = (value) => {
     return value.toString();
 };
-const formatPaddedNumber = (value) => {
-    return formatNumber(value).padStart(2, "0");
-};
-const formatMonthName = (date, localeCode, width) => {
-    const formatted = formatWithUmmAlQura(date, localeCode, {
-        month: width,
-    });
-    return formatted ?? (0, fallbackLocaleData_js_1.getFallbackMonthName)(date, localeCode, width);
-};
-const formatWeekdayName = (date, localeCode, width) => {
-    const formatted = formatWithUmmAlQura(date, localeCode, {
-        weekday: width,
-    });
-    return formatted ?? (0, fallbackLocaleData_js_1.getFallbackWeekdayName)(date, localeCode, width);
-};
-const formatDateStyle = (date, localeCode, style) => {
-    const formatted = formatWithUmmAlQura(date, localeCode, {
-        dateStyle: style,
-    });
-    if (formatted) {
-        return formatted;
-    }
-    const hijri = (0, conversion_js_1.toHijriDate)(date);
-    const monthName = (0, fallbackLocaleData_js_1.getFallbackMonthName)(date, localeCode, "long");
-    switch (style) {
-        case "full":
-            return `${(0, fallbackLocaleData_js_1.getFallbackWeekdayName)(date, localeCode, "long")}, ${monthName} ${hijri.day}, ${hijri.year}`;
-        case "long":
-            return `${monthName} ${hijri.day}, ${hijri.year}`;
-        case "medium":
-            return `${formatPaddedNumber(hijri.day)} ${monthName} ${hijri.year}`;
-        case "short":
-            return `${hijri.monthIndex + 1}/${hijri.day}/${hijri.year}`;
-    }
-};
 const buildTimeFormat = (date, localeCode, formatStr) => {
     const hour12 = formatStr.includes("a");
-    const formatted = formatWithUmmAlQura(date, localeCode, {
+    return new Intl.DateTimeFormat(localeCode, {
         hour: "numeric",
         minute: "numeric",
         hour12,
-    });
-    if (formatted) {
-        return formatted;
-    }
-    try {
-        return new Intl.DateTimeFormat(localeCode, {
-            hour: "numeric",
-            minute: "numeric",
-            hour12,
-            numberingSystem: BASE_NUMBERING_SYSTEM,
-        }).format(date);
-    }
-    catch {
-        const minutes = formatPaddedNumber(date.getMinutes());
-        if (hour12) {
-            const hour = date.getHours() % 12 || 12;
-            const period = date.getHours() >= 12 ? "PM" : "AM";
-            return `${hour}:${minutes} ${period}`;
-        }
-        return `${formatNumber(date.getHours())}:${minutes}`;
-    }
+    }).format(date);
 };
-/** Hijri calendar formatting override. */
+/** Hebrew calendar formatting override. */
 function format(date, formatStr, options) {
     const extendedOptions = options;
     const localeCode = getLocaleCode(extendedOptions);
-    const hijri = (0, conversion_js_1.toHijriDate)(date);
-    const gregorian = (0, range_js_1.getGregorianDateParts)(date);
-    const isOutOfRange = (0, range_js_1.clampGregorianDate)(date) !== date;
-    const numericDate = isOutOfRange
-        ? {
-            year: gregorian.year,
-            monthIndex: gregorian.month - 1,
-            day: gregorian.day,
-        }
-        : hijri;
+    const hebrew = (0, dateConversion_js_1.toHebrewDate)(date);
+    const monthNumber = (0, serial_js_1.hebrewMonthNumber)(hebrew.monthIndex);
     switch (formatStr) {
         case "LLLL y":
         case "LLLL yyyy":
-            return `${formatMonthName(date, localeCode, "long")} ${formatNumber(numericDate.year)}`;
+            return `${formatMonthName(date, localeCode)} ${formatNumber(hebrew.year)}`;
         case "LLLL":
-            return formatMonthName(date, localeCode, "long");
-        case "LLL":
-            return formatMonthName(date, localeCode, "short");
+            return formatMonthName(date, localeCode);
         case "PPP":
             return formatDateStyle(date, localeCode, "long");
         case "PPPP":
             return formatDateStyle(date, localeCode, "full");
-        case "PP":
-            return formatDateStyle(date, localeCode, "medium");
-        case "P":
-            return formatDateStyle(date, localeCode, "short");
         case "cccc":
             return formatWeekdayName(date, localeCode, "long");
-        case "ccc":
-            return formatWeekdayName(date, localeCode, "short");
-        case "ccccc":
         case "cccccc":
             return formatWeekdayName(date, localeCode, "narrow");
         case "yyyy":
         case "y":
-            return formatNumber(numericDate.year);
+            return formatNumber(hebrew.year);
         case "yyyy-MM":
-            return `${formatNumber(numericDate.year)}-${formatPaddedNumber(numericDate.monthIndex + 1)}`;
+            return `${formatNumber(hebrew.year)}-${formatNumber(monthNumber).padStart(2, "0")}`;
         case "yyyy-MM-dd":
-            return `${formatNumber(numericDate.year)}-${formatPaddedNumber(numericDate.monthIndex + 1)}-${formatPaddedNumber(numericDate.day)}`;
+            return `${formatNumber(hebrew.year)}-${formatNumber(monthNumber).padStart(2, "0")}-${formatNumber(hebrew.day).padStart(2, "0")}`;
         case "MM":
-            return formatPaddedNumber(numericDate.monthIndex + 1);
+            return formatNumber(monthNumber).padStart(2, "0");
         case "M":
-            return formatNumber(numericDate.monthIndex + 1);
+            return formatNumber(monthNumber);
         case "dd":
-            return formatPaddedNumber(numericDate.day);
+            return formatNumber(hebrew.day).padStart(2, "0");
         case "d":
-            return formatNumber(numericDate.day);
+            return formatNumber(hebrew.day);
         default:
             if (/[Hh]/.test(formatStr) && /m/.test(formatStr)) {
                 return buildTimeFormat(date, localeCode, formatStr);
             }
-            return formatDateStyle(date, localeCode, "medium");
+            return `${formatNumber(hebrew.day)}/${formatNumber(monthNumber)}/${formatNumber(hebrew.year)}`;
     }
 }

@@ -1,4 +1,8 @@
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.formatMonthCaption = void 0;
+exports.formatCaption = formatCaption;
+const DateLib_js_1 = require("../classes/DateLib.js");
 /**
  * Formats the caption of the month.
  *
@@ -11,8 +15,8 @@ import { DateLib } from "../classes/DateLib.js";
  * @group Formatters
  * @see https://daypicker.dev/docs/translation#custom-formatters
  */
-export function formatCaption(month, options, dateLib) {
-    const lib = dateLib ?? new DateLib(options);
+function formatCaption(month, options, dateLib) {
+    const lib = dateLib ?? new DateLib_js_1.DateLib(options);
     return lib.formatMonthYear(month);
 }
 /**
@@ -20,4 +24,4 @@ export function formatCaption(month, options, dateLib) {
  * @deprecated Use {@link formatCaption} instead.
  * @group Formatters
  */
-export const formatMonthCaption = formatCaption;
+exports.formatMonthCaption = formatCaption;

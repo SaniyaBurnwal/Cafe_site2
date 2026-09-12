@@ -2,28 +2,22 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eachMonthOfInterval = eachMonthOfInterval;
 const date_fns_1 = require("date-fns");
-const conversion_js_1 = require("../utils/conversion.js");
+const dateConversion_js_1 = require("../utils/dateConversion.js");
+const serial_js_1 = require("../utils/serial.js");
 function eachMonthOfInterval(interval) {
-    const start = (0, date_fns_1.toDate)(interval.start);
-    const end = (0, date_fns_1.toDate)(interval.end);
-    if (end.getTime() < start.getTime()) {
-        throw new RangeError("Invalid interval");
+    const startDate = (0, date_fns_1.toDate)(interval.start);
+    const endDate = (0, date_fns_1.toDate)(interval.end);
+    if (endDate.getTime() < startDate.getTime()) {
+        return [];
     }
-    const startDate = (0, conversion_js_1.toHijriDate)(start);
-    const endDate = (0, conversion_js_1.toHijriDate)(end);
+    const startHebrew = (0, dateConversion_js_1.toHebrewDate)(startDate);
+    const endHebrew = (0, dateConversion_js_1.toHebrewDate)(endDate);
+    const startIndex = (0, serial_js_1.monthsSinceEpoch)(startHebrew);
+    const endIndex = (0, serial_js_1.monthsSinceEpoch)(endHebrew);
     const months = [];
-    let currentYear = startDate.year;
-    let currentMonth = startDate.monthIndex;
-    const endYear = endDate.year;
-    const endMonth = endDate.monthIndex;
-    while (currentYear < endYear ||
-        (currentYear === endYear && currentMonth <= endMonth)) {
-        months.push((0, conversion_js_1.toGregorianDate)({ year: currentYear, monthIndex: currentMonth, day: 1 }));
-        currentMonth += 1;
-        if (currentMonth > 11) {
-            currentMonth = 0;
-            currentYear += 1;
-        }
+    for (let index = startIndex; index <= endIndex; index += 1) {
+        const hebrew = (0, serial_js_1.monthIndexToHebrewDate)(index, 1);
+        months.push((0, dateConversion_js_1.toGregorianDate)(hebrew));
     }
     return months;
 }

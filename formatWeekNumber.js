@@ -1,4 +1,7 @@
-import { defaultDateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.formatWeekNumber = formatWeekNumber;
+const DateLib_js_1 = require("../classes/DateLib.js");
 /**
  * Formats the week number.
  *
@@ -10,7 +13,7 @@ import { defaultDateLib } from "../classes/DateLib.js";
  * @group Formatters
  * @see https://daypicker.dev/docs/translation#custom-formatters
  */
-export function formatWeekNumber(weekNumber, dateLib = defaultDateLib) {
+function formatWeekNumber(weekNumber, dateLib = DateLib_js_1.defaultDateLib) {
     if (weekNumber < 10) {
         return dateLib.formatNumber(`0${weekNumber.toLocaleString()}`);
     }

@@ -1,4 +1,7 @@
-import { DateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.formatDay = formatDay;
+const DateLib_js_1 = require("../classes/DateLib.js");
 /**
  * Formats the day date shown in the day cell.
  *
@@ -11,6 +14,6 @@ import { DateLib } from "../classes/DateLib.js";
  * @group Formatters
  * @see https://daypicker.dev/docs/translation#custom-formatters
  */
-export function formatDay(date, options, dateLib) {
-    return (dateLib ?? new DateLib(options)).format(date, "d");
+function formatDay(date, options, dateLib) {
+    return (dateLib ?? new DateLib_js_1.DateLib(options)).format(date, "d");
 }

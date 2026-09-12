@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.formatWeekNumberHeader = formatWeekNumberHeader;
 /**
  * Formats the header for the week number column.
  *
@@ -6,6 +9,6 @@
  * @group Formatters
  * @see https://daypicker.dev/docs/translation#custom-formatters
  */
-export function formatWeekNumberHeader() {
+function formatWeekNumberHeader() {
     return ``;
 }

@@ -1,12 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.startOfYear = startOfYear;
-const conversion_js_1 = require("../utils/conversion.js");
+const dateConversion_js_1 = require("../utils/dateConversion.js");
 function startOfYear(date) {
-    const hijri = (0, conversion_js_1.toHijriDate)(date);
-    return (0, conversion_js_1.toGregorianDate)({
-        year: hijri.year,
-        monthIndex: 0,
-        day: 1,
-    });
+    const hebrew = (0, dateConversion_js_1.toHebrewDate)(date);
+    return (0, dateConversion_js_1.toGregorianDate)({ year: hebrew.year, monthIndex: 0, day: 1 });
 }

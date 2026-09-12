@@ -1,4 +1,7 @@
-import { defaultDateLib } from "../classes/DateLib.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.formatMonthDropdown = formatMonthDropdown;
+const DateLib_js_1 = require("../classes/DateLib.js");
 /**
  * Formats the month for the dropdown option label.
  *
@@ -10,6 +13,6 @@ import { defaultDateLib } from "../classes/DateLib.js";
  * @group Formatters
  * @see https://daypicker.dev/docs/translation#custom-formatters
  */
-export function formatMonthDropdown(month, dateLib = defaultDateLib) {
+function formatMonthDropdown(month, dateLib = DateLib_js_1.defaultDateLib) {
     return dateLib.format(month, "LLLL");
 }
