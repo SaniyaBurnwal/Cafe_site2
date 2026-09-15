@@ -1,233 +1,483 @@
-<br />
-<div align="center">
-  <p align="center">
-    <a href="https://www.embla-carousel.com/"><img width="100" height="100" src="https://www.embla-carousel.com/embla-logo.svg" alt="Embla Carousel">
-    </a>
-  </p>
-
-  <p align="center">
-    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/npm/l/embla-carousel?color=%238ab4f8"></a>
-    <a href="https://www.npmjs.com/package/embla-carousel-react"><img src="https://img.shields.io/npm/v/embla-carousel-react.svg?color=%23c1a8e2"></a>
-    <a href="https://github.com/davidjerleke/embla-carousel/actions?query=workflow%3A%22Continuous+Integration%22"><img src="https://img.shields.io/github/actions/workflow/status/davidjerleke/embla-carousel/cd.yml?color=%238ab4f8"></a>
-    <a href="https://prettier.io"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?color=%23c1a8e2"></a>
-    <a href="https://bundlephobia.com/result?p=embla-carousel-react@latest"><img src="https://img.shields.io/bundlephobia/minzip/embla-carousel-react?color=%238ab4f8&label=gzip%20size">
-    </a>
-  </p>
-
-  <strong>
-    <h2 align="center">Embla Carousel React</h2>
-  </strong>
-
-  <p align="center">
-    <strong>Embla Carousel</strong> is a bare bones carousel library with great fluid motion and awesome swipe precision. It's library agnostic, dependency free and 100% open source.
-  </p>
-
-  <br>
-
-  <p align="center">
-    <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/predefined/">Examples</a>&nbsp;</code>
-    </strong>
-  </p>
-
-  <p align="center">
-    <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/generator/">Generator</a>&nbsp;</code>
-    </strong>
-  </p>
-
-  <p align="center">
-    <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/get-started/#choose-installation-type">Installation</a>&nbsp;</code>
-    </strong>
-  </p>
-</div>
-
-<br>
-
-<div align="center">
-  <strong>
-    <h2 align="center">Ready for</h2>
-  </strong>
-  
-  <p align="center">
-    <a href="https://www.embla-carousel.com/get-started/module/">
-      <img src="https://www.embla-carousel.com/javascript-logo.svg" width="40" height="40" />
-    </a>
-    <a href="https://www.embla-carousel.com/get-started/module/">
-      <img src="https://www.embla-carousel.com/typescript-logo.svg" width="40" height="40" />
-    </a>
-    <a href="https://www.embla-carousel.com/get-started/react/">
-      <img src="https://www.embla-carousel.com/react-logo.svg" width="40" height="40" />
-    </a>
-    <a href="https://www.embla-carousel.com/get-started/vue/">
-      <img src="https://www.embla-carousel.com/vue-logo.svg" width="40" height="40" />
-    </a>
-    <a href="https://www.embla-carousel.com/get-started/svelte/">
-      <img src="https://www.embla-carousel.com/svelte-logo.svg" width="40" height="40" />
-    </a>
-    <a href="https://www.embla-carousel.com/get-started/solid/">
-      <img src="https://www.embla-carousel.com/solid-logo.svg" width="40" height="40" />
-    </a>
-    <a href="https://github.com/donaldxdonald/embla-carousel-angular">
-      <img src="https://www.embla-carousel.com/angular-logo.svg" width="40" height="40" />
-    </a>
-  </p>
-</div>
-
-<br>
-
-<div align="center">
-  <strong>
-    <h2 align="center">Contributors</h2>
-  </strong>
-  <p align="center">
-    Thank you to all contributors for making <a href="https://www.embla-carousel.com/">Embla Carousel</a> awesome! <a href="https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md">Contributions</a> are welcome.
-  </p>
-  <p align="center">
-    <a href="https://github.com/davidjerleke">
-      <img src="https://avatars2.githubusercontent.com/u/11529148?s=120&v=4" title="davidjerleke" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/Ronit-gurjar">
-      <img src="https://avatars2.githubusercontent.com/u/92150685?s=120&v=4" title="Ronit-gurjar" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/zaaakher">
-      <img src="https://avatars2.githubusercontent.com/u/46135573?s=120&v=4" title="zaaakher" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/xiel">
-      <img src="https://avatars2.githubusercontent.com/u/615522?s=120&v=4" title="xiel" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/javiergonzalezGenially">
-      <img src="https://avatars2.githubusercontent.com/u/78730098?s=120&v=4" title="javiergonzalezGenially" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/meirroth">
-      <img src="https://avatars2.githubusercontent.com/u/12494197?s=120&v=4" title="meirroth" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/hamidrezahanafi">
-      <img src="https://avatars2.githubusercontent.com/u/91487491?s=120&v=4" title="hamidrezahanafi" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/negezor">
-      <img src="https://avatars2.githubusercontent.com/u/9392723?s=120&v=4" title="negezor" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/th-km">
-      <img src="https://avatars2.githubusercontent.com/u/35410212?s=120&v=4" title="th-km" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/openscript">
-      <img src="https://avatars2.githubusercontent.com/u/1105080?s=120&v=4" title="openscript" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/nwidynski">
-      <img src="https://avatars2.githubusercontent.com/u/25958801?s=120&v=4" title="nwidynski" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/wopian">
-      <img src="https://avatars2.githubusercontent.com/u/3440094?s=120&v=4" title="wopian" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/horseeyephil">
-      <img src="https://avatars2.githubusercontent.com/u/32337092?s=120&v=4" title="horseeyephil" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/pipisasa">
-      <img src="https://avatars2.githubusercontent.com/u/54534600?s=120&v=4" title="pipisasa" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/ranno-lauri">
-      <img src="https://avatars2.githubusercontent.com/u/87007115?s=120&v=4" title="ranno-lauri" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/ruijdacd">
-      <img src="https://avatars2.githubusercontent.com/u/9107610?s=120&v=4" title="ruijdacd" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/rojadesign">
-      <img src="https://avatars2.githubusercontent.com/u/35687281?s=120&v=4" title="rojadesign" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/sadeghbarati">
-      <img src="https://avatars2.githubusercontent.com/u/17789047?s=120&v=4" title="sadeghbarati" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/S-Shingler">
-      <img src="https://avatars2.githubusercontent.com/u/48463809?s=120&v=4" title="S-Shingler" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/Yonom">
-      <img src="https://avatars2.githubusercontent.com/u/1394504?s=120&v=4" title="Yonom" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/smultar">
-      <img src="https://avatars2.githubusercontent.com/u/6223536?s=120&v=4" title="smultar" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/dev-suraj-kumar">
-      <img src="https://avatars2.githubusercontent.com/u/184739775?s=120&v=4" title="dev-suraj-kumar" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/Matoseb">
-      <img src="https://avatars2.githubusercontent.com/u/24431250?s=120&v=4" title="Matoseb" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/tlo-johnson">
-      <img src="https://avatars2.githubusercontent.com/u/8763144?s=120&v=4" title="tlo-johnson" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/yasuhiro-yamamoto">
-      <img src="https://avatars2.githubusercontent.com/u/25109330?s=120&v=4" title="yasuhiro-yamamoto" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/anzbert">
-      <img src="https://avatars2.githubusercontent.com/u/38823700?s=120&v=4" title="anzbert" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/sarussss">
-      <img src="https://avatars2.githubusercontent.com/u/15656996?s=120&v=4" title="sarussss" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/silllli">
-      <img src="https://avatars2.githubusercontent.com/u/9334305?s=120&v=4" title="silllli" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/nikrowell">
-      <img src="https://avatars2.githubusercontent.com/u/260039?s=120&v=4" title="nikrowell" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/mujahidfa">
-      <img src="https://avatars2.githubusercontent.com/u/17759705?s=120&v=4" title="mujahidfa" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/Mitch-At-Work">
-      <img src="https://avatars2.githubusercontent.com/u/99835933?s=120&v=4" title="Mitch-At-Work" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/romellem">
-      <img src="https://avatars2.githubusercontent.com/u/8504000?s=120&v=4" title="romellem" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/junlarsen">
-      <img src="https://avatars2.githubusercontent.com/u/42585241?s=120&v=4" title="junlarsen" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/LucasMariniFalbo">
-      <img src="https://avatars2.githubusercontent.com/u/9245477?s=120&v=4" title="LucasMariniFalbo" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/LiamMartens">
-      <img src="https://avatars2.githubusercontent.com/u/5265324?s=120&v=4" title="LiamMartens" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/S1r-Lanzelot">
-      <img src="https://avatars2.githubusercontent.com/u/4487160?s=120&v=4" title="S1r-Lanzelot" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/ishaqibrahimbot">
-      <img src="https://avatars2.githubusercontent.com/u/74908398?s=120&v=4" title="ishaqibrahimbot" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/fcasibu">
-      <img src="https://avatars2.githubusercontent.com/u/75290989?s=120&v=4" title="fcasibu" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/cundd">
-      <img src="https://avatars2.githubusercontent.com/u/743122?s=120&v=4" title="cundd" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/sedlukha">
-      <img src="https://avatars2.githubusercontent.com/u/14075940?s=120&v=4" title="sedlukha" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/allen-garvey">
-      <img src="https://avatars2.githubusercontent.com/u/9314727?s=120&v=4" title="allen-garvey" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/lesha1201">
-      <img src="https://avatars2.githubusercontent.com/u/10157660?s=120&v=4" title="lesha1201" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/SaizFerri">
-      <img src="https://avatars2.githubusercontent.com/u/19834971?s=120&v=4" title="SaizFerri" width="50" height="50" style="max-width: 100%" />
-    </a>
-  </p>
-</div>
-
-<br>
-
-<div align="center">
-  <strong>
-    <h2 align="center">Special Thanks</h2>
-  </strong>
-  <p align="center">
-    <sup>
-      <a href="https://github.com/gunnarx2">gunnarx2</a> - React wrapper <a href="https://www.embla-carousel.com/get-started/react/">useEmblaCarousel</a>.
-    </sup>
-    <br>
-    <sup>
-      <a href="https://github.com/LiamMartens">LiamMartens</a> - Solid wrapper <a href="https://www.embla-carousel.com/get-started/solid/">createEmblaCarousel</a>.
-    </sup>
-    <br>
-    <sup>
-      <a href="https://github.com/donaldxdonald">donaldxdonald</a>, <a href="https://github.com/zip-fa">zip-fa</a>, <a href="https://github.com/JeanMeche">JeanMeche</a> - Angular wrapper <a href="https://github.com/donaldxdonald/embla-carousel-angular?tab=readme-ov-file#installation">EmblaCarouselDirective</a>.
-    </sup>
-    <br>
-    <sup>
-      <a href="https://github.com/xiel">xiel</a> - Plugin <a href="https://github.com/xiel/embla-carousel-wheel-gestures">Embla Carousel Wheel Gestures</a>.
-    </sup>
-    <br>
-    <sup>
-      <a href="https://github.com/zaaakher">zaaakher</a> - Contributing <a href="https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md">guidelines</a>.
-    </sup>
-    <br>
-    <sup>
-      <a href="https://github.com/sarussss">sarussss</a> - Answering questions.
-    </sup>
-  </p>
-</div>
-
-<br>
-
-<h2 align="center">Open Source</h2>
-
 <p align="center">
-  Embla is <a href="https://github.com/davidjerleke/embla-carousel/blob/master/LICENSE">MIT licensed</a> 💖.<br><br>
-  <sup>Embla Carousel - Copyright © 2019-present.</sup><br />
-  <sup>Package created by David Jerleke.</sup>
+<img src="./website/public/og.png" />
 </p>
 
-<p align="center">
-  <strong>· · ·</strong>
-</p>
+# ⌘K [![cmdk minzip package size](https://img.shields.io/bundlephobia/minzip/cmdk)](https://www.npmjs.com/package/cmdk?activeTab=code) [![cmdk package version](https://img.shields.io/npm/v/cmdk.svg?colorB=green)](https://www.npmjs.com/package/cmdk)
 
-<p align="center">
-  Thanks <a href="https://www.browserstack.com">BrowserStack</a>.
-</p>
+⌘K is a command menu React component that can also be used as an accessible combobox. You render items, it filters and sorts them automatically. ⌘K supports a fully composable API <sup><sup>[How?](/ARCHITECTURE.md)</sup></sup>, so you can wrap items in other components or even as static JSX.
 
-<p align="center">
-  <a href="https://www.browserstack.com">
-    <img src="https://www.embla-carousel.com/browserstack-logo.svg" width="45" height="45" />
-    </a>
-</p>
+Demo and examples: [cmdk.paco.me](https://cmdk.paco.me)
+
+## Install
+
+```bash
+pnpm install cmdk
+```
+
+## Use
+
+```tsx
+import { Command } from 'cmdk'
+
+const CommandMenu = () => {
+  return (
+    <Command label="Command Menu">
+      <Command.Input />
+      <Command.List>
+        <Command.Empty>No results found.</Command.Empty>
+
+        <Command.Group heading="Letters">
+          <Command.Item>a</Command.Item>
+          <Command.Item>b</Command.Item>
+          <Command.Separator />
+          <Command.Item>c</Command.Item>
+        </Command.Group>
+
+        <Command.Item>Apple</Command.Item>
+      </Command.List>
+    </Command>
+  )
+}
+```
+
+Or in a dialog:
+
+```tsx
+import { Command } from 'cmdk'
+
+const CommandMenu = () => {
+  const [open, setOpen] = React.useState(false)
+
+  // Toggle the menu when ⌘K is pressed
+  React.useEffect(() => {
+    const down = (e) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        setOpen((open) => !open)
+      }
+    }
+
+    document.addEventListener('keydown', down)
+    return () => document.removeEventListener('keydown', down)
+  }, [])
+
+  return (
+    <Command.Dialog open={open} onOpenChange={setOpen} label="Global Command Menu">
+      <Command.Input />
+      <Command.List>
+        <Command.Empty>No results found.</Command.Empty>
+
+        <Command.Group heading="Letters">
+          <Command.Item>a</Command.Item>
+          <Command.Item>b</Command.Item>
+          <Command.Separator />
+          <Command.Item>c</Command.Item>
+        </Command.Group>
+
+        <Command.Item>Apple</Command.Item>
+      </Command.List>
+    </Command.Dialog>
+  )
+}
+```
+
+## Parts and styling
+
+All parts forward props, including `ref`, to an appropriate element. Each part has a specific data-attribute (starting with `cmdk-`) that can be used for styling.
+
+### Command `[cmdk-root]`
+
+Render this to show the command menu inline, or use [Dialog](#dialog-cmdk-dialog-cmdk-overlay) to render in a elevated context. Can be controlled with the `value` and `onValueChange` props.
+
+> **Note**
+>
+> Values are always trimmed with the [trim()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim) method.
+
+```tsx
+const [value, setValue] = React.useState('apple')
+
+return (
+  <Command value={value} onValueChange={setValue}>
+    <Command.Input />
+    <Command.List>
+      <Command.Item>Orange</Command.Item>
+      <Command.Item>Apple</Command.Item>
+    </Command.List>
+  </Command>
+)
+```
+
+You can provide a custom `filter` function that is called to rank each item. Note that the value will be trimmed.
+
+```tsx
+<Command
+  filter={(value, search) => {
+    if (value.includes(search)) return 1
+    return 0
+  }}
+/>
+```
+
+A third argument, `keywords`, can also be provided to the filter function. Keywords act as aliases for the item value, and can also affect the rank of the item. Keywords are trimmed.
+
+```tsx
+<Command
+  filter={(value, search, keywords) => {
+    const extendValue = value + ' ' + keywords.join(' ')
+    if (extendValue.includes(search)) return 1
+    return 0
+  }}
+/>
+```
+
+Or disable filtering and sorting entirely:
+
+```tsx
+<Command shouldFilter={false}>
+  <Command.List>
+    {filteredItems.map((item) => {
+      return (
+        <Command.Item key={item} value={item}>
+          {item}
+        </Command.Item>
+      )
+    })}
+  </Command.List>
+</Command>
+```
+
+You can make the arrow keys wrap around the list (when you reach the end, it goes back to the first item) by setting the `loop` prop:
+
+```tsx
+<Command loop />
+```
+
+### Dialog `[cmdk-dialog]` `[cmdk-overlay]`
+
+Props are forwarded to [Command](#command-cmdk-root). Composes Radix UI's Dialog component. The overlay is always rendered. See the [Radix Documentation](https://www.radix-ui.com/docs/primitives/components/dialog) for more information. Can be controlled with the `open` and `onOpenChange` props.
+
+```tsx
+const [open, setOpen] = React.useState(false)
+
+return (
+  <Command.Dialog open={open} onOpenChange={setOpen}>
+    ...
+  </Command.Dialog>
+)
+```
+
+You can provide a `container` prop that accepts an HTML element that is forwarded to Radix UI's Dialog Portal component to specify which element the Dialog should portal into (defaults to `body`). See the [Radix Documentation](https://www.radix-ui.com/docs/primitives/components/dialog#portal) for more information.
+
+```tsx
+const containerElement = React.useRef(null)
+
+return (
+  <>
+    <Command.Dialog container={containerElement.current} />
+    <div ref={containerElement} />
+  </>
+)
+```
+
+### Input `[cmdk-input]`
+
+All props are forwarded to the underlying `input` element. Can be controlled with the `value` and `onValueChange` props.
+
+```tsx
+const [search, setSearch] = React.useState('')
+
+return <Command.Input value={search} onValueChange={setSearch} />
+```
+
+### List `[cmdk-list]`
+
+Contains items and groups. Animate height using the `--cmdk-list-height` CSS variable.
+
+```css
+[cmdk-list] {
+  min-height: 300px;
+  height: var(--cmdk-list-height);
+  max-height: 500px;
+  transition: height 100ms ease;
+}
+```
+
+To scroll item into view earlier near the edges of the viewport, use scroll-padding:
+
+```css
+[cmdk-list] {
+  scroll-padding-block-start: 8px;
+  scroll-padding-block-end: 8px;
+}
+```
+
+### Item `[cmdk-item]` `[data-disabled?]` `[data-selected?]`
+
+Item that becomes active on pointer enter. You should provide a unique `value` for each item, but it will be automatically inferred from the `.textContent`.
+
+```tsx
+<Command.Item
+  onSelect={(value) => console.log('Selected', value)}
+  // Value is implicity "apple" because of the provided text content
+>
+  Apple
+</Command.Item>
+```
+
+You can also provide a `keywords` prop to help with filtering. Keywords are trimmed.
+
+```tsx
+<Command.Item keywords={['fruit', 'apple']}>Apple</Command.Item>
+```
+
+```tsx
+<Command.Item
+  onSelect={(value) => console.log('Selected', value)}
+  // Value is implicity "apple" because of the provided text content
+>
+  Apple
+</Command.Item>
+```
+
+You can force an item to always render, regardless of filtering, by passing the `forceMount` prop.
+
+### Group `[cmdk-group]` `[hidden?]`
+
+Groups items together with the given `heading` (`[cmdk-group-heading]`).
+
+```tsx
+<Command.Group heading="Fruit">
+  <Command.Item>Apple</Command.Item>
+</Command.Group>
+```
+
+Groups will not unmount from the DOM, rather the `hidden` attribute is applied to hide it from view. This may be relevant in your styling.
+
+You can force a group to always render, regardless of filtering, by passing the `forceMount` prop.
+
+### Separator `[cmdk-separator]`
+
+Visible when the search query is empty or `alwaysRender` is true, hidden otherwise.
+
+### Empty `[cmdk-empty]`
+
+Automatically renders when there are no results for the search query.
+
+### Loading `[cmdk-loading]`
+
+You should conditionally render this with `progress` while loading asynchronous items.
+
+```tsx
+const [loading, setLoading] = React.useState(false)
+
+return <Command.List>{loading && <Command.Loading>Hang on…</Command.Loading>}</Command.List>
+```
+
+### `useCommandState(state => state.selectedField)`
+
+Hook that composes [`useSyncExternalStore`](https://reactjs.org/docs/hooks-reference.html#usesyncexternalstore). Pass a function that returns a slice of the command menu state to re-render when that slice changes. This hook is provided for advanced use cases and should not be commonly used.
+
+A good use case would be to render a more detailed empty state, like so:
+
+```tsx
+const search = useCommandState((state) => state.search)
+return <Command.Empty>No results found for "{search}".</Command.Empty>
+```
+
+## Examples
+
+Code snippets for common use cases.
+
+### Nested items
+
+Often selecting one item should navigate deeper, with a more refined set of items. For example selecting "Change theme…" should show new items "Dark theme" and "Light theme". We call these sets of items "pages", and they can be implemented with simple state:
+
+```tsx
+const ref = React.useRef(null)
+const [open, setOpen] = React.useState(false)
+const [search, setSearch] = React.useState('')
+const [pages, setPages] = React.useState([])
+const page = pages[pages.length - 1]
+
+return (
+  <Command
+    onKeyDown={(e) => {
+      // Escape goes to previous page
+      // Backspace goes to previous page when search is empty
+      if (e.key === 'Escape' || (e.key === 'Backspace' && !search)) {
+        e.preventDefault()
+        setPages((pages) => pages.slice(0, -1))
+      }
+    }}
+  >
+    <Command.Input value={search} onValueChange={setSearch} />
+    <Command.List>
+      {!page && (
+        <>
+          <Command.Item onSelect={() => setPages([...pages, 'projects'])}>Search projects…</Command.Item>
+          <Command.Item onSelect={() => setPages([...pages, 'teams'])}>Join a team…</Command.Item>
+        </>
+      )}
+
+      {page === 'projects' && (
+        <>
+          <Command.Item>Project A</Command.Item>
+          <Command.Item>Project B</Command.Item>
+        </>
+      )}
+
+      {page === 'teams' && (
+        <>
+          <Command.Item>Team 1</Command.Item>
+          <Command.Item>Team 2</Command.Item>
+        </>
+      )}
+    </Command.List>
+  </Command>
+)
+```
+
+### Show sub-items when searching
+
+If your items have nested sub-items that you only want to reveal when searching, render based on the search state:
+
+```tsx
+const SubItem = (props) => {
+  const search = useCommandState((state) => state.search)
+  if (!search) return null
+  return <Command.Item {...props} />
+}
+
+return (
+  <Command>
+    <Command.Input />
+    <Command.List>
+      <Command.Item>Change theme…</Command.Item>
+      <SubItem>Change theme to dark</SubItem>
+      <SubItem>Change theme to light</SubItem>
+    </Command.List>
+  </Command>
+)
+```
+
+### Asynchronous results
+
+Render the items as they become available. Filtering and sorting will happen automatically.
+
+```tsx
+const [loading, setLoading] = React.useState(false)
+const [items, setItems] = React.useState([])
+
+React.useEffect(() => {
+  async function getItems() {
+    setLoading(true)
+    const res = await api.get('/dictionary')
+    setItems(res)
+    setLoading(false)
+  }
+
+  getItems()
+}, [])
+
+return (
+  <Command>
+    <Command.Input />
+    <Command.List>
+      {loading && <Command.Loading>Fetching words…</Command.Loading>}
+      {items.map((item) => {
+        return (
+          <Command.Item key={`word-${item}`} value={item}>
+            {item}
+          </Command.Item>
+        )
+      })}
+    </Command.List>
+  </Command>
+)
+```
+
+### Use inside Popover
+
+We recommend using the [Radix UI popover](https://www.radix-ui.com/docs/primitives/components/popover) component. ⌘K relies on the Radix UI Dialog component, so this will reduce your bundle size a bit due to shared dependencies.
+
+```bash
+$ pnpm install @radix-ui/react-popover
+```
+
+Render `Command` inside of the popover content:
+
+```tsx
+import * as Popover from '@radix-ui/react-popover'
+
+return (
+  <Popover.Root>
+    <Popover.Trigger>Toggle popover</Popover.Trigger>
+
+    <Popover.Content>
+      <Command>
+        <Command.Input />
+        <Command.List>
+          <Command.Item>Apple</Command.Item>
+        </Command.List>
+      </Command>
+    </Popover.Content>
+  </Popover.Root>
+)
+```
+
+### Drop in stylesheets
+
+You can find global stylesheets to drop in as a starting point for styling. See [website/styles/cmdk](website/styles/cmdk) for examples.
+
+## FAQ
+
+**Accessible?** Yes. Labeling, aria attributes, and DOM ordering tested with Voice Over and Chrome DevTools. [Dialog](#dialog-cmdk-dialog-cmdk-overlay) composes an accessible Dialog implementation.
+
+**Virtualization?** No. Good performance up to 2,000-3,000 items, though. Read below to bring your own.
+
+**Filter/sort items manually?** Yes. Pass `shouldFilter={false}` to [Command](#command-cmdk-root). Better memory usage and performance. Bring your own virtualization this way.
+
+**React 18 safe?** Yes, required. Uses React 18 hooks like `useId` and `useSyncExternalStore`.
+
+**Unstyled?** Yes, use the listed CSS selectors.
+
+**Hydration mismatch?** No, likely a bug in your code. Ensure the `open` prop to `Command.Dialog` is `false` on the server.
+
+**React strict mode safe?** Yes. Open an issue if you notice an issue.
+
+**Weird/wrong behavior?** Make sure your `Command.Item` has a `key` and unique `value`.
+
+**Concurrent mode safe?** Maybe, but concurrent mode is not yet real. Uses risky approaches like manual DOM ordering.
+
+**React server component?** No, it's a client component.
+
+**Listen for ⌘K automatically?** No, do it yourself to have full control over keybind context.
+
+**React Native?** No, and no plans to support it. If you build a React Native version, let us know and we'll link your repository here.
+
+## History
+
+Written in 2019 by Paco ([@pacocoursey](https://twitter.com/pacocoursey)) to see if a composable combobox API was possible. Used for the Vercel command menu and autocomplete by Rauno ([@raunofreiberg](https://twitter.com/raunofreiberg)) in 2020. Re-written independently in 2022 with a simpler and more performant approach. Ideas and help from Shu ([@shuding\_](https://twitter.com/shuding_)).
+
+[use-descendants](https://github.com/pacocoursey/use-descendants) was extracted from the 2019 version.
+
+## Testing
+
+First, install dependencies and Playwright browsers:
+
+```bash
+pnpm install
+pnpm playwright install
+```
+
+Then ensure you've built the library:
+
+```bash
+pnpm build
+```
+
+Then run the tests using your local build against real browser engines:
+
+```bash
+pnpm test
+```
