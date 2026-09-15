@@ -1,49 +1,63 @@
 {
-  "name": "cmdk",
-  "version": "1.1.1",
-  "license": "MIT",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
+  "name": "class-variance-authority",
+  "version": "0.7.1",
+  "description": "Class Variance Authority 🧬",
+  "keywords": [
+    "Class Variance Authority",
+    "class-variance-authority",
+    "classes",
+    "classname",
+    "classnames",
+    "css",
+    "cva",
+    "stitches",
+    "vanilla-extract",
+    "variants"
   ],
+  "homepage": "https://github.com/joe-bell/cva#readme",
+  "bugs": "https://github.com/joe-bell/cva/issues",
+  "repository": "https://github.com/joe-bell/cva.git",
+  "funding": "https://polar.sh/cva",
+  "license": "Apache-2.0",
+  "author": "Joe Bell (https://joebell.co.uk)",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts"
     }
   },
-  "peerDependencies": {
-    "react": "^18 || ^19 || ^19.0.0-rc",
-    "react-dom": "^18 || ^19 || ^19.0.0-rc"
-  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
   "dependencies": {
-    "@radix-ui/react-compose-refs": "^1.1.1",
-    "@radix-ui/react-dialog": "^1.1.6",
-    "@radix-ui/react-id": "^1.1.0",
-    "@radix-ui/react-primitive": "^2.0.2"
+    "clsx": "^2.1.1"
   },
   "devDependencies": {
-    "@types/react": "18.0.15"
-  },
-  "sideEffects": false,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pacocoursey/cmdk.git",
-    "directory": "cmdk"
-  },
-  "bugs": {
-    "url": "https://github.com/pacocoursey/cmdk/issues"
-  },
-  "homepage": "https://github.com/pacocoursey/cmdk#readme",
-  "author": {
-    "name": "Paco",
-    "url": "https://github.com/pacocoursey"
+    "@swc/cli": "0.3.12",
+    "@swc/core": "1.4.16",
+    "@types/node": "20.12.7",
+    "@types/react": "18.2.79",
+    "@types/react-dom": "18.2.25",
+    "bundlesize": "0.18.2",
+    "npm-run-all": "4.1.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "ts-node": "10.9.2",
+    "typescript": "5.4.5"
   },
   "scripts": {
-    "build": "tsup src",
-    "dev": "tsup src --watch"
+    "build": "run-p build:**",
+    "build:cjs": "swc ./src/index.ts --config-file ./.config/.swcrc -o dist/index.js -C module.type=commonjs",
+    "build:esm": "swc ./src/index.ts --config-file ./.config/.swcrc -o dist/index.mjs -C module.type=es6 ",
+    "build:tsc": "tsc --project .config/tsconfig.build.json",
+    "check": "tsc --project tsconfig.json --noEmit",
+    "bundlesize": "pnpm build && bundlesize -f 'dist/*.js' -s 1.2KB"
   }
 }
