@@ -1,63 +1,69 @@
 {
-  "name": "class-variance-authority",
-  "version": "0.7.1",
-  "description": "Class Variance Authority 🧬",
-  "keywords": [
-    "Class Variance Authority",
-    "class-variance-authority",
-    "classes",
-    "classname",
-    "classnames",
-    "css",
-    "cva",
-    "stitches",
-    "vanilla-extract",
-    "variants"
+  "name": "chokidar",
+  "description": "Minimal and efficient cross-platform file watching library",
+  "version": "4.0.3",
+  "homepage": "https://github.com/paulmillr/chokidar",
+  "author": "Paul Miller (https://paulmillr.com)",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "handler.js",
+    "handler.d.ts",
+    "esm"
   ],
-  "homepage": "https://github.com/joe-bell/cva#readme",
-  "bugs": "https://github.com/joe-bell/cva/issues",
-  "repository": "https://github.com/joe-bell/cva.git",
-  "funding": "https://polar.sh/cva",
-  "license": "Apache-2.0",
-  "author": "Joe Bell (https://joebell.co.uk)",
+  "main": "./index.js",
+  "module": "./esm/index.js",
+  "types": "./index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": "./esm/index.js",
+      "require": "./index.js"
     },
-    "./types": {
-      "types": "./dist/types.d.ts"
+    "./handler.js": {
+      "import": "./esm/handler.js",
+      "require": "./handler.js"
     }
   },
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist/"
-  ],
   "dependencies": {
-    "clsx": "^2.1.1"
+    "readdirp": "^4.0.1"
   },
   "devDependencies": {
-    "@swc/cli": "0.3.12",
-    "@swc/core": "1.4.16",
-    "@types/node": "20.12.7",
-    "@types/react": "18.2.79",
-    "@types/react-dom": "18.2.25",
-    "bundlesize": "0.18.2",
-    "npm-run-all": "4.1.5",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "ts-node": "10.9.2",
-    "typescript": "5.4.5"
+    "@paulmillr/jsbt": "0.2.1",
+    "@types/node": "20.14.8",
+    "chai": "4.3.4",
+    "prettier": "3.1.1",
+    "rimraf": "5.0.5",
+    "sinon": "12.0.1",
+    "sinon-chai": "3.7.0",
+    "typescript": "5.5.2",
+    "upath": "2.0.1"
   },
+  "sideEffects": false,
+  "engines": {
+    "node": ">= 14.16.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulmillr/chokidar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/paulmillr/chokidar/issues"
+  },
+  "license": "MIT",
   "scripts": {
-    "build": "run-p build:**",
-    "build:cjs": "swc ./src/index.ts --config-file ./.config/.swcrc -o dist/index.js -C module.type=commonjs",
-    "build:esm": "swc ./src/index.ts --config-file ./.config/.swcrc -o dist/index.mjs -C module.type=es6 ",
-    "build:tsc": "tsc --project .config/tsconfig.build.json",
-    "check": "tsc --project tsconfig.json --noEmit",
-    "bundlesize": "pnpm build && bundlesize -f 'dist/*.js' -s 1.2KB"
-  }
+    "build": "tsc && tsc -p tsconfig.esm.json",
+    "lint": "prettier --check src",
+    "format": "prettier --write src",
+    "test": "node --test"
+  },
+  "keywords": [
+    "fs",
+    "watch",
+    "watchFile",
+    "watcher",
+    "watching",
+    "file",
+    "fsevents"
+  ],
+  "funding": "https://paulmillr.com/funding/"
 }
