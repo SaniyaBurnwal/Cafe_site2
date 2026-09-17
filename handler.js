@@ -1,24 +1,19 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.NodeFsHandler = exports.EVENTS = exports.isIBMi = exports.isFreeBSD = exports.isLinux = exports.isMacos = exports.isWindows = exports.IDENTITY_FN = exports.EMPTY_FN = exports.STR_CLOSE = exports.STR_END = exports.STR_DATA = void 0;
-const fs_1 = require("fs");
-const promises_1 = require("fs/promises");
-const sysPath = require("path");
-const os_1 = require("os");
-exports.STR_DATA = 'data';
-exports.STR_END = 'end';
-exports.STR_CLOSE = 'close';
-const EMPTY_FN = () => { };
-exports.EMPTY_FN = EMPTY_FN;
-const IDENTITY_FN = (val) => val;
-exports.IDENTITY_FN = IDENTITY_FN;
+import { watchFile, unwatchFile, watch as fs_watch } from 'fs';
+import { open, stat, lstat, realpath as fsrealpath } from 'fs/promises';
+import * as sysPath from 'path';
+import { type as osType } from 'os';
+export const STR_DATA = 'data';
+export const STR_END = 'end';
+export const STR_CLOSE = 'close';
+export const EMPTY_FN = () => { };
+export const IDENTITY_FN = (val) => val;
 const pl = process.platform;
-exports.isWindows = pl === 'win32';
-exports.isMacos = pl === 'darwin';
-exports.isLinux = pl === 'linux';
-exports.isFreeBSD = pl === 'freebsd';
-exports.isIBMi = (0, os_1.type)() === 'OS400';
-exports.EVENTS = {
+export const isWindows = pl === 'win32';
+export const isMacos = pl === 'darwin';
+export const isLinux = pl === 'linux';
+export const isFreeBSD = pl === 'freebsd';
+export const isIBMi = osType() === 'OS400';
+export const EVENTS = {
     ALL: 'all',
     READY: 'ready',
     ADD: 'add',
@@ -29,9 +24,9 @@ exports.EVENTS = {
     RAW: 'raw',
     ERROR: 'error',
 };
-const EV = exports.EVENTS;
+const EV = EVENTS;
 const THROTTLE_MODE_WATCH = 'watch';
-const statMethods = { lstat: promises_1.lstat, stat: promises_1.stat };
+const statMethods = { lstat, stat };
 const KEY_LISTENERS = 'listeners';
 const KEY_ERR = 'errHandlers';
 const KEY_RAW = 'rawEmitters';
@@ -128,7 +123,7 @@ function createFsWatchInstance(path, options, listener, errHandler, emitRaw) {
         }
     };
     try {
-        return (0, fs_1.watch)(path, {
+        return fs_watch(path, {
             persistent: options.persistent,
         }, handleEvent);
     }
@@ -182,9 +177,9 @@ const setFsWatchListener = (path, fullPath, options, handlers) => {
             if (cont)
                 cont.watcherUnusable = true; // documented since Node 10.4.1
             // Workaround for https://github.com/joyent/node/issues/4337
-            if (exports.isWindows && error.code === 'EPERM') {
+            if (isWindows && error.code === 'EPERM') {
                 try {
-                    const fd = await (0, promises_1.open)(path, 'r');
+                    const fd = await open(path, 'r');
                     await fd.close();
                     broadcastErr(error);
                 }
@@ -250,7 +245,7 @@ const setFsWatchFileListener = (path, fullPath, options, handlers) => {
         // doesn't seem worthwhile for the added complexity.
         // listeners = cont.listeners;
         // rawEmitters = cont.rawEmitters;
-        (0, fs_1.unwatchFile)(fullPath);
+        unwatchFile(fullPath);
         cont = undefined;
     }
     if (cont) {
@@ -265,7 +260,7 @@ const setFsWatchFileListener = (path, fullPath, options, handlers) => {
             listeners: listener,
             rawEmitters: rawEmitter,
             options,
-            watcher: (0, fs_1.watchFile)(fullPath, options, (curr, prev) => {
+            watcher: watchFile(fullPath, options, (curr, prev) => {
                 foreach(cont.rawEmitters, (rawEmitter) => {
                     rawEmitter(EV.CHANGE, fullPath, { curr, prev });
                 });
@@ -285,7 +280,7 @@ const setFsWatchFileListener = (path, fullPath, options, handlers) => {
         delFromSet(cont, KEY_RAW, rawEmitter);
         if (isEmptySet(cont.listeners)) {
             FsWatchFileInstances.delete(fullPath);
-            (0, fs_1.unwatchFile)(fullPath);
+            unwatchFile(fullPath);
             cont.options = cont.watcher = undefined;
             Object.freeze(cont);
         }
@@ -294,7 +289,7 @@ const setFsWatchFileListener = (path, fullPath, options, handlers) => {
 /**
  * @mixin
  */
-class NodeFsHandler {
+export class NodeFsHandler {
     constructor(fsW) {
         this.fsw = fsW;
         this._boundHandleError = (error) => fsW._handleError(error);
@@ -316,7 +311,7 @@ class NodeFsHandler {
             persistent: opts.persistent,
         };
         if (!listener)
-            listener = exports.EMPTY_FN;
+            listener = EMPTY_FN;
         let closer;
         if (opts.usePolling) {
             const enableBin = opts.interval !== opts.binaryInterval;
@@ -356,7 +351,7 @@ class NodeFsHandler {
                 return;
             if (!newStats || newStats.mtimeMs === 0) {
                 try {
-                    const newStats = await (0, promises_1.stat)(file);
+                    const newStats = await stat(file);
                     if (this.fsw.closed)
                         return;
                     // Check that change event was not fired because of changed only accessTime.
@@ -365,7 +360,7 @@ class NodeFsHandler {
                     if (!at || at <= mt || mt !== prevStats.mtimeMs) {
                         this.fsw._emit(EV.CHANGE, file, newStats);
                     }
-                    if ((exports.isMacos || exports.isLinux || exports.isFreeBSD) && prevStats.ino !== newStats.ino) {
+                    if ((isMacos || isLinux || isFreeBSD) && prevStats.ino !== newStats.ino) {
                         this.fsw._closeFile(path);
                         prevStats = newStats;
                         const closer = this._watchWithNodeFs(file, listener);
@@ -421,7 +416,7 @@ class NodeFsHandler {
             this.fsw._incrReadyCount();
             let linkPath;
             try {
-                linkPath = await (0, promises_1.realpath)(path);
+                linkPath = await fsrealpath(path);
             }
             catch (e) {
                 this.fsw._emitReady();
@@ -464,7 +459,7 @@ class NodeFsHandler {
         if (!stream)
             return;
         stream
-            .on(exports.STR_DATA, async (entry) => {
+            .on(STR_DATA, async (entry) => {
             if (this.fsw.closed) {
                 stream = undefined;
                 return;
@@ -494,7 +489,7 @@ class NodeFsHandler {
         return new Promise((resolve, reject) => {
             if (!stream)
                 return reject();
-            stream.once(exports.STR_END, () => {
+            stream.once(STR_END, () => {
                 if (this.fsw.closed) {
                     stream = undefined;
                     return;
@@ -590,7 +585,7 @@ class NodeFsHandler {
             let closer;
             if (stats.isDirectory()) {
                 const absPath = sysPath.resolve(path);
-                const targetPath = follow ? await (0, promises_1.realpath)(path) : path;
+                const targetPath = follow ? await fsrealpath(path) : path;
                 if (this.fsw.closed)
                     return;
                 closer = await this._handleDir(wh.watchPath, stats, initialAdd, depth, target, wh, targetPath);
@@ -602,7 +597,7 @@ class NodeFsHandler {
                 }
             }
             else if (stats.isSymbolicLink()) {
-                const targetPath = follow ? await (0, promises_1.realpath)(path) : path;
+                const targetPath = follow ? await fsrealpath(path) : path;
                 if (this.fsw.closed)
                     return;
                 const parent = sysPath.dirname(wh.watchPath);
@@ -632,4 +627,3 @@ class NodeFsHandler {
         }
     }
 }
-exports.NodeFsHandler = NodeFsHandler;
